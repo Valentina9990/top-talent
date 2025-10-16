@@ -1,6 +1,6 @@
 import NextAuth from "next-auth"
 import { PrismaAdapter } from "@auth/prisma-adapter"
-import { UserRole } from "@prisma/client"
+import { UserRole, User, Account } from "@prisma/client"
 import authConfig from "@/auth.config"
 import { getUserById } from "@/data/user"
 import prisma from "./lib/prisma"
@@ -11,7 +11,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     error: "/auth/error",
   },
   events: {
-    async linkAccount({ user }) {
+    async linkAccount({ user } : { user: User }) {
       await prisma.user.update({
         where: { id: user.id },
         data: { emailVerified: new Date() }
@@ -19,7 +19,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }
   },
   callbacks: {
-    async session({ token, session }) {
+    async session({ token, session }: { token: any; session: any }) {
       if (token.sub && session.user) {
         session.user.id = token.sub
       }
@@ -34,7 +34,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
 
       return session;
     },
-    async signIn({ user, account }) {
+  async signIn({ user, account }: { user: User; account: Account | null }) {
       if(account?.provider !== "credentials") return true;
 
       const existingUser = await getUserById(user.id!);
@@ -42,7 +42,7 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
       if (!existingUser?.emailVerified) return false;
       return true;
     },
-    async jwt({ token }) {
+  async jwt({ token }: { token: any }) {
       if(!token.sub) return token;
 
       const existingUser = await getUserById(token.sub);
