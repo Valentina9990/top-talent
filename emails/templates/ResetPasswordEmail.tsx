@@ -23,7 +23,7 @@ export const ResetPasswordEmail = ({
   const resetLink = `${baseUrl}/auth/new-password?token=${token}`;
 
   return (
-    <EmailLayout preview="Restablece tu contraseña en Quejate">
+    <EmailLayout preview="Restablece tu contraseña de forma segura">
       <Heading style={baseStyles.heading}>
         Solicitud de restablecimiento de contraseña
       </Heading>
