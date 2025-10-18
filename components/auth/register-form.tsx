@@ -47,7 +47,7 @@ export const RegisterForm = () => {
       headerLabel=""
       backButtonLabel="¿Ya tienes cuenta?"
       backButtonHref="/auth/login"
-      showSocial
+      showSocial={false}
     
     >
       

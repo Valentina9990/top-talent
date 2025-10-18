@@ -55,7 +55,7 @@ export const LoginForm = () => {
       headerLabel="" 
       backButtonLabel="¿No tienes cuenta?" 
       backButtonHref="/auth/register" 
-      showSocial
+      showSocial={false}
     
     >
       
