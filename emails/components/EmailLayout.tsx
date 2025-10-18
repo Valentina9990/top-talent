@@ -27,13 +27,6 @@ export const EmailLayout = ({ children, preview }: EmailLayoutProps) => {
       <Body style={baseStyles.main}>
         <Section style={{ height: '40px' }}></Section>
         <Container style={baseStyles.container}>
-          <Section style={baseStyles.header}>
-            <Img
-              src={`https://quejate-files.s3.us-east-2.amazonaws.com/LogotipoEditableterpng.png`}
-              alt="Quejate Logo"
-              style={baseStyles.logo}
-            />
-          </Section>
 
           <Section style={baseStyles.content}>
             {children}
@@ -44,8 +37,8 @@ export const EmailLayout = ({ children, preview }: EmailLayoutProps) => {
             </Text>
             <Text style={baseStyles.footerText}>
               Si tienes alguna pregunta, puedes contactarnos en{' '}
-              <a href="mailto:soporte@quejate.com.co" style={baseStyles.footerLink}>
-                soporte@quejate.com.co
+              <a href="mailto:sarmientodaniav@gmail.com" style={baseStyles.footerLink}>
+                sarmientodaniav@gmail.com
               </a>
             </Text>
             <Text style={baseStyles.footerText}>
