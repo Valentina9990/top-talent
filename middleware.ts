@@ -1,21 +1,18 @@
-import authConfig from "./auth.config"
-import NextAuth from "next-auth"
-import { DEFAULT_LOGIN_REDIRECT } from "./route";
- 
-const { auth } = NextAuth(authConfig)
-export default auth((req) => {
-  const { nextUrl } = req;
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 
-  if (nextUrl.pathname === "/") {
-    return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl
+  
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/dashboard', request.url))
   }
   
-  return null;
-})
+  return NextResponse.next()
+}
 
 export const config = {
   matcher: [
-    '/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)',
-    '/(api|trpc)(.*)',
-  ],
+    '/',
+  ]
 }
