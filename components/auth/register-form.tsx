@@ -123,14 +123,14 @@ export const RegisterForm = () => {
             Al registrarte o iniciar sesión, aceptas automáticamente nuestros{' '}
             <Link 
               href="/terms" 
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-primary-600 hover:text-primary-800 underline"
             >
               Términos y Condiciones
             </Link>
             {' '}y{' '}
             <Link 
               href="/policy" 
-              className="text-blue-600 hover:text-blue-800 underline"
+              className="text-primary-600 hover:text-primary-800 underline"
             >
               Política de Privacidad
             </Link>
@@ -140,7 +140,7 @@ export const RegisterForm = () => {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full h-11 bg-blue-600 text-white hover:bg-blue-700 font-medium">
+            className="w-full h-11 bg-primary-600 text-white hover:bg-primary-700 font-medium">
             {isPending ? "Creando cuenta..." : "Crear cuenta"}
           </Button>
         </form>

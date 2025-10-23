@@ -45,6 +45,16 @@
   }
 }
 
+@layer components {
+  input:focus-visible,
+  textarea:focus-visible {
+    --tw-ring-shadow: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    border-color: hsl(var(--primary)) !important;
+  }
+}
+
 @theme {
   --color-primary-50: #FFF5F0;
   --color-primary-100: #FFE8D9;
