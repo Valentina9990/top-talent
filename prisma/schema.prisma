@@ -26,6 +26,7 @@ model User {
 enum UserRole {
   ADMIN
   PLAYER
+  SCHOOL
 }
 
 model Account {
