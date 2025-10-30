@@ -10,7 +10,7 @@ export const Header = ( { label, description }: HeaderProps) => {
         <div className="w-full flex flex-col gap-y-3">
             <div className="flex justify-center mt-4 mb-2">
                 <Image 
-                    src="/LogotipoEditableterpng.png" 
+                    src="/logoTopTalent.png" 
                     alt="Logo" 
                     width={150} 
                     height={60}

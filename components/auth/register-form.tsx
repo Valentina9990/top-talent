@@ -25,6 +25,7 @@ export const RegisterForm = () => {
     defaultValues: {
       email: "",
       password: "",
+      confirmPassword: "",
       name: ""
     }
   });
@@ -102,6 +103,25 @@ export const RegisterForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-gray-700">Contraseña</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      disabled={isPending}
+                      type="password"
+                      placeholder="••••••••"
+                      className="h-11 border border-gray-300"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-700">Confirmar contraseña</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
