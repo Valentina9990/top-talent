@@ -105,9 +105,9 @@ export const UserMenu = ({ user }: UserMenuProps) => {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <div className="absolute right-0 mt-2 w-56 origin-top-right rounded-lg bg-white shadow-lg border border-gray-200 focus:outline-none">
           <div className="py-1">
-            <div className="px-4 py-3 border-b">
+            <div className="px-4 py-3 border-b border-gray-200">
               <p className="text-sm font-medium text-gray-900">
                 {user.name || "Usuario"}
               </p>
@@ -128,7 +128,7 @@ export const UserMenu = ({ user }: UserMenuProps) => {
               ))}
             </div>
 
-            <div className="border-t py-1">
+            <div className="border-t border-gray-200 py-1">
               <button
                 onClick={handleSignOut}
                 className="flex w-full items-center px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"

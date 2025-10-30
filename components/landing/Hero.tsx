@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-80px)] bg-gradient-to-br from-gray-50 to-white">
-      <div className="container mx-auto px-4 py-12 md:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          <div className="space-y-6 lg:space-y-8 order-2 lg:order-1">
+    <section className="relative bg-gradient-to-br from-gray-50 to-white">
+      <div className="container mx-auto px-4 py-6 md:py-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-10 items-center">
+          <div className="space-y-4 lg:space-y-6 order-2 lg:order-1">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 ¡Muestra tu{" "}

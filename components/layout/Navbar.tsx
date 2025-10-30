@@ -30,7 +30,7 @@ export const Navbar = () => {
 
   const playerMenuItems = [
     { label: "Inicio", href: "/dashboard" },
-    { label: "Explorar convocatorias", href: "/explorar-escuelas" }, 
+    { label: "Explorar Escuelas", href: "/explorar-escuelas" }, 
   ];
 
   const schoolMenuItems = [
@@ -54,7 +54,7 @@ export const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b bg-white shadow-sm">
+    <nav className="sticky top-0 z-50 w-full border-b border-primary-100 bg-white shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
