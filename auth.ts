@@ -5,7 +5,7 @@ import authConfig from "@/auth.config"
 import { getUserById } from "@/data/user"
 import prisma from "./lib/prisma"
 
-export const { auth, handlers, signIn, signOut } = NextAuth({
+export const { auth, handlers, signIn } = NextAuth({
   pages: {
     signIn: "/auth/login",
     error: "/auth/error",
