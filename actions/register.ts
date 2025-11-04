@@ -3,10 +3,10 @@
 import { RegisterSchema } from "@/schemas";
 import * as z from "zod";
 import bcrypt from "bcryptjs";
-import prisma from "@/lib/prisma";
 import { getUserByEmail } from "@/data/user";
 import { sendVerificationEmail } from "@/emails/mail";
 import { generateVerificationToken } from "@/lib/tokens";
+import { createUserWithProfile } from "@/lib/user-helpers";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
     const validatedFields = RegisterSchema.safeParse(values);
@@ -24,12 +24,11 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         return { error: "Correo en uso" };
     }
 
-    await prisma.user.create({
-        data: {
-            email,
-            password: hashedPassword,
-            name
-        },
+    await createUserWithProfile({
+        email,
+        password: hashedPassword,
+        name,
+        role: "PLAYER",
     });
 
     const verificationToken = await generateVerificationToken(email);
