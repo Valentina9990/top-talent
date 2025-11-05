@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Position, Category, PlayerProfileFormData } from "@/types/player-profile";
+import { AvatarUpload } from "./AvatarUpload";
 
 interface BasicInfoFormProps {
   formData: PlayerProfileFormData;
@@ -10,6 +11,7 @@ interface BasicInfoFormProps {
   validationErrors: Record<string, string>;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   onPositionsChange: (positionIds: string[]) => void;
+  onAvatarChange: (url: string) => void;
 }
 
 export function BasicInfoForm({
@@ -19,6 +21,7 @@ export function BasicInfoForm({
   validationErrors,
   onChange,
   onPositionsChange,
+  onAvatarChange,
 }: BasicInfoFormProps) {
   const handlePositionToggle = (positionId: string) => {
     const currentPositions = formData.positionIds || [];
@@ -35,26 +38,13 @@ export function BasicInfoForm({
     <div className="border-b pb-6">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">Información Básica</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            URL de Avatar
-          </label>
-          <input
-            type="url"
-            name="avatarUrl"
-            value={formData.avatarUrl || ""}
-            onChange={onChange}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
-              validationErrors.avatarUrl ? 'border-red-500' : 'border-gray-300'
-            }`}
-            placeholder="https://ejemplo.com/avatar.jpg"
-          />
-          {validationErrors.avatarUrl && (
-            <p className="mt-1 text-sm text-red-600">{validationErrors.avatarUrl}</p>
-          )}
-        </div>
+      <AvatarUpload
+        avatarUrl={formData.avatarUrl}
+        onAvatarChange={onAvatarChange}
+        className="mb-6"
+      />
 
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">
             Equipo
