@@ -84,6 +84,20 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     }));
   };
 
+  const handleAvatarChange = (url: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      avatarUrl: url,
+    }));
+  };
+
+  const handleVideoChange = (url: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      profileVideoUrl: url,
+    }));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
@@ -133,6 +147,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           validationErrors={validationErrors}
           onChange={handleInputChange}
           onPositionsChange={handlePositionsChange}
+          onAvatarChange={handleAvatarChange}
         />
 
         <StatisticsForm
@@ -145,6 +160,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           formData={formData}
           validationErrors={validationErrors}
           onChange={handleInputChange}
+          onVideoChange={handleVideoChange}
         />
 
         <FormError message={error} />
