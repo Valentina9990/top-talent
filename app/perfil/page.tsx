@@ -20,7 +20,6 @@ export default async function ProfilePage({ searchParams }: PageProps) {
   }
 
   const result = await getPlayerProfile(session.user.id);
-  console.log(result);
 
   if (!result.profile) {
     return <div>Error: No se pudo cargar el perfil</div>;
