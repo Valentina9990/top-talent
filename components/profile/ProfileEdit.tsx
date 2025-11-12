@@ -170,6 +170,8 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           onVideoChange={handleVideoChange}
         />
 
+        <AchievementManagement achievements={profile.achievements} />
+
         <FormError message={error} />
         <FormSuccess message={success} />
 
@@ -191,9 +193,6 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
         </div>
       </form>
 
-      <VideoManagement />
-
-      <AchievementManagement achievements={profile.achievements} />
     </div>
   );
 }

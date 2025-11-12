@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { deletePlayerVideo, deletePlayerAchievement } from "@/actions/player-profile";
+import { deletePlayerAchievement } from "@/actions/player-profile";
 import { useRouter } from "next/navigation";
 
 interface ProfileViewProps {
@@ -13,21 +13,7 @@ interface ProfileViewProps {
 
 export default function ProfileView({ profile, user, isOwner }: ProfileViewProps) {
   const router = useRouter();
-  const [deletingVideo, setDeletingVideo] = useState<string | null>(null);
   const [deletingAchievement, setDeletingAchievement] = useState<string | null>(null);
-
-  const handleDeleteVideo = async (videoId: string) => {
-    if (!confirm("¿Estás seguro de eliminar este video?")) return;
-
-    setDeletingVideo(videoId);
-    const result = await deletePlayerVideo(videoId);
-    if (result.success) {
-      router.refresh();
-    } else {
-      alert(result.error);
-    }
-    setDeletingVideo(null);
-  };
 
   const handleDeleteAchievement = async (achievementId: string) => {
     if (!confirm("¿Estás seguro de eliminar este logro?")) return;
@@ -127,10 +113,10 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
         {/* Video Highlights */}
         <div className="lg:col-span-2">
           <div className="bg-white p-6 rounded-2xl shadow-xl">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Video de Presentación y Highlights</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Video de Presentación</h2>
 
             {profile?.profileVideoUrl ? (
-              <div className="rounded-xl overflow-hidden shadow-lg mb-8 bg-black">
+            <div className="rounded-xl overflow-hidden shadow-lg bg-black">
               <video
                 controls
                 src={profile.profileVideoUrl}
@@ -141,47 +127,8 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               </video>
             </div>
           ) : (
-            <div className="rounded-xl overflow-hidden shadow-lg mb-8 bg-gray-200 flex items-center justify-center h-64">
+            <div className="rounded-xl overflow-hidden shadow-lg bg-gray-200 flex items-center justify-center h-64">
               <p className="text-gray-500">No hay video de presentación</p>
-            </div>
-          )}
-
-          {profile?.videos && profile.videos.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {profile.videos.map((video: any) => (
-                <div key={video.id} className="relative group">
-                  <div className="rounded-lg overflow-hidden shadow-md bg-black">
-                    <video
-                      controls
-                      src={video.videoUrl}
-                      className="w-full h-auto"
-                    >
-                      Tu navegador no soporta el tag de video.
-                    </video>
-                  </div>
-                  {video.title && (
-                    <p className="mt-2 text-sm font-semibold text-gray-800">{video.title}</p>
-                  )}
-                  {video.description && (
-                    <p className="text-xs text-gray-600">{video.description}</p>
-                  )}
-                  {isOwner && (
-                    <button
-                      onClick={() => handleDeleteVideo(video.id)}
-                      disabled={deletingVideo === video.id}
-                      className="absolute top-2 right-2 bg-red-600 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-700 disabled:opacity-50"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                      </svg>
-                    </button>
-                  )}
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12 bg-gray-100 rounded-lg">
-              <p className="text-gray-500">No hay videos adicionales</p>
             </div>
           )}
           </div>
