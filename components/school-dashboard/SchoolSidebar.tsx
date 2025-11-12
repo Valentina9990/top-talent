@@ -26,15 +26,15 @@ const menuItems = [
     icon: BarChart3,
   },
   {
-    title: "Jugadores",
+    title: "Mis Jugadores",
     href: "/dashboard-escuela/jugadores",
     icon: Users,
   },
   {
-    title: "Configuración",
-    href: "/dashboard-escuela/configuracion",
+    title: "Mis publicaciones",
+    href: "/dashboard-escuela/publicaciones",
     icon: Settings,
-  },
+  }
 ];
 
 export function SchoolSidebar() {
