@@ -31,6 +31,7 @@ export const Navbar = () => {
   const playerMenuItems = [
     { label: "Inicio", href: "/dashboard" },
     { label: "Explorar Escuelas", href: "/explorar-escuelas" }, 
+    { label: "Suscripciones", href: "/suscripciones-jugadores" },
   ];
 
   const schoolMenuItems = [
@@ -38,6 +39,7 @@ export const Navbar = () => {
     { label: "Dashboard", href: "/dashboard" },
     { label: "Explorar Jugadores", href: "/explorar-jugadores" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
+    { label: "Suscripciones", href: "/suscripciones-escuelas" },
   ];
 
   const getMenuItems = () => {
