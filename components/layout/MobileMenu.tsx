@@ -46,11 +46,6 @@ export const MobileMenu = ({
       return [
         ...commonOptions,
         {
-          label: "Mi CV Deportivo",
-          href: "/cv-deportivo",
-          icon: FileText,
-        },
-        {
           label: "Configuración",
           href: "/configuracion",
           icon: Settings,
