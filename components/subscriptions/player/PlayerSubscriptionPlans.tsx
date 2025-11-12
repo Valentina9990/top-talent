@@ -1,4 +1,4 @@
-import { PricingCard } from "./PricingCard";
+import { PlayerPricingCard } from "./PlayerPricingCard";
 
 const plans = [
   {
@@ -62,11 +62,11 @@ const plans = [
   },
 ];
 
-export function SubscriptionPlans() {
+export function PlayerSubscriptionPlans() {
   return (
     <div className="grid gap-8 lg:grid-cols-3 lg:gap-6">
       {plans.map((plan) => (
-        <PricingCard key={plan.name} {...plan} />
+        <PlayerPricingCard key={plan.name} {...plan} />
       ))}
     </div>
   );

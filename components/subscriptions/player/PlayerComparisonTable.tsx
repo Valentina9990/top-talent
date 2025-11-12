@@ -110,7 +110,7 @@ const comparisonData = [
   },
 ];
 
-export function ComparisonTable() {
+export function PlayerComparisonTable() {
   const renderCell = (value: boolean | string) => {
     if (typeof value === "boolean") {
       return value ? (

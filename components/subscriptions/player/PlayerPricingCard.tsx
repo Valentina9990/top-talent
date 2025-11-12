@@ -4,7 +4,7 @@ import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 
-interface PricingCardProps {
+interface PlayerPricingCardProps {
   name: string;
   price: number;
   period: string;
@@ -16,7 +16,7 @@ interface PricingCardProps {
   ctaVariant?: "default" | "outline";
 }
 
-export function PricingCard({
+export function PlayerPricingCard({
   name,
   price,
   period,
@@ -26,7 +26,7 @@ export function PricingCard({
   highlighted = false,
   ctaText,
   ctaVariant = "default",
-}: PricingCardProps) {
+}: PlayerPricingCardProps) {
   const formatPrice = (amount: number) => {
     return new Intl.NumberFormat("es-CO", {
       style: "currency",
