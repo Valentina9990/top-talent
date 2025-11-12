@@ -41,21 +41,13 @@ export const LoginForm = () => {
     startTransition(() => {
       login(values)
         .then((data) => {
-          if (data?.error) {
-            setError(data.error);
-          }
+          setError(data?.error);
+          setSuccess(data?.success);
 
           if (data?.success) {
-            setSuccess(data.success);
             setIsOpen(false);
-            // Redirect to dashboard after successful login
-            setTimeout(() => {
-              router.push("/dashboard");
-            }, 500);
+            router.push("/dashboard");
           }
-        })
-        .catch(() => {
-          setError("Algo salió mal");
         });
     });
   }

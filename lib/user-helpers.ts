@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 
 /**
  * Creates a new user and automatically creates a PlayerProfile if the role is PLAYER
+ * or SchoolProfile if the role is SCHOOL
  */
 export async function createUserWithProfile(data: {
   email: string;
@@ -25,6 +26,13 @@ export async function createUserWithProfile(data: {
       await tx.playerProfile.create({
         data: {
           userId: newUser.id,
+        },
+      });
+    } else if (newUser.role === "SCHOOL") {
+      await tx.schoolProfile.create({
+        data: {
+          userId: newUser.id,
+          officialName: data.name, // Use the name as initial official name
         },
       });
     }

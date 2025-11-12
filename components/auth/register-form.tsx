@@ -14,23 +14,28 @@ import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import Link from "next/link";
 
+type RegisterFormData = z.infer<typeof RegisterSchema>;
+
 export const RegisterForm = () => {
 
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
+  const form = useForm<RegisterFormData>({
     resolver: zodResolver(RegisterSchema),
     defaultValues: {
       email: "",
       password: "",
       confirmPassword: "",
-      name: ""
+      name: "",
+      role: "PLAYER"
     }
   });
 
-  const onSubmit = (values: z.infer<typeof RegisterSchema>) => {
+  const selectedRole = form.watch("role");
+
+  const onSubmit = (values: RegisterFormData) => {
     setError("");
     setSuccess("");
 
@@ -61,15 +66,62 @@ export const RegisterForm = () => {
           <div className="space-y-4">
             <FormField
               control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-gray-700">Tipo de cuenta</FormLabel>
+                  <FormControl>
+                    <div className="grid grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => field.onChange("PLAYER")}
+                        className={`p-4 border-2 rounded-lg text-center transition-all ${
+                          field.value === "PLAYER"
+                            ? "border-primary-600 bg-primary-50 text-primary-700"
+                            : "border-gray-300 hover:border-gray-400"
+                        }`}
+                      >
+                        <div className="font-semibold">Jugador</div>
+                        <div className="text-xs text-gray-600 mt-1">
+                          Perfil individual
+                        </div>
+                      </button>
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => field.onChange("SCHOOL")}
+                        className={`p-4 border-2 rounded-lg text-center transition-all ${
+                          field.value === "SCHOOL"
+                            ? "border-primary-600 bg-primary-50 text-primary-700"
+                            : "border-gray-300 hover:border-gray-400"
+                        }`}
+                      >
+                        <div className="font-semibold">Escuela</div>
+                        <div className="text-xs text-gray-600 mt-1">
+                          Perfil institucional
+                        </div>
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-gray-700">Nombre completo</FormLabel>
+                  <FormLabel className="text-gray-700">
+                    {selectedRole === "SCHOOL" ? "Nombre de la escuela" : "Nombre completo"}
+                  </FormLabel>
                   <FormControl>
                     <Input
                       {...field}
                       disabled={isPending}
-                      placeholder="Juan Pérez"
+                      placeholder={selectedRole === "SCHOOL" ? "Academia de Fútbol XYZ" : "Juan Pérez"}
                       className="h-11 border border-gray-300"
                     />
                   </FormControl>
