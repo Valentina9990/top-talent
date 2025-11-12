@@ -20,9 +20,7 @@ import {
 } from "@/types/player-profile";
 import { BasicInfoForm } from "./edit/BasicInfoForm";
 import { StatisticsForm } from "./edit/StatisticsForm";
-import { ProfileVideoForm } from "./edit/ProfileVideoForm";
-import { VideoManagement } from "./edit/VideoManagement";
-import { AchievementManagement } from "./edit/AchievementManagement";
+import { CancelConfirmModal } from "./CancelConfirmModal";
 
 interface ProfileEditProps {
   profile: PlayerProfile;
@@ -34,11 +32,12 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
   const [error, setError] = useState<string | undefined>("");
   const [success, setSuccess] = useState<string | undefined>("");
   const [validationErrors, setValidationErrors] = useState<Record<string, string>>({});
+  const [showCancelModal, setShowCancelModal] = useState(false);
 
   const [positions, setPositions] = useState<Position[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
-  const [formData, setFormData] = useState<PlayerProfileFormData>({
+  const initialFormData: PlayerProfileFormData = {
     team: profile?.team || "",
     zone: profile?.zone || "",
     bio: profile?.bio || "",
@@ -48,8 +47,9 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     goals: profile?.goals || 0,
     assists: profile?.assists || 0,
     matchesPlayed: profile?.matchesPlayed || 0,
-    profileVideoUrl: profile?.profileVideoUrl || "",
-  });
+  };
+
+  const [formData, setFormData] = useState<PlayerProfileFormData>(initialFormData);
 
   useEffect(() => {
     const loadData = async () => {
@@ -85,7 +85,6 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
   };
 
   const handleAvatarChange = async (url: string) => {
-    // Actualizar directamente el User.image usando la action
     const result = await updatePlayerAvatar(url);
     if (result.success) {
       setSuccess("Avatar actualizado");
@@ -97,11 +96,21 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     }
   };
 
-  const handleVideoChange = (url: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      profileVideoUrl: url,
-    }));
+  const hasUnsavedChanges = () => {
+    return JSON.stringify(formData) !== JSON.stringify(initialFormData);
+  };
+
+  const handleCancel = () => {
+    if (hasUnsavedChanges()) {
+      setShowCancelModal(true);
+    } else {
+      router.push("/perfil");
+    }
+  };
+
+  const confirmCancel = () => {
+    setShowCancelModal(false);
+    router.push("/perfil");
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -134,16 +143,23 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
   };
 
   return (
-    <div className="bg-white rounded-2xl shadow-xl p-8">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold text-gray-900">Editar Perfil</h1>
-        <button
-          onClick={() => router.push("/perfil")}
-          className="text-gray-600 hover:text-gray-900 transition duration-300"
-        >
-          Cancelar
-        </button>
-      </div>
+    <>
+      <CancelConfirmModal
+        isOpen={showCancelModal}
+        onClose={() => setShowCancelModal(false)}
+        onConfirm={confirmCancel}
+      />
+
+      <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Editar Perfil</h1>
+          <button
+            onClick={handleCancel}
+            className="text-gray-600 hover:text-gray-900 transition duration-300"
+          >
+            Cancelar
+          </button>
+        </div>
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <BasicInfoForm
@@ -163,26 +179,10 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           onChange={handleInputChange}
         />
 
-        <ProfileVideoForm
-          formData={formData}
-          validationErrors={validationErrors}
-          onChange={handleInputChange}
-          onVideoChange={handleVideoChange}
-        />
-
-        <AchievementManagement achievements={profile.achievements} />
-
         <FormError message={error} />
         <FormSuccess message={success} />
 
         <div className="flex justify-end gap-4">
-          <button
-            type="button"
-            onClick={() => router.push("/perfil")}
-            className="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-semibold hover:bg-gray-50 transition duration-300"
-          >
-            Cancelar
-          </button>
           <button
             type="submit"
             disabled={isPending}
@@ -193,7 +193,8 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
         </div>
       </form>
 
-    </div>
+      </div>
+    </>
   );
 }
 
