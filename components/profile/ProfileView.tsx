@@ -5,10 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Plus, Pencil, Trash2, CheckCircle2 } from "lucide-react";
 import { deletePlayerAchievement } from "@/actions/player-profile";
+import { updatePlayerProfile } from "@/actions/player-profile";
 import { useRouter } from "next/navigation";
 import { VideoUploadModal } from "./VideoUploadModal";
 import { AchievementModal } from "./AchievementModal";
 import { PlayerStats } from "./PlayerStats";
+import { ConfirmModal } from "./ConfirmModal";
 
 interface ProfileViewProps {
   profile: any;
@@ -22,18 +24,43 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [showAchievementModal, setShowAchievementModal] = useState(false);
   const [editingAchievement, setEditingAchievement] = useState<any>(null);
+  const [showDeleteVideoModal, setShowDeleteVideoModal] = useState(false);
+  const [showDeleteAchievementModal, setShowDeleteAchievementModal] = useState(false);
+  const [achievementToDelete, setAchievementToDelete] = useState<string | null>(null);
+  const [isDeletingVideo, setIsDeletingVideo] = useState(false);
 
-  const handleDeleteAchievement = async (achievementId: string) => {
-    if (!confirm("¿Estás seguro de eliminar este logro?")) return;
-
-    setDeletingAchievement(achievementId);
-    const result = await deletePlayerAchievement(achievementId);
+  const handleDeleteVideo = async () => {
+    setIsDeletingVideo(true);
+    const result = await updatePlayerProfile({ profileVideoUrl: "" });
+    
     if (result.success) {
       router.refresh();
+      setShowDeleteVideoModal(false);
+    } else {
+      alert(result.error);
+    }
+    setIsDeletingVideo(false);
+  };
+
+  const handleDeleteAchievement = async () => {
+    if (!achievementToDelete) return;
+
+    setDeletingAchievement(achievementToDelete);
+    const result = await deletePlayerAchievement(achievementToDelete);
+    
+    if (result.success) {
+      router.refresh();
+      setShowDeleteAchievementModal(false);
+      setAchievementToDelete(null);
     } else {
       alert(result.error);
     }
     setDeletingAchievement(null);
+  };
+
+  const openDeleteAchievementModal = (achievementId: string) => {
+    setAchievementToDelete(achievementId);
+    setShowDeleteAchievementModal(true);
   };
 
   const avatarUrl = profile?.avatarUrl || user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || "Player")}`;
@@ -116,6 +143,24 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
           <div className="bg-white p-6 rounded-2xl shadow-xl">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-gray-900">Video de Presentación</h2>
+              {isOwner && profile?.profileVideoUrl && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setShowVideoModal(true)}
+                    className="text-primary-600 hover:text-primary-700 transition-colors"
+                    title="Editar video"
+                  >
+                    <Pencil className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => setShowDeleteVideoModal(true)}
+                    className="text-red-600 hover:text-red-700 transition-colors"
+                    title="Eliminar video"
+                  >
+                    <Trash2 className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {profile?.profileVideoUrl ? (
@@ -157,7 +202,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             {profile?.achievements && profile.achievements.length > 0 ? (
               <ul className="space-y-3">
                 {profile.achievements.map((achievement: any) => (
-                  <li key={achievement.id} className="flex items-start group relative">
+                  <li key={achievement.id} className="flex items-start relative">
                     <CheckCircle2 className="w-6 h-6 text-green-500 mr-3 flex-shrink-0" />
                     <div className="flex-1">
                       <span className="text-gray-700">{achievement.title}</span>
@@ -169,21 +214,21 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
                       )}
                     </div>
                     {isOwner && (
-                      <div className="flex gap-1 ml-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="flex gap-1 ml-2">
                         <button
                           onClick={() => {
                             setEditingAchievement(achievement);
                             setShowAchievementModal(true);
                           }}
-                          className="text-primary-600 hover:text-primary-700"
+                          className="text-primary-600 hover:text-primary-700 transition-colors"
                           title="Editar"
                         >
                           <Pencil className="w-4 h-4" />
                         </button>
                         <button
-                          onClick={() => handleDeleteAchievement(achievement.id)}
+                          onClick={() => openDeleteAchievementModal(achievement.id)}
                           disabled={deletingAchievement === achievement.id}
-                          className="text-red-600 hover:text-red-700 disabled:opacity-50"
+                          className="text-red-600 hover:text-red-700 disabled:opacity-50 transition-colors"
                           title="Eliminar"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -234,6 +279,27 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               setEditingAchievement(null);
             }}
             achievement={editingAchievement}
+          />
+          <ConfirmModal
+            isOpen={showDeleteVideoModal}
+            onClose={() => setShowDeleteVideoModal(false)}
+            onConfirm={handleDeleteVideo}
+            title="¿Eliminar video?"
+            description="¿Estás seguro de que deseas eliminar este video de presentación? Esta acción no se puede deshacer."
+            confirmText="Eliminar"
+            isLoading={isDeletingVideo}
+          />
+          <ConfirmModal
+            isOpen={showDeleteAchievementModal}
+            onClose={() => {
+              setShowDeleteAchievementModal(false);
+              setAchievementToDelete(null);
+            }}
+            onConfirm={handleDeleteAchievement}
+            title="¿Eliminar logro?"
+            description="¿Estás seguro de que deseas eliminar este logro? Esta acción no se puede deshacer."
+            confirmText="Eliminar"
+            isLoading={!!deletingAchievement}
           />
         </>
       )}
