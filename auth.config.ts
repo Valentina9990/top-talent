@@ -23,5 +23,25 @@ export default {
                 return null;
             }
         })
-    ] 
+    ],
+    callbacks: {
+        authorized({ auth, request: { nextUrl } }) {
+            const isLoggedIn = !!auth?.user;
+            const pathname = nextUrl.pathname;
+
+            if (pathname.startsWith('/dashboard-escuela')) {
+                if (!isLoggedIn) return false;
+                if (auth.user.role !== 'SCHOOL') {
+                    return Response.redirect(new URL('/', nextUrl));
+                }
+                return true;
+            }
+
+            if (pathname === '/dashboard' && auth?.user?.role === 'SCHOOL') {
+                return Response.redirect(new URL('/dashboard-escuela', nextUrl));
+            }
+
+            return true;
+        },
+    },
 } satisfies NextAuthConfig
