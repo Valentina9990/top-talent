@@ -117,7 +117,7 @@ export function AchievementManagement({ achievements }: AchievementManagementPro
   };
 
   return (
-    <div className="mt-12 pt-8 border-t">
+    <div className="mt-12 pt-8">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">Gestionar Logros</h2>
 
       {achievementList.length > 0 && (
