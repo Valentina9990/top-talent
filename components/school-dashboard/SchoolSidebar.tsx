@@ -16,6 +16,11 @@ import { logout } from "@/actions/logout";
 
 const menuItems = [
   {
+    title: "Perfil",
+    href: "/dashboard-escuela/perfil",
+    icon: User,
+  },
+  {
     title: "Estadísticas",
     href: "/dashboard-escuela",
     icon: BarChart3,
@@ -24,11 +29,6 @@ const menuItems = [
     title: "Jugadores",
     href: "/dashboard-escuela/jugadores",
     icon: Users,
-  },
-  {
-    title: "Perfil",
-    href: "/dashboard-escuela/perfil",
-    icon: User,
   },
   {
     title: "Configuración",

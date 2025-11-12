@@ -40,9 +40,6 @@ export const SchoolHeader: React.FC<SchoolHeaderProps> = ({
                             <h1 className="mt-1 text-4xl font-bold text-gray-900">
                                 {officialName}
                             </h1>
-                            {nit && (
-                                <p className="mt-2 text-gray-600">NIT: {nit}</p>
-                            )}
                             {(city || department) && (
                                 <p className="mt-1 text-gray-600">
                                     {city}{department && `, ${department}`}
