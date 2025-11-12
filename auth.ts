@@ -19,26 +19,6 @@ export const { auth, handlers, signIn, signOut } = NextAuth({
     }
   },
   callbacks: {
-    authorized({ auth, request: { nextUrl } }) {
-      const isLoggedIn = !!auth?.user;
-      const pathname = nextUrl.pathname;
-
-      // Protect school dashboard
-      if (pathname.startsWith('/dashboard-escuela')) {
-        if (!isLoggedIn) return false;
-        if (auth.user.role !== 'SCHOOL') {
-          return Response.redirect(new URL('/dashboard', nextUrl));
-        }
-        return true;
-      }
-
-      // Redirect SCHOOL users from /dashboard to /dashboard-escuela
-      if (pathname === '/dashboard' && auth?.user?.role === 'SCHOOL') {
-        return Response.redirect(new URL('/dashboard-escuela', nextUrl));
-      }
-
-      return true;
-    },
     async session({ token, session }) {
       if (token.sub && session.user) {
         session.user.id = token.sub

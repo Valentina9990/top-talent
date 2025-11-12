@@ -1,8 +1,4 @@
-import { auth } from "@/auth"
-
-export default auth((req) => {
-  // req.auth contains the session
-})
+export { auth as middleware } from "@/auth"
 
 export const config = {
   matcher: [
