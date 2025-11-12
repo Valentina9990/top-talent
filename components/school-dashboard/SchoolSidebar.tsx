@@ -9,32 +9,33 @@ import {
   User, 
   Settings,
   LogOut,
-  School
+  School,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/actions/logout";
 
 const menuItems = [
   {
-    title: "Estadísticas",
-    href: "/dashboard-escuela",
-    icon: BarChart3,
-  },
-  {
-    title: "Jugadores",
-    href: "/dashboard-escuela/jugadores",
-    icon: Users,
-  },
-  {
     title: "Perfil",
     href: "/dashboard-escuela/perfil",
     icon: User,
   },
   {
-    title: "Configuración",
-    href: "/dashboard-escuela/configuracion",
-    icon: Settings,
+    title: "Estadísticas",
+    href: "/dashboard-escuela",
+    icon: BarChart3,
   },
+  {
+    title: "Mis Jugadores",
+    href: "/dashboard-escuela/jugadores",
+    icon: Users,
+  },
+  {
+    title: "Mis publicaciones",
+    href: "/dashboard-escuela/publicaciones",
+    icon: FileText,
+  }
 ];
 
 export function SchoolSidebar() {

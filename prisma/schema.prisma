@@ -189,8 +189,29 @@ model SchoolProfile {
   headCoachName      String? // Nombre del director técnico principal
   achievements       String?    @db.Text // Logros destacados (texto libre)
 
+  // Posts
+  posts SchoolPost[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("school_profiles")
+}
+
+model SchoolPost {
+  id            String        @id @default(cuid())
+  schoolId      String        @map("school_id")
+  school        SchoolProfile @relation(fields: [schoolId], references: [id], onDelete: Cascade)
+  
+  title         String
+  description   String        @db.Text
+  mediaUrl      String?       
+  mediaType     String?       
+  
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("school_posts")
+  @@index([schoolId])
+  @@index([createdAt])
 }
