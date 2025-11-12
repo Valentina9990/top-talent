@@ -13,17 +13,21 @@ import { FormSection } from "./school/FormSection";
 import { FormInput } from "./school/FormInput";
 import { FormTextArea } from "./school/FormTextArea";
 import { CategoryMultiSelect } from "./school/CategoryMultiSelect";
+import { AvatarUpload } from "./edit/AvatarUpload";
+import { updateUserImage } from "@/actions/update-user-image";
 
 interface SchoolProfileEditProps {
     initialData: any;
+    currentUserImage?: string | null;
 }
 
-export const SchoolProfileEdit = ({ initialData }: SchoolProfileEditProps) => {
+export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfileEditProps) => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [categories, setCategories] = useState<Array<{ id: string; name: string }>>([]);
     const [isPending, setIsPending] = useState(false);
+    const [avatarUrl, setAvatarUrl] = useState<string>(currentUserImage || "");
 
     const form = useForm<z.infer<typeof SchoolProfileSchema>>({
         resolver: zodResolver(SchoolProfileSchema),
@@ -33,7 +37,6 @@ export const SchoolProfileEdit = ({ initialData }: SchoolProfileEditProps) => {
             description: initialData?.description || "",
             mission: initialData?.mission || "",
             vision: initialData?.vision || "",
-            logoUrl: initialData?.logoUrl || "",
             department: initialData?.department || "",
             city: initialData?.city || "",
             address: initialData?.address || "",
@@ -64,6 +67,16 @@ export const SchoolProfileEdit = ({ initialData }: SchoolProfileEditProps) => {
         setIsPending(true);
 
         try {
+            // Update user image if changed
+            if (avatarUrl !== currentUserImage) {
+                const imageResult = await updateUserImage(avatarUrl);
+                if (imageResult.error) {
+                    setError(imageResult.error);
+                    setIsPending(false);
+                    return;
+                }
+            }
+
             const result = await updateSchoolProfile(values);
             if (result.error) {
                 setError(result.error);
@@ -89,6 +102,12 @@ export const SchoolProfileEdit = ({ initialData }: SchoolProfileEditProps) => {
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Información Básica */}
             <FormSection title="Información Básica">
+                <AvatarUpload
+                    avatarUrl={avatarUrl}
+                    onAvatarChange={setAvatarUrl}
+                    className="mb-6"
+                />
+
                 <FormInput
                     id="officialName"
                     label="Nombre oficial de la escuela *"
@@ -98,23 +117,13 @@ export const SchoolProfileEdit = ({ initialData }: SchoolProfileEditProps) => {
                     error={form.formState.errors.officialName?.message}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormInput
-                        id="nit"
-                        label="NIT (opcional)"
-                        placeholder="123456789-0"
-                        disabled={isPending}
-                        register={form.register("nit")}
-                    />
-
-                    <FormInput
-                        id="logoUrl"
-                        label="URL del Logo"
-                        placeholder="https://ejemplo.com/logo.png"
-                        disabled={isPending}
-                        register={form.register("logoUrl")}
-                    />
-                </div>
+                <FormInput
+                    id="nit"
+                    label="NIT (opcional)"
+                    placeholder="123456789-0"
+                    disabled={isPending}
+                    register={form.register("nit")}
+                />
 
                 <FormTextArea
                     id="description"

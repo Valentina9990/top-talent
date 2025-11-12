@@ -12,7 +12,7 @@ interface SchoolProfileViewProps {
 
 export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
   const categories = schoolProfile?.categories || [];
-  const logoUrl = schoolProfile?.logoUrl || `https://ui-avatars.com/api/?name=${encodeURIComponent(schoolProfile?.officialName || schoolProfile?.user?.name || "Escuela")}`;
+  const logoUrl = schoolProfile?.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(schoolProfile?.officialName || schoolProfile?.user?.name || "Escuela")}`;
 
   // Prepare stats cards
   const statsCards = (

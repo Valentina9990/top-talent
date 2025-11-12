@@ -49,6 +49,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
             {isEditMode ? (
               <SchoolProfileEdit
                 initialData={schoolProfile}
+                currentUserImage={session.user.image}
               />
             ) : (
               <SchoolProfileView schoolProfile={schoolProfile} />
