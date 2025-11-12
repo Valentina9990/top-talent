@@ -103,7 +103,6 @@ model PlayerProfile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Basic Info
-  avatarUrl     String?
   team          String?
   zone          String?
   bio           String? @db.Text
@@ -171,7 +170,6 @@ model SchoolProfile {
   description  String? @db.Text
   mission      String? @db.Text
   vision       String? @db.Text
-  logoUrl      String?
 
   // Location
   department String? // Departamento

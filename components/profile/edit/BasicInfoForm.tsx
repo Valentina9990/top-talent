@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Position, Category, PlayerProfileFormData } from "@/types/player-profile";
-import { AvatarUpload } from "./AvatarUpload";
 
 interface BasicInfoFormProps {
   formData: PlayerProfileFormData;
@@ -11,7 +10,6 @@ interface BasicInfoFormProps {
   validationErrors: Record<string, string>;
   onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   onPositionsChange: (positionIds: string[]) => void;
-  onAvatarChange: (url: string) => void;
 }
 
 export function BasicInfoForm({
@@ -21,7 +19,6 @@ export function BasicInfoForm({
   validationErrors,
   onChange,
   onPositionsChange,
-  onAvatarChange,
 }: BasicInfoFormProps) {
   const handlePositionToggle = (positionId: string) => {
     const currentPositions = formData.positionIds || [];
@@ -37,12 +34,6 @@ export function BasicInfoForm({
   return (
     <div className="border-b pb-6">
       <h2 className="text-xl font-semibold text-gray-900 mb-4">Información Básica</h2>
-
-      <AvatarUpload
-        avatarUrl={formData.avatarUrl}
-        onAvatarChange={onAvatarChange}
-        className="mb-6"
-      />
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>

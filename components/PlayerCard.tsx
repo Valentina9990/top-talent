@@ -16,7 +16,7 @@ export default function PlayerCard({ player }: PlayerCardProps) {
 
   if (!profile) return null;
 
-  const avatarUrl = profile.avatarUrl || player.image;
+  const avatarUrl = player.image;
   const positions = profile.positions.map((p) => p.name).join(", ");
   const age = profile.category?.name || "N/A";
 

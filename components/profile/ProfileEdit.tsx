@@ -38,7 +38,6 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
   const [categories, setCategories] = useState<Category[]>([]);
 
   const [formData, setFormData] = useState<PlayerProfileFormData>({
-    avatarUrl: profile?.avatarUrl || "",
     team: profile?.team || "",
     zone: profile?.zone || "",
     bio: profile?.bio || "",
@@ -81,13 +80,6 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     setFormData((prev) => ({
       ...prev,
       positionIds,
-    }));
-  };
-
-  const handleAvatarChange = (url: string) => {
-    setFormData((prev) => ({
-      ...prev,
-      avatarUrl: url,
     }));
   };
 
@@ -147,7 +139,6 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           validationErrors={validationErrors}
           onChange={handleInputChange}
           onPositionsChange={handlePositionsChange}
-          onAvatarChange={handleAvatarChange}
         />
 
         <StatisticsForm

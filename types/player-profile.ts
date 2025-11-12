@@ -34,7 +34,6 @@ export interface PlayerVideo {
 export interface PlayerProfile {
   id: string;
   userId: string;
-  avatarUrl: string | null;
   team: string | null;
   zone: string | null;
   bio: string | null;
@@ -53,7 +52,6 @@ export interface PlayerProfile {
 }
 
 export interface PlayerProfileFormData {
-  avatarUrl?: string;
   team?: string;
   zone?: string;
   bio?: string;

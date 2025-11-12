@@ -24,13 +24,7 @@ export async function updatePlayerAvatar(avatarUrl: string) {
       return { error: "Perfil no encontrado" };
     }
 
-    // Actualizar avatar
-    await prisma.playerProfile.update({
-      where: { id: profile.id },
-      data: { avatarUrl },
-    });
-
-    // También actualizar el avatar en el usuario
+    // Actualizar el avatar en el usuario
     await prisma.user.update({
       where: { id: session.user.id },
       data: { image: avatarUrl },

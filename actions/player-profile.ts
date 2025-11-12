@@ -5,7 +5,6 @@ import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
 export interface PlayerProfileData {
-  avatarUrl?: string;
   team?: string;
   zone?: string;
   bio?: string;
@@ -90,7 +89,6 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
         const updated = await tx.playerProfile.update({
           where: { userId },
           data: {
-            avatarUrl: data.avatarUrl || null,
             team: data.team || null,
             zone: data.zone || null,
             bio: data.bio || null,
@@ -132,7 +130,6 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
         const created = await tx.playerProfile.create({
           data: {
             userId,
-            avatarUrl: data.avatarUrl || null,
             team: data.team || null,
             zone: data.zone || null,
             bio: data.bio || null,
