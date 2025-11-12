@@ -8,22 +8,24 @@ datasource db {
 }
 
 model User {
-  id                String               @id @default(uuid())
-  name              String
-  image             String?
-  password          String?
-  email             String               @unique
-  role              UserRole             @default(PLAYER)
-  createdAt         DateTime             @default(now())
-  updatedAt         DateTime             @updatedAt
-  emailVerified     DateTime?
-  
+  id            String    @id @default(uuid())
+  name          String
+  image         String?
+  password      String?
+  email         String    @unique
+  role          UserRole  @default(PLAYER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  emailVerified DateTime?
+
   // NextAuth.js relations
-  accounts          Account[]
+  accounts Account[]
 
   // Player profile
-  playerProfile     PlayerProfile?
+  playerProfile PlayerProfile?
 
+  // School profile
+  schoolProfile SchoolProfile?
 }
 
 enum UserRole {
@@ -33,126 +35,164 @@ enum UserRole {
 }
 
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
   @@map("accounts")
 }
 
 model VerificationToken {
-  id         String   @id @default(cuid())
-  email      String
-  token      String @unique
-  expires    DateTime
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
 
   @@unique([email, token])
   @@map("verification_tokens")
 }
 
 model PasswordResetToken {
-  id         String   @id @default(cuid())
-  email     String
-  token      String @unique
-  expires    DateTime
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
 
   @@unique([email, token])
   @@map("password_reset_tokens")
 }
 
 model Position {
-  id          String          @id @default(cuid())
-  name        String          @unique // e.g., "Delantero", "Mediocampista", "Defensa", "Portero"
-  createdAt   DateTime        @default(now())
+  id        String   @id @default(cuid())
+  name      String   @unique // e.g., "Delantero", "Mediocampista", "Defensa", "Portero"
+  createdAt DateTime @default(now())
 
-  players     PlayerProfile[] @relation("PlayerPositions")
+  players PlayerProfile[] @relation("PlayerPositions")
 
   @@map("positions")
 }
 
 model Category {
-  id          String          @id @default(cuid())
-  name        String          @unique // e.g., "Sub-17", "Sub-20", "Senior"
-  minAge      Int?
-  maxAge      Int?
-  createdAt   DateTime        @default(now())
+  id        String   @id @default(cuid())
+  name      String   @unique // e.g., "Sub-17", "Sub-20", "Senior"
+  minAge    Int?
+  maxAge    Int?
+  createdAt DateTime @default(now())
 
-  players     PlayerProfile[]
+  players PlayerProfile[]
+  schools SchoolProfile[] @relation("SchoolCategories")
 
   @@map("categories")
 }
 
 model PlayerProfile {
-  id                String              @id @default(cuid())
-  userId            String              @unique @map("user_id")
-  user              User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   // Basic Info
-  avatarUrl         String?
-  team              String?
-  zone              String?
-  bio               String?             @db.Text
-  preferredFoot     String?             // "RIGHT", "LEFT", "BOTH"
+  avatarUrl     String?
+  team          String?
+  zone          String?
+  bio           String? @db.Text
+  preferredFoot String? // "RIGHT", "LEFT", "BOTH"
 
   // Position and Category - Many-to-Many for positions
-  positions         Position[]          @relation("PlayerPositions")
+  positions Position[] @relation("PlayerPositions")
 
-  categoryId        String?             @map("category_id")
-  category          Category?           @relation(fields: [categoryId], references: [id])
+  categoryId String?   @map("category_id")
+  category   Category? @relation(fields: [categoryId], references: [id])
 
   // Stats
-  goals             Int                 @default(0)
-  assists           Int                 @default(0)
-  matchesPlayed     Int                 @default(0)
+  goals         Int @default(0)
+  assists       Int @default(0)
+  matchesPlayed Int @default(0)
 
   // Media
-  profileVideoUrl   String?
-  videos            PlayerVideo[]
+  profileVideoUrl String?
+  videos          PlayerVideo[]
 
   // Achievements
-  achievements      PlayerAchievement[]
+  achievements PlayerAchievement[]
 
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@map("player_profiles")
 }
 
 model PlayerVideo {
-  id              String        @id @default(cuid())
-  playerId        String        @map("player_id")
-  player          PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  id       String        @id @default(cuid())
+  playerId String        @map("player_id")
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
-  videoUrl        String
-  title           String?
-  description     String?       @db.Text
-  createdAt       DateTime      @default(now())
+  videoUrl    String
+  title       String?
+  description String?  @db.Text
+  createdAt   DateTime @default(now())
 
   @@map("player_videos")
 }
 
 model PlayerAchievement {
-  id              String        @id @default(cuid())
-  playerId        String        @map("player_id")
-  player          PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  id       String        @id @default(cuid())
+  playerId String        @map("player_id")
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
 
-  title           String
-  description     String?       @db.Text
-  date            DateTime?
-  verified        Boolean       @default(false)
-  createdAt       DateTime      @default(now())
+  title       String
+  description String?   @db.Text
+  date        DateTime?
+  verified    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
 
   @@map("player_achievements")
+}
+
+model SchoolProfile {
+  id     String @id @default(cuid())
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Basic Info
+  officialName String? // Nombre oficial de la escuela
+  nit          String? // NIT (opcional)
+  description  String? @db.Text
+  mission      String? @db.Text
+  vision       String? @db.Text
+  logoUrl      String?
+
+  // Location
+  department String? // Departamento
+  city       String? // Ciudad
+  address    String? // Dirección específica
+
+  // Contact
+  phone        String?
+  contactEmail String?
+  facebookUrl  String?
+  instagramUrl String?
+  websiteUrl   String?
+
+  // Sports Data
+  categories         Category[] @relation("SchoolCategories")
+  approximatePlayers Int? // Número aproximado de jugadores
+  headCoachName      String? // Nombre del director técnico principal
+  achievements       String?    @db.Text // Logros destacados (texto libre)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("school_profiles")
 }

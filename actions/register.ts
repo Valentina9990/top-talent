@@ -15,7 +15,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         return { error: "Campos inválidos" };
     }
 
-    const { email, password, name } = validatedFields.data;
+    const { email, password, name, role } = validatedFields.data;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await getUserByEmail(email);
@@ -28,7 +28,7 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         email,
         password: hashedPassword,
         name,
-        role: "PLAYER",
+        role: role as "PLAYER" | "SCHOOL",
     });
 
     const verificationToken = await generateVerificationToken(email);
