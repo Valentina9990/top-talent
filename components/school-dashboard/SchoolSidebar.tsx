@@ -9,7 +9,8 @@ import {
   User, 
   Settings,
   LogOut,
-  School
+  School,
+  FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/actions/logout";
@@ -33,7 +34,7 @@ const menuItems = [
   {
     title: "Mis publicaciones",
     href: "/dashboard-escuela/publicaciones",
-    icon: Settings,
+    icon: FileText,
   }
 ];
 
