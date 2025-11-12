@@ -7,6 +7,7 @@ import {
   getPositions,
   getCategories,
 } from "@/actions/player-profile";
+import { updatePlayerAvatar } from "@/actions/media-upload";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { PlayerProfileSchema } from "@/schemas";
@@ -83,6 +84,19 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     }));
   };
 
+  const handleAvatarChange = async (url: string) => {
+    // Actualizar directamente el User.image usando la action
+    const result = await updatePlayerAvatar(url);
+    if (result.success) {
+      setSuccess("Avatar actualizado");
+      setTimeout(() => setSuccess(""), 2000);
+      router.refresh();
+    } else if (result.error) {
+      setError(result.error);
+      setTimeout(() => setError(""), 3000);
+    }
+  };
+
   const handleVideoChange = (url: string) => {
     setFormData((prev) => ({
       ...prev,
@@ -139,6 +153,8 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           validationErrors={validationErrors}
           onChange={handleInputChange}
           onPositionsChange={handlePositionsChange}
+          currentAvatarUrl={profile?.user?.image}
+          onAvatarChange={handleAvatarChange}
         />
 
         <StatisticsForm

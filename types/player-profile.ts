@@ -47,6 +47,11 @@ export interface PlayerProfile {
   profileVideoUrl: string | null;
   videos: PlayerVideo[];
   achievements: PlayerAchievement[];
+  user?: {
+    name: string;
+    email: string;
+    image: string | null;
+  };
   createdAt: Date;
   updatedAt: Date;
 }
