@@ -20,7 +20,7 @@ import {
 } from "@/types/player-profile";
 import { BasicInfoForm } from "./edit/BasicInfoForm";
 import { StatisticsForm } from "./edit/StatisticsForm";
-import { CancelConfirmModal } from "./CancelConfirmModal";
+import { CancelConfirmModal } from "../modals/CancelConfirmModal";
 
 interface ProfileEditProps {
   profile: PlayerProfile;

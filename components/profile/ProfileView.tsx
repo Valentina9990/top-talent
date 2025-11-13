@@ -7,10 +7,10 @@ import { Plus, Pencil, Trash2, CheckCircle2 } from "lucide-react";
 import { deletePlayerAchievement } from "@/actions/player-profile";
 import { updatePlayerProfile } from "@/actions/player-profile";
 import { useRouter } from "next/navigation";
-import { VideoUploadModal } from "./VideoUploadModal";
-import { AchievementModal } from "./AchievementModal";
+import { AchievementModal } from "../modals/AchievementModal";
 import { PlayerStats } from "./PlayerStats";
-import { ConfirmModal } from "./ConfirmModal";
+import { ConfirmModal } from "../modals/ConfirmModal";
+import { VideoUploadModal } from "../modals/VideoUploadModal";
 
 interface ProfileViewProps {
   profile: any;

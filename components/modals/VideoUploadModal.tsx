@@ -10,7 +10,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { VideoUpload } from "./edit/VideoUpload";
+import { VideoUpload } from "../profile/edit/VideoUpload";
 
 interface VideoUploadModalProps {
   isOpen: boolean;
