@@ -88,13 +88,6 @@ export function PlayersTable({ players, categories, positions, onRefresh }: Play
               <p className="text-gray-500 mb-6">
                 Comienza agregando jugadores a tu escuela
               </p>
-              <Button
-                onClick={() => setAddModalOpen(true)}
-                className="bg-primary-600 hover:bg-primary-700 text-white"
-              >
-                <UserPlus className="w-4 h-4 mr-2" />
-                Agregar Primer Jugador
-              </Button>
             </div>
           ) : (
             <Table>
