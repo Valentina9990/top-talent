@@ -104,6 +104,9 @@ model PlayerProfile {
 
   // Basic Info
   team          String?
+  schoolId      String?  @map("school_id")
+  school        SchoolProfile? @relation(fields: [schoolId], references: [id])
+  schoolVerified Boolean @default(false)
   zone          String?
   bio           String? @db.Text
   preferredFoot String? // "RIGHT", "LEFT", "BOTH"
@@ -185,13 +188,12 @@ model SchoolProfile {
 
   // Sports Data
   categories         Category[] @relation("SchoolCategories")
+  players            PlayerProfile[]
   approximatePlayers Int? // Número aproximado de jugadores
   headCoachName      String? // Nombre del director técnico principal
   achievements       String?    @db.Text // Logros destacados (texto libre)
-
-  // Posts
   posts SchoolPost[]
-
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
