@@ -12,13 +12,14 @@ import Image from 'next/image';
 export const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const isAuthRoute = pathname?.startsWith("/auth");
   if (isAuthRoute) return null;
 
   const user = session?.user;
   const userRole = user?.role;
+  const isLoading = status === "loading";
 
   const publicMenuItems = [
     { label: "Inicio", href: "/" },
@@ -30,19 +31,20 @@ export const Navbar = () => {
 
   const playerMenuItems = [
     { label: "Inicio", href: "/dashboard" },
-    { label: "Explorar Escuelas", href: "/explorar-escuelas" }, 
+    { label: "Explorar Escuelas", href: "para-jugadores" },
     { label: "Suscripciones", href: "/suscripciones-jugadores" },
   ];
 
   const schoolMenuItems = [
     { label: "Inicio", href: "/" },
     { label: "Dashboard", href: "/dashboard" },
-    { label: "Explorar Jugadores", href: "/explorar-jugadores" },
+    { label: "Explorar Jugadores", href: "/para-escuelas" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
     { label: "Suscripciones", href: "/suscripciones-escuelas" },
   ];
 
   const getMenuItems = () => {
+    if (isLoading) return []; // Return empty array while loading
     if (!user) return publicMenuItems;
     if (userRole === "PLAYER") return playerMenuItems;
     if (userRole === "SCHOOL") return schoolMenuItems;
@@ -77,23 +79,36 @@ export const Navbar = () => {
           </div>
 
           <div className="hidden md:flex md:items-center md:space-x-8">
-            {menuItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`text-sm font-medium transition-colors hover:text-primary-600 ${
-                  pathname === item.href
-                    ? "text-primary-600"
-                    : "text-gray-700"
-                }`}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {isLoading ? (
+              <>
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="h-4 w-24 animate-pulse rounded bg-gray-200"
+                  ></div>
+                ))}
+              </>
+            ) : (
+              menuItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`text-sm font-medium transition-colors hover:text-primary-600 ${
+                    pathname === item.href
+                      ? "text-primary-600"
+                      : "text-gray-700"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))
+            )}
           </div>
 
           <div className="hidden md:flex md:items-center md:space-x-4">
-            {user ? (
+            {isLoading ? (
+              <div className="h-10 w-32 animate-pulse rounded-lg bg-gray-200"></div>
+            ) : user ? (
               <UserMenu user={user} />
             ) : (
               <div className="flex items-center space-x-4">
