@@ -31,17 +31,14 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
         role: role as "PLAYER" | "SCHOOL",
     });
 
-    // VERIFICACIÓN POR CORREO TEMPORALMENTE DESHABILITADA
-    // const verificationToken = await generateVerificationToken(email);
+    const verificationToken = await generateVerificationToken(email);
 
-    // await sendVerificationEmail(
-    //     verificationToken.email, 
-    //     verificationToken.token
-    // );
+    await sendVerificationEmail(
+        verificationToken.email, 
+        verificationToken.token
+    );
 
-    // return { success: "Se ha enviado un correo de verificación" };
-    
-    return { success: "Registro exitoso. Ya puedes iniciar sesión" };
+    return { success: "Se ha enviado un correo de verificación" };
 }
 
  
