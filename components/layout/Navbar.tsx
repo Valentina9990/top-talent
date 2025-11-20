@@ -28,14 +28,12 @@ export const Navbar = () => {
 
 
   const playerMenuItems = [
-    { label: "Inicio", href: "/dashboard" },
-    { label: "Explorar Escuelas", href: "para-jugadores" },
+    { label: "Escuelas", href: "/para-jugadores" },
+    { label: "Explorar convocatorias", href: "/mis-aplicaciones" },
     { label: "Suscripciones", href: "/suscripciones-jugadores" },
   ];
 
   const schoolMenuItems = [
-    { label: "Inicio", href: "/" },
-    { label: "Dashboard", href: "/dashboard" },
     { label: "Explorar Jugadores", href: "/para-escuelas" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
     { label: "Suscripciones", href: "/suscripciones-escuelas" },

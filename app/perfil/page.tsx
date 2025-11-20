@@ -86,7 +86,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
   }
 
   // Default redirect for other roles
-  redirect("/dashboard");
+  redirect("/");
 }
 
 
