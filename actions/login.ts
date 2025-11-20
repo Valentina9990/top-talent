@@ -24,15 +24,16 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
         return { error: "Usuario no encontrado" };
     }
 
-    if(!existingUser.emailVerified) {
-        const verificationToken = await generateVerificationToken(existingUser.email);
-        await sendVerificationEmail(
-                verificationToken.email, 
-                verificationToken.token
-            );
-            
-        return { success: "Verifica tu correo para iniciar sesión" };
-    }
+    // VERIFICACIÓN POR CORREO TEMPORALMENTE DESHABILITADA
+    // if(!existingUser.emailVerified) {
+    //     const verificationToken = await generateVerificationToken(existingUser.email);
+    //     await sendVerificationEmail(
+    //             verificationToken.email, 
+    //             verificationToken.token
+    //         );
+    //         
+    //     return { success: "Verifica tu correo para iniciar sesión" };
+    // }
 
     try {
         const redirectTo = existingUser.role === "SCHOOL" 
