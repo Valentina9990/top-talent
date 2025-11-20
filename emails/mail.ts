@@ -1,29 +1,44 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
+import { render } from "@react-email/render";
 import { VerificationEmail } from "./templates/VerificationEmail";
 import { ResetPasswordEmail } from "./templates/ResetPasswordEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+    },
+});
 
 export const sendVerificationEmail = async (email: string, token: string, userName?: string) => {
-    await resend.emails.send({
-        from: process.env.EMAIL_FROM || "sarmientodaniav@gmail.com",
-        to: email,
-        subject: "Verifica tu correo electrónico",
-        react: VerificationEmail({ 
+    const emailHtml = await render(
+        VerificationEmail({ 
             userName: userName || "Usuario", 
             token 
-        }),
+        })
+    );
+
+    await transporter.sendMail({
+        from: `"Top Talent" <${process.env.GMAIL_USER}>`,
+        to: email,
+        subject: "Verifica tu correo electrónico",
+        html: emailHtml,
     });
 }
 
 export const sendPasswordResetEmail = async (email: string, token: string, userName?: string) => {
-    await resend.emails.send({
-        from: process.env.EMAIL_FROM || "sarmientodaniav@gmail.com",
-        to: email,
-        subject: "Restablece tu contraseña",
-        react: ResetPasswordEmail({ 
+    const emailHtml = await render(
+        ResetPasswordEmail({ 
             userName: userName || "Usuario", 
             token 
-        }),
+        })
+    );
+
+    await transporter.sendMail({
+        from: `"Top Talent" <${process.env.GMAIL_USER}>`,
+        to: email,
+        subject: "Restablece tu contraseña",
+        html: emailHtml,
     });
 }
