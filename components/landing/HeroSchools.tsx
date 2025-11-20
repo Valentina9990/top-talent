@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-export function Hero() {
+export function HeroSchools() {
   return (
     <section className="relative bg-gradient-to-br from-gray-50 to-white">
       <div className="container mx-auto px-4 py-6 md:py-8">
@@ -12,16 +12,15 @@ export function Hero() {
           <div className="space-y-4 lg:space-y-6 order-2 lg:order-1">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
-                ¡Muestra tu{" "}
+                ¡Encuentra el{" "}
                 <span className="text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
                   talento
                 </span>{" "}
-                al mundo!
+                que buscas!
               </h1>
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-                Es tu momento de brillar. Conecta con escuelas deportivas de
-                élite, muestra tus habilidades y abre las puertas a nuevas
-                oportunidades.
+                Promociona tu escuela deportiva, conecta con jugadores
+                talentosos, publica convocatorias y haz crecer tu institución.
               </p>
             </div>
 
@@ -41,10 +40,8 @@ export function Hero() {
                   </svg>
                 </div>
                 <p className="text-gray-700">
-                  <strong className="text-gray-900">
-                    Visibilidad garantizada:
-                  </strong>{" "}
-                  Tu perfil será visto por cazatalentos y escuelas profesionales
+                  <strong className="text-gray-900">Mayor visibilidad:</strong>{" "}
+                  Dale difusión a tu escuela y atrae a los mejores talentos
                 </p>
               </div>
 
@@ -64,9 +61,10 @@ export function Hero() {
                 </div>
                 <p className="text-gray-700">
                   <strong className="text-gray-900">
-                    Oportunidades reales:
+                    Publicaciones ilimitadas:
                   </strong>{" "}
-                  Recibe ofertas directas de instituciones deportivas
+                  Anuncia convocatorias, partidos, eventos y noticias de tu
+                  escuela
                 </p>
               </div>
 
@@ -85,10 +83,9 @@ export function Hero() {
                   </svg>
                 </div>
                 <p className="text-gray-700">
-                  <strong className="text-gray-900">
-                    Destaca tu potencial:
-                  </strong>{" "}
-                  Crea un portafolio completo con videos, estadísticas y logros
+                  <strong className="text-gray-900">Gestión completa:</strong>{" "}
+                  Administra tu perfil, jugadores y contenido desde un solo
+                  lugar
                 </p>
               </div>
             </div>
@@ -99,7 +96,7 @@ export function Hero() {
                   size="lg"
                   className="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                 >
-                  Explorar oportunidades
+                  Registrar mi escuela
                   <svg
                     className="w-5 h-5 ml-2"
                     fill="none"
@@ -115,7 +112,6 @@ export function Hero() {
                   </svg>
                 </Button>
               </Link>
-
             </div>
 
             <div className="pt-6 border-t border-gray-200">
@@ -131,7 +127,7 @@ export function Hero() {
                     clipRule="evenodd"
                   />
                 </svg>
-                Registro gratuito • Sin comisiones • Privacidad garantizada
+                Registro gratuito • Sin comisiones • Gestión profesional
               </p>
             </div>
           </div>
@@ -140,10 +136,10 @@ export function Hero() {
             <div className="order-1 lg:order-2">
               <div className="relative aspect-square lg:aspect-[3/4] max-w-md mx-auto">
                 <Image
-                  src="/players.png"
-                  alt="Jugador mostrando su talento"
+                  src="/schools.png"
+                  alt="Escuela deportiva profesional"
                   fill
-                  className="object-cortain rounded-lg"
+                  className="object-cover rounded-lg"
                   priority
                   sizes="(max-width: 768px) 80vw, 40vw"
                 />
