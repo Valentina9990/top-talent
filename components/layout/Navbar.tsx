@@ -59,13 +59,13 @@ export const Navbar = () => {
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="flex h-10 w-10 items-center justify-center">
+              <div className="flex h-20 w-20 items-center justify-center">
                 <Image
-                  src="/logoTopTalent.png"
-                  alt="Top Talent Logo"
-                  width={48}
-                  height={48}
-                  className="object-contain"
+                  src="/pegasightLogo.png"
+                  alt="Logo"
+                  width={180}
+                  height={180}
+                  className="object-cover"
                 />
               </div>
               <span className="text-xl font-bold text-primary-700">
