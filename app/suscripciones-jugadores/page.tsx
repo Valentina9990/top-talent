@@ -36,7 +36,7 @@ export default function SuscripcionesJugadoresPage() {
           </p>
           <a
             href="/contacto"
-            className="inline-flex items-center justify-center rounded-lg bg-primary-600 px-6 py-3 text-base font-medium text-white hover:bg-primary-700 transition-colors"
+            className="inline-flex items-center justify-center rounded-lg bg-primary-500 px-6 py-3 text-base font-medium text-white hover:bg-primary-700 transition-colors"
           >
             Contactar Soporte
           </a>

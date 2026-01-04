@@ -127,7 +127,7 @@ export function EditPlayerModal({
                   className={`
                     px-3 py-1.5 rounded-md text-sm font-medium transition-colors
                     ${formData.positionIds.includes(position.id)
-                      ? "bg-primary-600 text-white hover:bg-primary-700"
+                      ? "bg-primary-500 text-white hover:bg-primary-700"
                       : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-100"
                     }
                     disabled:opacity-50 disabled:cursor-not-allowed
@@ -219,7 +219,7 @@ export function EditPlayerModal({
             <Button
               type="submit"
               disabled={loading}
-              className="bg-primary-600 hover:bg-primary-700"
+              className="bg-primary-500 hover:bg-primary-700"
             >
               {loading ? "Guardando..." : "Guardar Cambios"}
             </Button>

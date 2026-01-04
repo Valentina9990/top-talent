@@ -31,7 +31,7 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
       )}
       {schoolProfile?.headCoachName && (
         <div className="text-center p-4 bg-gray-50 rounded-lg flex-1 min-w-[100px]">
-          <p className="text-lg font-semibold text-primary-600">{schoolProfile.headCoachName}</p>
+          <p className="text-lg font-semibold text-primary-500">{schoolProfile.headCoachName}</p>
           <p className="text-sm text-gray-500">Director Técnico</p>
         </div>
       )}
@@ -59,13 +59,13 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {schoolProfile?.mission && (
                 <div>
-                  <h3 className="text-lg font-semibold text-primary-600 mb-2">Misión</h3>
+                  <h3 className="text-lg font-semibold text-primary-500 mb-2">Misión</h3>
                   <p className="text-gray-700 whitespace-pre-wrap">{schoolProfile.mission}</p>
                 </div>
               )}
               {schoolProfile?.vision && (
                 <div>
-                  <h3 className="text-lg font-semibold text-primary-600 mb-2">Visión</h3>
+                  <h3 className="text-lg font-semibold text-primary-500 mb-2">Visión</h3>
                   <p className="text-gray-700 whitespace-pre-wrap">{schoolProfile.vision}</p>
                 </div>
               )}

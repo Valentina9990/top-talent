@@ -107,7 +107,7 @@ export const LoginForm = () => {
                       size="sm"
                       variant="link"
                       asChild
-                      className="px-0 font-normal text-primary-600 hover:text-primary-800"
+                      className="px-0 font-normal text-primary-500 hover:text-primary-800"
                     >
                       <Link href="/auth/reset">
                         ¿Olvidaste tu contraseña?
@@ -126,14 +126,14 @@ export const LoginForm = () => {
             Al registrarte o iniciar sesión, aceptas automáticamente nuestros{' '}
             <Link 
               href="/terms" 
-              className="text-primary-600 hover:text-primary-800 underline"
+              className="text-primary-500 hover:text-primary-800 underline"
             >
               Términos y Condiciones
             </Link>
             {' '}y{' '}
             <Link 
               href="/policy" 
-              className="text-primary-600 hover:text-primary-800 underline"
+              className="text-primary-500 hover:text-primary-800 underline"
             >
               Política de Privacidad
             </Link>
@@ -143,7 +143,7 @@ export const LoginForm = () => {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full h-11 bg-primary-600 text-white hover:bg-primary-700 font-medium">
+            className="w-full h-11 bg-primary-500 text-white hover:bg-primary-700 font-medium">
             {isPending ? "Iniciando sesión..." : "Iniciar sesión"}
           </Button>
         </form>

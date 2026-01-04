@@ -85,7 +85,7 @@ export function AddPlayerModal({ open, onOpenChange, onSuccess }: AddPlayerModal
             <Button
               type="submit"
               disabled={loading}
-              className="bg-primary-600 hover:bg-primary-700"
+              className="bg-primary-500 hover:bg-primary-700"
             >
               {loading ? "Agregando..." : "Agregar Jugador"}
             </Button>

@@ -6,14 +6,20 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    container: {
+      center: true,
+      padding: {
+        DEFAULT: '1rem',
+        sm: '1.5rem',
+        lg: '2rem',
+      },
+    },
     extend: {
       colors: {
         primary: {
-          50: '#FFF5F0',
-          100: '#FFE8D9',
-          500: '#FF8838',
-          600: '#FF6600',
-          700: '#E55C00',
+          50: '#e7f0ffff',
+          500: '#234f9cff',
+          700: '#041859',
         },
         gray: {
           50: '#F9F9F9',

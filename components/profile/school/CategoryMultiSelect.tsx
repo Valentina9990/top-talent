@@ -56,7 +56,7 @@ export const CategoryMultiSelect: React.FC<CategoryMultiSelectProps> = ({
                                     checked={selectedIds.includes(category.id)}
                                     onChange={() => handleToggle(category.id)}
                                     disabled={disabled}
-                                    className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                                    className="w-4 h-4 text-primary-500 border-gray-300 rounded focus:ring-primary-500"
                                 />
                                 <span className="ml-3 text-sm text-gray-700">{category.name}</span>
                             </label>

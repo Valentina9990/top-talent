@@ -46,8 +46,8 @@ export function SchoolSidebar() {
   };
 
   return (
-    <aside className="w-64 bg-primary-500 border-r border-primary-600 flex flex-col">
-      <div className="p-6 border-b border-primary-600">
+    <aside className="w-64 bg-primary-500 border-r border-primary-500 flex flex-col">
+      <div className="p-6 border-b border-primary-500">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center">
             <School className="w-6 h-6 text-white" />
@@ -88,7 +88,7 @@ export function SchoolSidebar() {
         })}
       </nav>
 
-      <div className="p-4 border-t border-primary-600">
+      <div className="p-4 border-t border-primary-500">
         <Button
           onClick={handleLogout}
           variant="ghost"

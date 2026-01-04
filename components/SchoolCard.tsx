@@ -29,7 +29,7 @@ export default function SchoolCard({ school }: SchoolCardProps) {
   const categories = profile.categories.map((c) => c.name).join(", ");
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-      <div className="relative h-48 bg-gradient-to-br from-primary-500 to-primary-600 flex items-center justify-center">
+      <div className="relative h-48 bg-gradient-to-br from-primary-500 to-primary-500 flex items-center justify-center">
         {school.image ? (
           <Image
             src={logoUrl}
@@ -53,13 +53,13 @@ export default function SchoolCard({ school }: SchoolCardProps) {
         <div className="space-y-2 text-sm text-gray-600 mb-4">
           {location && (
             <div className="flex items-center">
-              <MapPin className="w-4 h-4 mr-2 text-primary-600 flex-shrink-0" />
+              <MapPin className="w-4 h-4 mr-2 text-primary-500 flex-shrink-0" />
               <span className="line-clamp-1">{location}</span>
             </div>
           )}
           {categories && (
             <div className="flex items-center">
-              <Award className="w-4 h-4 mr-2 text-primary-600 flex-shrink-0" />
+              <Award className="w-4 h-4 mr-2 text-primary-500 flex-shrink-0" />
               <span className="line-clamp-1">{categories}</span>
             </div>
           )}
@@ -85,7 +85,7 @@ export default function SchoolCard({ school }: SchoolCardProps) {
         </div>
         <Link
           href={`/escuela/${school.id}`}
-          className="block w-full text-center bg-primary-600 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300"
+          className="block w-full text-center bg-primary-500 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300"
         >
           Ver Perfil
         </Link>

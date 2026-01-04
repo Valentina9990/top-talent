@@ -8,7 +8,7 @@ export default function NotFound() {
         </p>
         <a
           href="/para-jugadores"
-          className="inline-block bg-primary-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-700 transition duration-300"
+          className="inline-block bg-primary-500 text-white font-semibold px-6 py-3 rounded-lg hover:bg-primary-700 transition duration-300"
         >
           Volver al Directorio
         </a>

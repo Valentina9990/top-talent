@@ -43,13 +43,13 @@ export function PlayerPricingCard({
     <Card
       className={`relative flex flex-col ${
         highlighted
-          ? "border-primary-600 border-2 shadow-xl scale-105"
+          ? "border-primary-500 border-2 shadow-xl scale-105"
           : "border-gray-200"
       }`}
     >
       {highlighted && (
         <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-          <span className="inline-flex items-center rounded-full bg-primary-600 px-4 py-1 text-sm font-semibold text-white">
+          <span className="inline-flex items-center rounded-full bg-primary-500 px-4 py-1 text-sm font-semibold text-white">
             Más Popular
           </span>
         </div>
@@ -114,7 +114,7 @@ export function PlayerPricingCard({
           variant={ctaVariant}
           className={`w-full ${
             highlighted && ctaVariant === "default"
-              ? "bg-primary-600 hover:bg-primary-700"
+              ? "bg-primary-500 hover:bg-primary-700"
               : ""
           }`}
           size="lg"

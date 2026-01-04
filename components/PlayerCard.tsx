@@ -22,7 +22,7 @@ export default function PlayerCard({ player }: PlayerCardProps) {
 
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-      <div className="relative h-48 bg-gradient-to-br from-primary-500 to-primary-600">
+      <div className="relative h-48 bg-gradient-to-br from-primary-500 to-primary-500">
         {avatarUrl ? (
           <Image
             src={avatarUrl}
@@ -88,7 +88,7 @@ export default function PlayerCard({ player }: PlayerCardProps) {
 
         <Link
           href={`/jugador/${player.id}`}
-          className="block w-full text-center bg-primary-600 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300"
+          className="block w-full text-center bg-primary-500 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300"
         >
           Ver Perfil
         </Link>

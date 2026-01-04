@@ -34,7 +34,7 @@ export const SchoolHeader: React.FC<SchoolHeaderProps> = ({
                 <div className="p-8 flex-1">
                     <div className="flex justify-between items-start">
                         <div>
-                            <div className="uppercase tracking-wide text-sm text-primary-600 font-semibold">
+                            <div className="uppercase tracking-wide text-sm text-primary-500 font-semibold">
                                 Escuela Deportiva
                             </div>
                             <h1 className="mt-1 text-4xl font-bold text-gray-900">

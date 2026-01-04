@@ -26,7 +26,7 @@ export default function NotFound() {
         <div className="space-y-3">
           <Link
             href="/para-escuelas"
-            className="block w-full bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300"
+            className="block w-full bg-primary-500 text-white font-semibold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300"
           >
             Ver todos los jugadores
           </Link>

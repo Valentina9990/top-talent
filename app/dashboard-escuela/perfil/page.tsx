@@ -35,7 +35,7 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl shadow-lg p-8 text-white">
+      <div className="bg-gradient-to-r from-primary-500 to-primary-500 rounded-2xl shadow-lg p-8 text-white">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
             <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
@@ -57,7 +57,7 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
           {!isEditMode ? (
             <a
               href="/dashboard-escuela/perfil?edit=true"
-              className="flex items-center gap-2 px-6 py-3 bg-white text-primary-600 rounded-lg hover:bg-white/90 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center gap-2 px-6 py-3 bg-white text-primary-500 rounded-lg hover:bg-white/90 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
             >
               <Edit3 className="w-5 h-5" />
               Editar Perfil

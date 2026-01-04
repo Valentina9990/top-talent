@@ -285,7 +285,7 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
                 <button
                     type="submit"
                     disabled={isPending}
-                    className="flex-1 px-6 py-3 bg-primary-600 text-white font-bold rounded-lg hover:bg-primary-700 transition duration-300"
+                    className="flex-1 px-6 py-3 bg-primary-500 text-white font-bold rounded-lg hover:bg-primary-700 transition duration-300"
                 >
                     {isPending ? "Guardando..." : "Guardar Cambios"}
                 </button>

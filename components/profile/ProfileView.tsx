@@ -82,7 +82,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
           <div className="p-8 flex-1">
             <div className="flex justify-between items-start">
               <div>
-                <div className="uppercase tracking-wide text-sm text-primary-600 font-semibold flex flex-wrap gap-2">
+                <div className="uppercase tracking-wide text-sm text-primary-500 font-semibold flex flex-wrap gap-2">
                   {profile?.positions && profile.positions.length > 0 ? (
                     profile.positions.map((pos: { id: string; name: string }) => (
                       <span key={pos.id} className="bg-primary-100 px-2 py-1 rounded">
@@ -116,7 +116,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               {isOwner && (
                 <Link
                   href="/perfil?edit=true"
-                  className="bg-primary-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300"
+                  className="bg-primary-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-primary-700 transition duration-300"
                 >
                   Editar Perfil
                 </Link>
@@ -130,7 +130,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             />
             
             {!isOwner && (
-              <button className="mt-8 bg-primary-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300">
+              <button className="mt-8 bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300">
                 Contactar Jugador
               </button>
             )}
@@ -147,7 +147,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowVideoModal(true)}
-                    className="text-primary-600 hover:text-primary-700 transition-colors"
+                    className="text-primary-500 hover:text-primary-700 transition-colors"
                     title="Editar video"
                   >
                     <Pencil className="w-5 h-5" />
@@ -220,7 +220,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
                             setEditingAchievement(achievement);
                             setShowAchievementModal(true);
                           }}
-                          className="text-primary-600 hover:text-primary-700 transition-colors"
+                          className="text-primary-500 hover:text-primary-700 transition-colors"
                           title="Editar"
                         >
                           <Pencil className="w-4 h-4" />

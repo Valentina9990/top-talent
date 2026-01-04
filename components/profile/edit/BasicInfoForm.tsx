@@ -151,7 +151,7 @@ export function BasicInfoForm({
                 type="checkbox"
                 checked={formData.positionIds?.includes(pos.id) || false}
                 onChange={() => handlePositionToggle(pos.id)}
-                className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
+                className="w-4 h-4 text-primary-500 border-gray-300 rounded focus:ring-primary-500"
               />
               <span className="ml-2 text-sm font-medium">{pos.name}</span>
             </label>

@@ -108,7 +108,7 @@ export function VideoManagement() {
           type="button"
           onClick={handleAddVideo}
           disabled={addingVideo}
-          className="w-full px-4 py-2 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50"
+          className="w-full px-4 py-2 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50"
         >
           {addingVideo ? "Agregando..." : "Agregar Video"}
         </button>

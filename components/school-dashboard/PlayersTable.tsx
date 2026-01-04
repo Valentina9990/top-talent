@@ -69,7 +69,7 @@ export function PlayersTable({ players, categories, positions, onRefresh }: Play
           </div>
           <Button
             onClick={() => setAddModalOpen(true)}
-            className="bg-primary-600 hover:bg-primary-700 text-white"
+            className="bg-primary-500 hover:bg-primary-700 text-white"
           >
             <UserPlus className="w-4 h-4 mr-2" />
             Agregar Jugador

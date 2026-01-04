@@ -100,7 +100,7 @@ const FeedClient: React.FC<FeedClientProps> = ({ initialPlayers, positions }) =>
             <button
               onClick={handleFilter}
               disabled={isPending}
-              className="flex-1 bg-primary-600 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex-1 bg-primary-500 text-white font-semibold py-2 rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isPending ? "Filtrando..." : "Filtrar"}
             </button>
@@ -117,7 +117,7 @@ const FeedClient: React.FC<FeedClientProps> = ({ initialPlayers, positions }) =>
 
       {isPending ? (
         <div className="text-center py-12">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-600"></div>
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary-500"></div>
           <p className="mt-4 text-gray-600">Cargando jugadores...</p>
         </div>
       ) : players.length === 0 ? (
@@ -127,7 +127,7 @@ const FeedClient: React.FC<FeedClientProps> = ({ initialPlayers, positions }) =>
           </p>
           <button
             onClick={handleReset}
-            className="mt-4 text-primary-600 hover:text-primary-700 font-semibold"
+            className="mt-4 text-primary-500 hover:text-primary-700 font-semibold"
           >
             Limpiar filtros
           </button>

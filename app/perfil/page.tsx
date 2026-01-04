@@ -40,7 +40,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
               {!isEditMode && (
                 <a
                   href="/perfil?edit=true"
-                  className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700"
+                  className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-700"
                 >
                   Editar Perfil
                 </a>

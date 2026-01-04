@@ -212,7 +212,7 @@ export function CreatePostForm({ schoolId, onSuccess }: CreatePostFormProps) {
       <Button
         type="submit"
         disabled={isSubmitting || !title.trim() || !description.trim()}
-        className="w-full bg-primary-500 hover:bg-primary-600 text-white font-semibold py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full bg-primary-500 hover:bg-primary-500 text-white font-semibold py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isSubmitting ? (
           <span className="flex items-center justify-center gap-2">

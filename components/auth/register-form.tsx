@@ -78,7 +78,7 @@ export const RegisterForm = () => {
                         onClick={() => field.onChange("PLAYER")}
                         className={`p-4 border-2 rounded-lg text-center transition-all ${
                           field.value === "PLAYER"
-                            ? "border-primary-600 bg-primary-50 text-primary-700"
+                            ? "border-primary-500 bg-primary-50 text-primary-700"
                             : "border-gray-300 hover:border-gray-400"
                         }`}
                       >
@@ -93,7 +93,7 @@ export const RegisterForm = () => {
                         onClick={() => field.onChange("SCHOOL")}
                         className={`p-4 border-2 rounded-lg text-center transition-all ${
                           field.value === "SCHOOL"
-                            ? "border-primary-600 bg-primary-50 text-primary-700"
+                            ? "border-primary-500 bg-primary-50 text-primary-700"
                             : "border-gray-300 hover:border-gray-400"
                         }`}
                       >
@@ -195,14 +195,14 @@ export const RegisterForm = () => {
             Al registrarte o iniciar sesión, aceptas automáticamente nuestros{' '}
             <Link 
               href="/terms" 
-              className="text-primary-600 hover:text-primary-800 underline"
+              className="text-primary-500 hover:text-primary-800 underline"
             >
               Términos y Condiciones
             </Link>
             {' '}y{' '}
             <Link 
               href="/policy" 
-              className="text-primary-600 hover:text-primary-800 underline"
+              className="text-primary-500 hover:text-primary-800 underline"
             >
               Política de Privacidad
             </Link>
@@ -212,7 +212,7 @@ export const RegisterForm = () => {
           <Button
             disabled={isPending}
             type="submit"
-            className="w-full h-11 bg-primary-600 text-white hover:bg-primary-700 font-medium">
+            className="w-full h-11 bg-primary-500 text-white hover:bg-primary-700 font-medium">
             {isPending ? "Creando cuenta..." : "Crear cuenta"}
           </Button>
         </form>

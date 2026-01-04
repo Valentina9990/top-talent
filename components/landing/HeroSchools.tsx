@@ -13,7 +13,7 @@ export function HeroSchools() {
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
                 ¡Encuentra el{" "}
-                <span className="text-primary-600 bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent">
+                <span className="text-primary-500 bg-gradient-to-r from-primary-500 to-primary-500 bg-clip-text text-transparent">
                   talento
                 </span>{" "}
                 que buscas!
@@ -28,7 +28,7 @@ export function HeroSchools() {
               <div className="flex items-start gap-3">
                 <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center">
                   <svg
-                    className="w-4 h-4 text-primary-600"
+                    className="w-4 h-4 text-primary-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -48,7 +48,7 @@ export function HeroSchools() {
               <div className="flex items-start gap-3">
                 <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center">
                   <svg
-                    className="w-4 h-4 text-primary-600"
+                    className="w-4 h-4 text-primary-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -71,7 +71,7 @@ export function HeroSchools() {
               <div className="flex items-start gap-3">
                 <div className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 flex items-center justify-center">
                   <svg
-                    className="w-4 h-4 text-primary-600"
+                    className="w-4 h-4 text-primary-500"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
@@ -94,7 +94,7 @@ export function HeroSchools() {
               <Link href="/auth/register">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto bg-primary-600 hover:bg-primary-700 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
+                  className="w-full sm:w-auto bg-primary-500 hover:bg-primary-700 text-white px-8 py-6 text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
                 >
                   Registrar mi escuela
                   <svg
@@ -117,7 +117,7 @@ export function HeroSchools() {
             <div className="pt-6 border-t border-gray-200">
               <p className="text-sm text-gray-500 flex items-center gap-2">
                 <svg
-                  className="w-5 h-5 text-primary-600"
+                  className="w-5 h-5 text-primary-500"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >

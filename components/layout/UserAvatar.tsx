@@ -56,7 +56,7 @@ export const UserAvatar = ({ name, image, size = "md" }: UserAvatarProps) => {
     <div
       className={`${sizeClasses[size]} ${getBackgroundColor(
         initials
-      )} rounded-full flex items-center justify-center text-primary-600 font-semibold`}
+      )} rounded-full flex items-center justify-center text-primary-500 font-semibold`}
     >
       {initials}
     </div>

@@ -19,7 +19,7 @@ export const ContactItem: React.FC<ContactItemProps> = ({
 }) => {
     const content = (
         <div className="flex items-start gap-3">
-            <div className="text-primary-600 mt-1 flex-shrink-0">
+            <div className="text-primary-500 mt-1 flex-shrink-0">
                 {icon}
             </div>
             <div className="flex-1 min-w-0">
@@ -29,7 +29,7 @@ export const ContactItem: React.FC<ContactItemProps> = ({
                         href={href}
                         target={isExternal ? "_blank" : undefined}
                         rel={isExternal ? "noopener noreferrer" : undefined}
-                        className="text-gray-900 hover:text-primary-600 break-words"
+                        className="text-gray-900 hover:text-primary-500 break-words"
                     >
                         {value}
                     </a>

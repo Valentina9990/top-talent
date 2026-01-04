@@ -150,7 +150,7 @@ export function AchievementManagement({ achievements }: AchievementManagementPro
                   <div className="flex gap-2">
                     <button
                       onClick={() => handleUpdateAchievement(achievement)}
-                      className="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 text-sm"
+                      className="px-4 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-700 text-sm"
                     >
                       Guardar
                     </button>
@@ -173,7 +173,7 @@ export function AchievementManagement({ achievements }: AchievementManagementPro
                   <div className="flex gap-2 ml-4">
                     <button
                       onClick={() => setEditingId(achievement.id!)}
-                      className="p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition"
+                      className="p-2 text-primary-500 hover:bg-primary-50 rounded-lg transition"
                       title="Editar"
                     >
                       <svg
@@ -268,7 +268,7 @@ export function AchievementManagement({ achievements }: AchievementManagementPro
           type="button"
           onClick={handleAddAchievement}
           disabled={addingAchievement}
-          className="w-full px-4 py-2 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50"
+          className="w-full px-4 py-2 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50"
         >
           {addingAchievement ? "Agregando..." : "Agregar Logro"}
         </button>

@@ -23,7 +23,7 @@ export default async function PublicacionesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-primary-500 to-primary-600 rounded-2xl shadow-lg p-8 text-white">
+      <div className="bg-gradient-to-r from-primary-500 to-primary-500 rounded-2xl shadow-lg p-8 text-white">
         <div className="flex items-center gap-4">
           <div className="bg-white/20 backdrop-blur-sm rounded-xl p-4">
             <FileText className="w-10 h-10" />

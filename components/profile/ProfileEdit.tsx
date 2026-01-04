@@ -186,7 +186,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           <button
             type="submit"
             disabled={isPending}
-            className="px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-3 bg-primary-500 text-white font-semibold rounded-lg hover:bg-primary-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isPending ? "Guardando..." : "Guardar Cambios"}
           </button>
