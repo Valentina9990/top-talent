@@ -20,7 +20,7 @@ export const sendVerificationEmail = async (email: string, token: string, userNa
     );
 
     await transporter.sendMail({
-        from: `"Top Talent" <${process.env.GMAIL_USER}>`,
+        from: `"Pegasight" <${process.env.GMAIL_USER}>`,
         to: email,
         subject: "Verifica tu correo electrónico",
         html: emailHtml,
@@ -36,7 +36,7 @@ export const sendPasswordResetEmail = async (email: string, token: string, userN
     );
 
     await transporter.sendMail({
-        from: `"Top Talent" <${process.env.GMAIL_USER}>`,
+        from: `"Pegasight" <${process.env.GMAIL_USER}>`,
         to: email,
         subject: "Restablece tu contraseña",
         html: emailHtml,

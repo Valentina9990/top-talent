@@ -68,8 +68,8 @@ export const Navbar = () => {
                   className="object-cover"
                 />
               </div>
-              <span className="text-xl font-bold text-primary-700">
-                Top Talent
+              <span className="text-xl font-bold text-black font-[family-name:var(--font-bodoni-moda)]">
+                PEGASIGHT
               </span>
             </Link>
           </div>

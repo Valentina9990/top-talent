@@ -257,7 +257,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             {profile?.achievements && profile.achievements.some((a: any) => a.verified) && (
               <div className="mt-6 p-3 bg-green-50 rounded-lg border border-green-200">
                 <p className="text-xs text-green-700 font-semibold text-center">
-                  Validado por Top Talent
+                  Validado por Pegasight
                 </p>
               </div>
             )}

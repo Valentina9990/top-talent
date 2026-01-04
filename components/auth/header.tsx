@@ -8,13 +8,13 @@ interface HeaderProps {
 export const Header = ( { label, description }: HeaderProps) => {
     return (
         <div className="w-full flex flex-col gap-y-3">
-            <div className="flex justify-center mt-4 mb-2">
+            <div className="flex justify-center mt-4">
                 <Image 
                     src="/pegasightLogo.png" 
                     alt="Logo" 
                     width={180} 
                     height={180}
-                    className="object-contain"
+                    className="object-cover"
                     priority
                 />
             </div>

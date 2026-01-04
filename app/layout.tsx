@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Bodoni_Moda } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
 import { Toaster } from "@/components/ui/sonner";
@@ -15,8 +15,14 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bodoniModa = Bodoni_Moda({
+  variable: "--font-bodoni-moda",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800", "900"],
+});
+
 export const metadata: Metadata = {
-  title: "Top Talent",
+  title: "Pegasight",
   description: "Conecta jugadores con escuelas deportivas",
 };
 
@@ -27,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${bodoniModa.variable} antialiased`}>
         <Providers>
           <NavbarWrapper />
           <main className="min-h-screen">
