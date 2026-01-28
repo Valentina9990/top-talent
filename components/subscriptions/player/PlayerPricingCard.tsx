@@ -114,7 +114,7 @@ export function PlayerPricingCard({
           variant={ctaVariant}
           className={`w-full ${
             highlighted && ctaVariant === "default"
-              ? "bg-primary-500 hover:bg-primary-700"
+              ? "bg-primary-500 hover:bg-primary-700 text-white"
               : ""
           }`}
           size="lg"
