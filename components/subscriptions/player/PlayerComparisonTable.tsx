@@ -2,6 +2,7 @@
 
 import { Check, X } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Fragment } from "react";
 
 const comparisonData = [
   {
@@ -147,9 +148,9 @@ export function PlayerComparisonTable() {
               </tr>
             </thead>
             <tbody>
-              {comparisonData.map((category) => (
-                <>
-                  <tr key={category.category} className="bg-gray-100">
+              {comparisonData.map((category, categoryIndex) => (
+                <Fragment key={`category-${categoryIndex}`}>
+                  <tr className="bg-gray-100">
                     <td
                       colSpan={4}
                       className="px-6 py-3 text-sm font-bold text-gray-900"
@@ -176,7 +177,7 @@ export function PlayerComparisonTable() {
                       </td>
                     </tr>
                   ))}
-                </>
+                </Fragment>
               ))}
             </tbody>
           </table>
