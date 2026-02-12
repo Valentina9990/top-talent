@@ -41,12 +41,20 @@ export const LoginForm = () => {
     startTransition(() => {
       login(values)
         .then((data) => {
-          setError(data?.error);
-          setSuccess(data?.success);
-
+          if (data?.error) {
+            setError(data.error);
+          }
+          
           if (data?.success) {
+            setSuccess(data.success);
             setIsOpen(false);
-            router.push("/dashboard");
+            
+            if (data.redirectTo) {
+              router.push(data.redirectTo);
+            } else {
+              router.push("/dashboard");
+            }
+            router.refresh();
           }
         });
     });
