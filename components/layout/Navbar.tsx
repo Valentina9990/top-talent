@@ -70,7 +70,7 @@ export const Navbar = () => {
                 />
               </div>
               <span className="text-xl font-bold text-black font-[family-name:var(--font-bodoni-moda)]">
-                PEGASIGHT
+                TOPTALENT
               </span>
             </Link>
           </div>
