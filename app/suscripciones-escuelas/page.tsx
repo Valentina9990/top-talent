@@ -3,7 +3,7 @@ import { SchoolComparisonTable, SchoolSubscriptionPlans } from "@/components/sub
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Planes de Suscripción para Escuelas y Clubes | Pegasight",
+  title: "Planes de Suscripción para Escuelas y Clubes | TopTalent",
   description: "Accede a la mejor base de datos de jugadores. Planes diseñados para clubes, escuelas y organizaciones deportivas.",
 };
 
