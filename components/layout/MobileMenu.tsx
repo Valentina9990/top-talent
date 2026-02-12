@@ -3,7 +3,13 @@
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { UserAvatar } from "./UserAvatar";
-import { User, LogOut, Settings, FileText } from "lucide-react";
+import {
+  User,
+  LogOut,
+  Settings,
+  FileText,
+  LayoutDashboard,
+} from "lucide-react";
 
 interface MobileMenuProps {
   menuItems: Array<{
@@ -30,21 +36,46 @@ export const MobileMenu = ({
     await signOut({ callbackUrl: "/" });
   };
 
+  const getRoleBadge = () => {
+    if (!user) return null;
+    if (user.role === "PLAYER") {
+      return {
+        label: "Jugador",
+        bg: "bg-primary-50",
+        text: "text-primary-700",
+      };
+    }
+    if (user.role === "SCHOOL") {
+      return {
+        label: "Escuela",
+        bg: "bg-primary-50",
+        text: "text-primary-700",
+      };
+    }
+    return null;
+  };
+
+  const activeStyles = {
+    activeBg: "bg-primary-50",
+    activeText: "text-primary-500",
+    hoverText: "hover:text-primary-500",
+  };
 
   const getUserMenuOptions = () => {
     if (!user) return [];
 
-    const commonOptions = [
-      {
-        label: "Ver Perfil",
-        href: "/perfil",
-        icon: User,
-      },
-    ];
-
     if (user.role === "PLAYER") {
       return [
-        ...commonOptions,
+        {
+          label: "Mi Panel",
+          href: "/dashboard",
+          icon: LayoutDashboard,
+        },
+        {
+          label: "Ver Perfil",
+          href: "/perfil",
+          icon: User,
+        },
         {
           label: "Configuración",
           href: "/configuracion",
@@ -55,24 +86,35 @@ export const MobileMenu = ({
 
     if (user.role === "SCHOOL") {
       return [
-        ...commonOptions,
+        {
+          label: "Mi Panel",
+          href: "/dashboard-escuela",
+          icon: LayoutDashboard,
+        },
         {
           label: "Perfil de Escuela",
-          href: "/escuela/perfil",
+          href: "/dashboard-escuela/perfil",
           icon: FileText,
         },
         {
           label: "Configuración",
-          href: "/configuracion",
+          href: "/dashboard-escuela/configuracion",
           icon: Settings,
         },
       ];
     }
 
-    return commonOptions;
+    return [
+      {
+        label: "Ver Perfil",
+        href: "/perfil",
+        icon: User,
+      },
+    ];
   };
 
   const userMenuOptions = getUserMenuOptions();
+  const roleBadge = getRoleBadge();
 
   return (
     <div className="md:hidden">
@@ -85,8 +127,8 @@ export const MobileMenu = ({
               onClick={onClose}
               className={`block rounded-lg px-3 py-2 text-base font-medium transition-colors ${
                 pathname === item.href
-                  ? "bg-primary-50 text-primary-500"
-                  : "text-gray-700 hover:bg-gray-100 hover:text-primary-500"
+                  ? `${activeStyles.activeBg} ${activeStyles.activeText}`
+                  : `text-gray-700 hover:bg-gray-100 ${activeStyles.hoverText}`
               }`}
             >
               {item.label}
@@ -103,6 +145,13 @@ export const MobileMenu = ({
                   {user.name || "Usuario"}
                 </p>
                 <p className="text-sm text-gray-500">{user.email}</p>
+                {roleBadge && (
+                  <span
+                    className={`mt-1 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${roleBadge.bg} ${roleBadge.text}`}
+                  >
+                    {roleBadge.label}
+                  </span>
+                )}
               </div>
             </div>
 
@@ -112,7 +161,7 @@ export const MobileMenu = ({
                   key={option.href}
                   href={option.href}
                   onClick={onClose}
-                  className="flex items-center rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors"
+                  className={`flex items-center rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 ${activeStyles.hoverText} transition-colors`}
                 >
                   <option.icon className="mr-3 h-5 w-5 text-gray-500" />
                   {option.label}
@@ -133,14 +182,14 @@ export const MobileMenu = ({
             <Link
               href="/auth/login"
               onClick={onClose}
-              className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-colors text-center"
+              className="block rounded-lg px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-primary-500 transition-colors text-center"
             >
               Iniciar Sesión
             </Link>
             <Link
               href="/auth/register"
               onClick={onClose}
-              className="block rounded-lg bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700 transition-colors text-center"
+              className="block rounded-lg bg-primary-500 px-3 py-2 text-base font-medium text-white hover:bg-primary-700 transition-colors text-center"
             >
               Registrarse
             </Link>

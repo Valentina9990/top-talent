@@ -4,7 +4,14 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { UserAvatar } from "./UserAvatar";
-import { ChevronDown, User, LogOut, Settings, FileText } from "lucide-react";
+import {
+  ChevronDown,
+  User,
+  LogOut,
+  Settings,
+  FileText,
+  LayoutDashboard,
+} from "lucide-react";
 
 interface UserMenuProps {
   user: {
@@ -39,18 +46,37 @@ export const UserMenu = ({ user }: UserMenuProps) => {
     await signOut({ callbackUrl: "/" });
   };
 
-  const getMenuOptions = () => {
-    const commonOptions = [
-      {
-        label: "Ver Perfil",
-        href: "/perfil",
-        icon: User,
-      },
-    ];
+  const getRoleBadge = () => {
+    if (user.role === "PLAYER") {
+      return {
+        label: "Jugador",
+        bg: "bg-primary-50",
+        text: "text-primary-700",
+      };
+    }
+    if (user.role === "SCHOOL") {
+      return {
+        label: "Escuela",
+        bg: "bg-primary-50",
+        text: "text-primary-700",
+      };
+    }
+    return null;
+  };
 
+  const getMenuOptions = () => {
     if (user.role === "PLAYER") {
       return [
-        ...commonOptions,
+        {
+          label: "Mi Panel",
+          href: "/dashboard",
+          icon: LayoutDashboard,
+        },
+        {
+          label: "Ver Perfil",
+          href: "/perfil",
+          icon: User,
+        },
         {
           label: "Configuración",
           href: "/configuracion",
@@ -61,24 +87,35 @@ export const UserMenu = ({ user }: UserMenuProps) => {
 
     if (user.role === "SCHOOL") {
       return [
-        ...commonOptions,
+        {
+          label: "Mi Panel",
+          href: "/dashboard-escuela",
+          icon: LayoutDashboard,
+        },
         {
           label: "Perfil de Escuela",
-          href: "/escuela/perfil",
+          href: "/dashboard-escuela/perfil",
           icon: FileText,
         },
         {
           label: "Configuración",
-          href: "/configuracion",
+          href: "/dashboard-escuela/configuracion",
           icon: Settings,
         },
       ];
     }
 
-    return commonOptions;
+    return [
+      {
+        label: "Ver Perfil",
+        href: "/perfil",
+        icon: User,
+      },
+    ];
   };
 
   const menuOptions = getMenuOptions();
+  const roleBadge = getRoleBadge();
 
   return (
     <div className="relative" ref={menuRef}>
@@ -107,6 +144,13 @@ export const UserMenu = ({ user }: UserMenuProps) => {
                 {user.name || "Usuario"}
               </p>
               <p className="text-xs text-gray-500 truncate">{user.email}</p>
+              {roleBadge && (
+                <span
+                  className={`mt-1.5 inline-flex items-center rounded-full px-2 py-0.5 text-xs font-semibold ${roleBadge.bg} ${roleBadge.text}`}
+                >
+                  {roleBadge.label}
+                </span>
+              )}
             </div>
 
             <div className="py-1">
