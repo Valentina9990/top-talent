@@ -35,15 +35,17 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
     }
 
     try {
+        await signIn("credentials", {
+            email,
+            password,
+            redirect: false,
+        });
+
         const redirectTo = existingUser.role === "SCHOOL" 
             ? "/dashboard-escuela" 
             : DEFAULT_LOGIN_REDIRECT;
 
-        await signIn("credentials", {
-            email,
-            password,
-            redirectTo,
-        });
+        return { success: "Inicio de sesión exitoso", redirectTo };
     } catch (error) {
         if (error instanceof AuthError) {
             switch (error.type) {

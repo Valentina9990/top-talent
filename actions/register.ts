@@ -21,6 +21,16 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
     const existingUser = await getUserByEmail(email);
 
     if (existingUser) {
+        if (!existingUser.emailVerified) {
+            // User exists but hasn't verified email — resend verification
+            const verificationToken = await generateVerificationToken(email);
+            await sendVerificationEmail(
+                verificationToken.email,
+                verificationToken.token,
+                existingUser.name
+            );
+            return { success: "Ya tienes una cuenta pendiente de verificación. Se ha reenviado el correo de verificación, revisa tu bandeja de entrada y carpeta de spam." };
+        }
         return { error: "Correo en uso" };
     }
 

@@ -1,15 +1,11 @@
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { render } from "@react-email/render";
 import { VerificationEmail } from "./templates/VerificationEmail";
 import { ResetPasswordEmail } from "./templates/ResetPasswordEmail";
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
-    },
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const EMAIL_FROM = process.env.EMAIL_FROM || "onboarding@resend.dev";
 
 export const sendVerificationEmail = async (email: string, token: string, userName?: string) => {
     const emailHtml = await render(
@@ -19,8 +15,8 @@ export const sendVerificationEmail = async (email: string, token: string, userNa
         })
     );
 
-    await transporter.sendMail({
-        from: `"Pegasight" <${process.env.GMAIL_USER}>`,
+    await resend.emails.send({
+        from: EMAIL_FROM,
         to: email,
         subject: "Verifica tu correo electrónico",
         html: emailHtml,
@@ -35,8 +31,8 @@ export const sendPasswordResetEmail = async (email: string, token: string, userN
         })
     );
 
-    await transporter.sendMail({
-        from: `"Pegasight" <${process.env.GMAIL_USER}>`,
+    await resend.emails.send({
+        from: EMAIL_FROM,
         to: email,
         subject: "Restablece tu contraseña",
         html: emailHtml,
