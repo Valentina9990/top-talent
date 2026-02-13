@@ -4,7 +4,7 @@ import { PlayerFAQ } from "@/components/subscriptions/player/PlayerFAQ";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Planes de Suscripción para Jugadores | Pegasight",
+  title: "Planes de Suscripción para Jugadores | TopTalent",
   description: "Elige el plan perfecto para impulsar tu carrera futbolística. Desde planes gratuitos hasta premium con visibilidad destacada.",
 };
 
