@@ -23,7 +23,7 @@ const bodoniModa = Bodoni_Moda({
 });
 
 export const metadata: Metadata = {
-  title: "Pegasight",
+  title: "TopTalent",
   description: "Conecta jugadores con escuelas deportivas",
 };
 
