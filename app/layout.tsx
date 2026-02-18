@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bodoni_Moda } from "next/font/google";
 import { Providers } from "@/components/Providers";
 import { NavbarWrapper } from "@/components/layout/NavbarWrapper";
+import { FooterWrapper } from "@/components/layout/FooterWrapper";
 import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
@@ -39,6 +40,7 @@ export default function RootLayout({
           <main className="min-h-screen">
             {children}
           </main>
+          <FooterWrapper />
           <Toaster />
         </Providers>
       </body>
