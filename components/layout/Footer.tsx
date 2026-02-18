@@ -28,7 +28,7 @@ export const Footer = () => {
           <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
             <Link href="/" className="flex items-center gap-2">
               <span className="text-xl font-bold tracking-tight text-white">
-                Pegasight
+                TopTalent
               </span>
             </Link>
             <p className="max-w-xs text-sm leading-relaxed text-primary-50/80">
