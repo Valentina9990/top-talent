@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { Mail, Phone, Instagram } from "lucide-react";
 
 const CONTACT_INFO = {
@@ -23,41 +22,31 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary-700 text-white">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
-          {/* Brand */}
-          <div className="flex flex-col gap-3">
+    <footer className="bg-primary-700 text-primary-50">
+      <div className="container mx-auto px-6 py-12 lg:px-20">
+        <div className="flex flex-col gap-10 md:flex-row md:justify-between">
+          <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
             <Link href="/" className="flex items-center gap-2">
-              <Image
-                src="/logo.png"
-                alt="Pegasight logo"
-                width={36}
-                height={36}
-                className="rounded"
-                onError={(e) => {
-                  (e.currentTarget as HTMLImageElement).style.display = "none";
-                }}
-              />
-              <span className="text-xl font-bold tracking-tight">Pegasight</span>
+              <span className="text-xl font-bold tracking-tight text-white">
+                Pegasight
+              </span>
             </Link>
-            <p className="text-sm leading-relaxed text-white/70">
+            <p className="max-w-xs text-sm leading-relaxed text-primary-50/80">
               Conectamos jugadores con escuelas deportivas y ofrecemos grabación
               deportiva profesional para llevar tu rendimiento al siguiente nivel.
             </p>
           </div>
 
-          {/* Navigation */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white/50">
+          <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-secondary">
               Plataforma
             </h3>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col gap-2.5">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 transition-colors hover:text-white"
+                    className="text-sm text-primary-50/70 transition-colors hover:text-secondary"
                   >
                     {link.label}
                   </Link>
@@ -66,27 +55,26 @@ export const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
-          <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-white/50">
+          <div className="flex flex-col items-center gap-4 text-center md:items-start md:text-left">
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-secondary">
               Contacto
             </h3>
             <ul className="flex flex-col gap-3">
               <li>
                 <a
                   href={`mailto:${CONTACT_INFO.email}`}
-                  className="flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+                  className="flex items-center gap-2 text-sm text-primary-50/70 transition-colors hover:text-secondary"
                 >
-                  <Mail size={15} className="shrink-0" />
+                  <Mail size={16} className="shrink-0" />
                   {CONTACT_INFO.email}
                 </a>
               </li>
               <li>
                 <a
                   href={`tel:${CONTACT_INFO.phone}`}
-                  className="flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+                  className="flex items-center gap-2 text-sm text-primary-50/70 transition-colors hover:text-secondary"
                 >
-                  <Phone size={15} className="shrink-0" />
+                  <Phone size={16} className="shrink-0" />
                   {CONTACT_INFO.phoneDisplay}
                 </a>
               </li>
@@ -95,9 +83,9 @@ export const Footer = () => {
                   href={CONTACT_INFO.instagram.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
+                  className="flex items-center gap-2 text-sm text-primary-50/70 transition-colors hover:text-secondary"
                 >
-                  <Instagram size={15} className="shrink-0" />
+                  <Instagram size={16} className="shrink-0" />
                   {CONTACT_INFO.instagram.handle}
                 </a>
               </li>
@@ -105,8 +93,7 @@ export const Footer = () => {
           </div>
         </div>
 
-        {/* Divider + copyright */}
-        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/40">
+        <div className="mt-12 border-t border-primary-50/10 pt-8 text-center text-xs text-primary-50/50">
           © {currentYear} Pegasight. Todos los derechos reservados.
         </div>
       </div>
