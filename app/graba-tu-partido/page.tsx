@@ -27,7 +27,7 @@ export default function GrabaTuPartidoPage() {
 
     const mensaje = `*Solicitud de Grabación Profesional*%0A%0A*Equipo:* ${formData.nombreEquipo}%0A*Contacto:* ${formData.nombreContacto}%0A*Teléfono:* ${formData.telefono}%0A*Fecha del partido:* ${formData.fechaPartido}%0A*Lugar:* ${formData.lugarPartido}%0A*Paquete seleccionado:* ${paqueteTexto}`;
 
-    const whatsappUrl = `https://wa.me/573107764018?text=${mensaje}`;
+    const whatsappUrl = `https://wa.me/573135751086?text=${mensaje}`;
     window.open(whatsappUrl, "_blank");
   };
 
