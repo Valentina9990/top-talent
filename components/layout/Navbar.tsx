@@ -24,18 +24,21 @@ export const Navbar = () => {
   const publicMenuItems = [
     { label: "Para Jugadores", href: "/landing-jugadores" },
     { label: "Para Escuelas", href: "/landing-escuelas" },
+    { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
   const playerMenuItems = [
     { label: "Escuelas", href: "/para-jugadores" },
     { label: "Explorar convocatorias", href: "/mis-aplicaciones" },
     { label: "Suscripciones", href: "/suscripciones-jugadores" },
+    { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
   const schoolMenuItems = [
     { label: "Explorar Jugadores", href: "/para-escuelas" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
     { label: "Suscripciones", href: "/suscripciones-escuelas" },
+    { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
   const getMenuItems = () => {
