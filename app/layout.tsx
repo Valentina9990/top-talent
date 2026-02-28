@@ -25,6 +25,10 @@ const bodoniModa = Bodoni_Moda({
 export const metadata: Metadata = {
   title: "TopTalent",
   description: "Conecta jugadores con escuelas deportivas",
+  icons: {
+    icon: "/pegasightLogo.png",
+    apple: "/pegasightLogo.png",
+  },
 };
 
 export default function RootLayout({
