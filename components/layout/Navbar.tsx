@@ -22,8 +22,7 @@ export const Navbar = () => {
   const isLoading = status === "loading";
 
   const publicMenuItems = [
-    { label: "Para Jugadores", href: "/landing-jugadores" },
-    { label: "Para Escuelas", href: "/landing-escuelas" },
+    { label: "Inicio", href: "/" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
