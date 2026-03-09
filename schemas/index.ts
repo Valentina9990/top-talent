@@ -13,10 +13,11 @@ export const RegisterSchema = z.object({
   email: z.string().email({
     message: "El correo electrónico debe ser válido"
   }),
-  password: z.string().min(6, {
-    message: "La contraseña debe tener al menos 6 caracteres"
-  }),
-  confirmPassword: z.string().min(6, {
+  password: z.string()
+    .min(8, { message: "La contraseña debe tener al menos 8 caracteres" })
+    .regex(/[0-9]/, { message: "La contraseña debe contener al menos un número" })
+    .regex(/[^A-Za-z0-9]/, { message: "La contraseña debe contener al menos un carácter especial" }),
+  confirmPassword: z.string().min(1, {
     message: "La confirmación de contraseña es requerida"
   }),
   name: z.string().min(1, {
