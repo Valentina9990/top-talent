@@ -57,7 +57,7 @@ const plans = [
     ],
     limitations: [],
     highlighted: true,
-    ctaText: "Suscribirse Ahora",
+    ctaText: "Suscribirse",
     ctaVariant: "default" as const,
   },
 ];

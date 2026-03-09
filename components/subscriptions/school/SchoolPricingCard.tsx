@@ -119,8 +119,8 @@ export function SchoolPricingCard({
         <Button
           onClick={handleSubscribe}
           variant={ctaVariant}
-          className={`w-full ${
-            highlighted && ctaVariant === "default"
+          className={`w-full cursor-pointer ${
+            highlighted
               ? "bg-primary-500 hover:bg-primary-700 text-white"
               : ""
           }`}
