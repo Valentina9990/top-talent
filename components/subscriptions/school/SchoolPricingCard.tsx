@@ -39,7 +39,11 @@ export function SchoolPricingCard({
   };
 
   const handleSubscribe = () => {
-    console.log(`Subscribing to ${name} plan`);
+    const priceText = typeof price === "string" ? price : formatPrice(price);
+    const priceDisplay = period ? `${priceText} / ${period}` : priceText;
+    const mensaje = `*Solicitud de Suscripción - Escuela*%0A%0A*Plan:* ${name}%0A*Precio:* ${priceDisplay}%0A%0AHola, estoy interesado en el plan ${name} para escuelas. Me gustaría obtener más información.`;
+    const whatsappUrl = `https://wa.me/573226029105?text=${mensaje}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (

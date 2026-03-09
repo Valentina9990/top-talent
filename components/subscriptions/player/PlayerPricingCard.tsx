@@ -36,7 +36,10 @@ export function PlayerPricingCard({
   };
 
   const handleSubscribe = () => {
-    console.log(`Subscribing to ${name} plan`);
+    const priceText = price === 0 ? "Gratuito" : formatPrice(price) + (period ? ` / ${period}` : "");
+    const mensaje = `*Solicitud de Suscripción - Jugador*%0A%0A*Plan:* ${name}%0A*Precio:* ${priceText}%0A%0AHola, estoy interesado en el plan ${name} para jugadores. Me gustaría obtener más información.`;
+    const whatsappUrl = `https://wa.me/573226029105?text=${mensaje}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
