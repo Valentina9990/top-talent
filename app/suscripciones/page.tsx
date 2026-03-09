@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { PlayerSubscriptionPlans } from "@/components/subscriptions/player/PlayerSubscriptionPlans";
 import { PlayerComparisonTable } from "@/components/subscriptions/player/PlayerComparisonTable";
-import { PlayerFAQ } from "@/components/subscriptions/player/PlayerFAQ";
 import { SchoolSubscriptionPlans, SchoolComparisonTable } from "@/components/subscriptions";
 
 type Tab = "jugadores" | "escuelas";
@@ -52,7 +51,6 @@ export default function SuscripcionesPage() {
           <div>
             <PlayerSubscriptionPlans />
             <PlayerComparisonTable />
-            <PlayerFAQ />
           </div>
         ) : (
           <div>
