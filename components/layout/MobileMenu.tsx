@@ -67,11 +67,6 @@ export const MobileMenu = ({
     if (user.role === "PLAYER") {
       return [
         {
-          label: "Mi Panel",
-          href: "/dashboard",
-          icon: LayoutDashboard,
-        },
-        {
           label: "Ver Perfil",
           href: "/perfil",
           icon: User,
