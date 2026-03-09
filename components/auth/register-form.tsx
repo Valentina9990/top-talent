@@ -13,6 +13,7 @@ import { FormSuccess } from "../form-success";
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
 import Link from "next/link";
+import { PasswordStrengthIndicator } from "./password-strength-indicator";
 
 type RegisterFormData = z.infer<typeof RegisterSchema>;
 
@@ -34,6 +35,7 @@ export const RegisterForm = () => {
   });
 
   const selectedRole = form.watch("role");
+  const passwordValue = form.watch("password");
 
   const onSubmit = (values: RegisterFormData) => {
     setError("");
@@ -164,6 +166,7 @@ export const RegisterForm = () => {
                       className="h-11 border border-gray-300"
                     />
                   </FormControl>
+                  <PasswordStrengthIndicator password={passwordValue} />
                   <FormMessage />
                 </FormItem>
               )}
