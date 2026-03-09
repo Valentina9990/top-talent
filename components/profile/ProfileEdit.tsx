@@ -155,7 +155,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           <h1 className="text-3xl font-bold text-gray-900">Editar Perfil</h1>
           <button
             onClick={handleCancel}
-            className="text-gray-600 hover:text-gray-900 transition duration-300"
+            className="text-gray-600 hover:text-gray-900 cursor-pointer transition duration-300"
           >
             Cancelar
           </button>
