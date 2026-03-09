@@ -23,20 +23,21 @@ export const Navbar = () => {
 
   const publicMenuItems = [
     { label: "Inicio", href: "/" },
+    { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
   const playerMenuItems = [
     { label: "Escuelas", href: "/para-jugadores" },
     { label: "Explorar convocatorias", href: "/mis-aplicaciones" },
-    { label: "Suscripciones", href: "/suscripciones-jugadores" },
+    { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 
   const schoolMenuItems = [
     { label: "Explorar Jugadores", href: "/para-escuelas" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
-    { label: "Suscripciones", href: "/suscripciones-escuelas" },
+    { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
 

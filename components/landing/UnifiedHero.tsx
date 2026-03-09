@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 export function UnifiedHero() {
   return (
     <section className="relative bg-gray-900 overflow-hidden">
-      {/* Background pattern */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.04] pointer-events-none"
         xmlns="http://www.w3.org/2000/svg"
@@ -18,14 +17,12 @@ export function UnifiedHero() {
         <rect width="100%" height="100%" fill="url(#hero-dots)" />
       </svg>
 
-      {/* Glows */}
       <div className="absolute -top-40 -left-40 w-[480px] h-[480px] rounded-full bg-primary-500/20 blur-3xl pointer-events-none" />
       <div className="absolute -bottom-24 right-0 w-[360px] h-[360px] rounded-full bg-blue-600/10 blur-3xl pointer-events-none" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-primary-500/5 blur-3xl pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-24 lg:py-32">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
             Conectamos{" "}
             <span className="text-blue-400">
@@ -37,13 +34,11 @@ export function UnifiedHero() {
             </span>
           </h1>
 
-          {/* Subtitle */}
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
             Ya seas jugador buscando destacar o escuela buscando el próximo gran talento,
             TopTalent es tu plataforma para alcanzar el éxito deportivo.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <a href="#para-jugadores">
               <Button
@@ -64,7 +59,6 @@ export function UnifiedHero() {
             </a>
           </div>
 
-          {/* Trust line */}
           <div className="pt-6">
             <p className="text-sm text-gray-400 flex items-center justify-center gap-2">
               <svg className="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20">

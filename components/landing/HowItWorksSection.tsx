@@ -52,7 +52,6 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {STEPS.map((step, index) => (
             <div key={step.step} className="relative text-center group">
-              {/* Connector line (desktop only) */}
               {index < STEPS.length - 1 && (
                 <div className="hidden md:block absolute top-12 left-[60%] w-[80%] h-px bg-gradient-to-r from-primary-500/30 to-primary-500/10 pointer-events-none" />
               )}

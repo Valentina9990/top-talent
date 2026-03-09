@@ -13,8 +13,7 @@ const CONTACT_INFO = {
 
 const NAV_LINKS = [
   { label: "Inicio", href: "/" },
-  { label: "Suscripciones Jugadores", href: "/suscripciones-jugadores" },
-  { label: "Suscripciones Escuelas", href: "/suscripciones-escuelas" },
+  { label: "Suscripciones", href: "/suscripciones" },
 ] as const;
 
 export const Footer = () => {

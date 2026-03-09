@@ -39,7 +39,6 @@ export function ForPlayersSection() {
     <section id="para-jugadores" className="py-16 md:py-24 bg-white scroll-mt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Content */}
           <div className="space-y-8">
             <div className="space-y-4">
               <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary-500">
@@ -85,10 +84,8 @@ export function ForPlayersSection() {
             </div>
           </div>
 
-          {/* Right - Visual card */}
           <div className="relative">
             <div className="relative bg-gradient-to-br from-gray-900 to-primary-700 rounded-2xl p-8 md:p-10 overflow-hidden">
-              {/* Decorative elements */}
               <div className="absolute top-0 right-0 w-40 h-40 bg-primary-500/20 rounded-full blur-3xl pointer-events-none" />
               <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-600/10 rounded-full blur-2xl pointer-events-none" />
 

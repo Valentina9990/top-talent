@@ -39,10 +39,8 @@ export function ForSchoolsSection() {
     <section id="para-escuelas" className="py-16 md:py-24 bg-gray-50 scroll-mt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left - Visual card */}
           <div className="relative order-2 lg:order-1">
             <div className="relative bg-white rounded-2xl p-8 md:p-10 shadow-xl border border-gray-100 overflow-hidden">
-              {/* Decorative elements */}
               <div className="absolute top-0 left-0 w-40 h-40 bg-primary-50 rounded-full blur-3xl pointer-events-none" />
 
               <div className="relative z-10 space-y-6">
@@ -58,7 +56,6 @@ export function ForSchoolsSection() {
                   </div>
                 </div>
 
-                {/* Mock dashboard stats */}
                 <div className="grid grid-cols-2 gap-4">
                   {[
                     { label: "Jugadores", value: "128", trend: "+12%" },
@@ -76,7 +73,6 @@ export function ForSchoolsSection() {
                   ))}
                 </div>
 
-                {/* Mock recent activity */}
                 <div className="space-y-3">
                   <p className="text-sm font-medium text-gray-700">Actividad reciente</p>
                   {[
@@ -94,7 +90,6 @@ export function ForSchoolsSection() {
             </div>
           </div>
 
-          {/* Right - Content */}
           <div className="space-y-8 order-1 lg:order-2">
             <div className="space-y-4">
               <span className="inline-block text-sm font-semibold uppercase tracking-widest text-primary-500">
