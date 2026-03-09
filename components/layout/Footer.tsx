@@ -12,10 +12,8 @@ const CONTACT_INFO = {
 } as const;
 
 const NAV_LINKS = [
-  { label: "Para Jugadores", href: "/landing-jugadores" },
-  { label: "Para Escuelas", href: "/landing-escuelas" },
-  { label: "Suscripciones Jugadores", href: "/suscripciones-jugadores" },
-  { label: "Suscripciones Escuelas", href: "/suscripciones-escuelas" },
+  { label: "Inicio", href: "/" },
+  { label: "Suscripciones", href: "/suscripciones" },
 ] as const;
 
 export const Footer = () => {

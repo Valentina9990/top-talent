@@ -35,8 +35,14 @@ export function PlayerPricingCard({
     }).format(amount);
   };
 
+  const isFree = price === 0;
+
   const handleSubscribe = () => {
-    console.log(`Subscribing to ${name} plan`);
+    if (isFree) return;
+    const priceText = formatPrice(price) + (period ? ` / ${period}` : "");
+    const mensaje = `*Solicitud de Suscripción - Jugador*%0A%0A*Plan:* ${name}%0A*Precio:* ${priceText}%0A%0AHola, estoy interesado en el plan ${name} para jugadores. Me gustaría obtener más información.`;
+    const whatsappUrl = `https://wa.me/573226029105?text=${mensaje}`;
+    window.open(whatsappUrl, "_blank");
   };
 
   return (
@@ -109,18 +115,29 @@ export function PlayerPricingCard({
       </CardContent>
 
       <CardFooter className="pt-6">
-        <Button
-          onClick={handleSubscribe}
-          variant={ctaVariant}
-          className={`w-full ${
-            highlighted && ctaVariant === "default"
-              ? "bg-primary-500 hover:bg-primary-700 text-white"
-              : ""
-          }`}
-          size="lg"
-        >
-          {ctaText}
-        </Button>
+        {isFree ? (
+          <Button
+            variant="outline"
+            className="w-full opacity-60 cursor-not-allowed"
+            size="lg"
+            disabled
+          >
+            Incluido al registrarse
+          </Button>
+        ) : (
+          <Button
+            onClick={handleSubscribe}
+            variant={ctaVariant}
+            className={`w-full cursor-pointer ${
+              highlighted
+                ? "bg-primary-500 hover:bg-primary-700 text-white"
+                : ""
+            }`}
+            size="lg"
+          >
+            {ctaText}
+          </Button>
+        )}
       </CardFooter>
     </Card>
   );

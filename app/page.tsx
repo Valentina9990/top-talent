@@ -1,5 +1,12 @@
-import { redirect } from "next/navigation";
+import { UnifiedHero, ForPlayersSection, ForSchoolsSection, HowItWorksSection } from "@/components/landing";
 
 export default function Home() {
-  redirect("/landing-jugadores");
+  return (
+    <div>
+      <UnifiedHero />
+      <ForPlayersSection />
+      <ForSchoolsSection />
+      <HowItWorksSection />
+    </div>
+  );
 }
