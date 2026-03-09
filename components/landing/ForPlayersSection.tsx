@@ -36,7 +36,7 @@ const PLAYER_FEATURES = [
 
 export function ForPlayersSection() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section id="para-jugadores" className="py-16 md:py-24 bg-white scroll-mt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Content */}
@@ -116,22 +116,6 @@ export function ForPlayersSection() {
                       <p className="text-gray-200 text-sm">{item}</p>
                     </div>
                   ))}
-                </div>
-
-                <div className="bg-white/5 rounded-lg p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300 text-sm">Visitas a tu perfil</span>
-                    <span className="text-green-400 text-sm font-medium">+24%</span>
-                  </div>
-                  <div className="flex gap-1 items-end h-8">
-                    {[40, 55, 35, 70, 50, 85, 65, 90, 75, 95, 80, 100].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 bg-primary-500/60 rounded-sm"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
                 </div>
               </div>
             </div>

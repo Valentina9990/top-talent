@@ -14,8 +14,8 @@ const SCHOOL_FEATURES = [
     ),
   },
   {
-    title: "Publicaciones ilimitadas",
-    description: "Anuncia convocatorias, partidos, eventos y noticias de tu escuela sin restricciones.",
+    title: "Publicaciones",
+    description: "Anuncia convocatorias, partidos, eventos y noticias de tu escuela.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
@@ -36,7 +36,7 @@ const SCHOOL_FEATURES = [
 
 export function ForSchoolsSection() {
   return (
-    <section className="py-16 md:py-24 bg-gray-50">
+    <section id="para-escuelas" className="py-16 md:py-24 bg-gray-50 scroll-mt-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left - Visual card */}
@@ -81,8 +81,7 @@ export function ForSchoolsSection() {
                   <p className="text-sm font-medium text-gray-700">Actividad reciente</p>
                   {[
                     { text: "Nuevo jugador interesado en tu convocatoria", time: "Hace 2h" },
-                    { text: "Tu publicación alcanzó 200 visualizaciones", time: "Hace 5h" },
-                    { text: "3 nuevos jugadores vieron tu perfil", time: "Hoy" },
+                    { text: "Tu publicación tiene 200 interacciones", time: "Hace 5h" },
                   ].map((activity, i) => (
                     <div key={i} className="flex items-center gap-3 bg-primary-50/50 rounded-lg px-4 py-3">
                       <div className="w-2 h-2 rounded-full bg-primary-500 flex-shrink-0" />

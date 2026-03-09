@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export function UnifiedHero() {
@@ -26,22 +25,14 @@ export function UnifiedHero() {
 
       <div className="relative z-10 container mx-auto px-4 py-16 md:py-24 lg:py-32">
         <div className="max-w-4xl mx-auto text-center space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-primary-500/30 bg-primary-500/10 px-4 py-1.5">
-            <span className="h-2 w-2 rounded-full bg-primary-500 animate-pulse" />
-            <span className="text-sm font-medium text-blue-300">
-              La plataforma deportiva líder
-            </span>
-          </div>
-
           {/* Heading */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight">
             Conectamos{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-primary-500 bg-clip-text text-transparent">
+            <span className="text-blue-400">
               talento
             </span>{" "}
             con{" "}
-            <span className="bg-gradient-to-r from-primary-500 to-blue-400 bg-clip-text text-transparent">
+            <span className="text-blue-400">
               oportunidades
             </span>
           </h1>
@@ -54,29 +45,23 @@ export function UnifiedHero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Link href="/auth/register">
+            <a href="#para-jugadores">
               <Button
                 size="lg"
                 className="w-full sm:w-auto bg-primary-500 hover:bg-primary-700 text-white px-8 py-6 text-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 transition-all duration-200"
               >
                 Soy Jugador
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
               </Button>
-            </Link>
-            <Link href="/auth/register">
+            </a>
+            <a href="#para-escuelas">
               <Button
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-gray-500 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold transition-all duration-200"
               >
                 Soy Escuela
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
               </Button>
-            </Link>
+            </a>
           </div>
 
           {/* Trust line */}
@@ -94,20 +79,6 @@ export function UnifiedHero() {
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto">
-          {[
-            { value: "500+", label: "Jugadores registrados" },
-            { value: "50+", label: "Escuelas activas" },
-            { value: "100%", label: "Seguro y confiable" },
-            { value: "24/7", label: "Soporte disponible" },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
-              <p className="text-sm text-gray-400 mt-1">{stat.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

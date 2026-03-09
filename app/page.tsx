@@ -1,4 +1,4 @@
-import { UnifiedHero, ForPlayersSection, ForSchoolsSection, HowItWorksSection, CTASection } from "@/components/landing";
+import { UnifiedHero, ForPlayersSection, ForSchoolsSection, HowItWorksSection } from "@/components/landing";
 
 export default function Home() {
   return (
@@ -7,7 +7,6 @@ export default function Home() {
       <ForPlayersSection />
       <ForSchoolsSection />
       <HowItWorksSection />
-      <CTASection />
     </div>
   );
 }
