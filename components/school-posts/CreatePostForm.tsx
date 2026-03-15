@@ -173,6 +173,7 @@ export function CreatePostForm({ schoolId, onSuccess }: CreatePostFormProps) {
                   <p className="text-sm text-gray-500">Imágenes o videos hasta 50MB</p>
                 </div>
                 <div className="flex gap-2 mt-2">
+                  {/* eslint-disable-next-line jsx-a11y/alt-text */}
                   <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-medium flex items-center gap-1">
                     <Image className="w-3 h-3" /> Imagen
                   </span>
