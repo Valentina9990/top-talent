@@ -1,9 +1,24 @@
 import { config } from 'dotenv';
 import { PrismaClient } from '@prisma/client';
+import * as fs from 'fs';
+import * as path from 'path';
 
 config();
 
 const prisma = new PrismaClient();
+
+// Load Colombia geo data from JSON file
+const colombiaGeoPath = path.join(__dirname, '../data/colombia-geo.json');
+const colombiaGeoData = JSON.parse(fs.readFileSync(colombiaGeoPath, 'utf-8'));
+
+// Transform the geo data from departments/municipalities to code/name/cities format
+const colombiaGeo: { code: string; name: string; cities: string[] }[] = colombiaGeoData.departments.map(
+  (dept: { id: string; name: string; municipalities: { name: string }[] }) => ({
+    code: dept.id,
+    name: dept.name,
+    cities: dept.municipalities.map((municipality: { name: string }) => municipality.name),
+  })
+);
 
 async function main() {
   console.log('Seeding database...');
@@ -48,6 +63,26 @@ async function main() {
     });
   }
 
+  console.log('✅ Categories seeded');
+
+  // Seed Colombia departments and cities
+  for (const dept of colombiaGeo) {
+    const department = await prisma.department.upsert({
+      where: { code: dept.code },
+      update: { name: dept.name },
+      create: { code: dept.code, name: dept.name },
+    });
+
+    for (const cityName of dept.cities) {
+      await prisma.city.upsert({
+        where: { name_departmentId: { name: cityName, departmentId: department.id } },
+        update: {},
+        create: { name: cityName, departmentId: department.id },
+      });
+    }
+  }
+
+  console.log('✅ Colombia departments and cities seeded');
   console.log('Seeding completed');
 }
 

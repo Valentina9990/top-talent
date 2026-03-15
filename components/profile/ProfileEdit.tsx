@@ -6,6 +6,7 @@ import {
   updatePlayerProfile,
   getPositions,
   getCategories,
+  getDepartments,
 } from "@/actions/player-profile";
 import { updatePlayerAvatar } from "@/actions/media-upload";
 import { FormError } from "@/components/form-error";
@@ -15,6 +16,7 @@ import { formatZodErrors } from "@/lib/validation";
 import {
   Position,
   Category,
+  Department,
   PlayerProfileFormData,
   PlayerProfile,
 } from "@/types/player-profile";
@@ -36,6 +38,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
 
   const [positions, setPositions] = useState<Position[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [departments, setDepartments] = useState<Department[]>([]);
 
   const initialFormData: PlayerProfileFormData = {
     team: profile?.team || "",
@@ -43,7 +46,10 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     bio: profile?.bio || "",
     preferredFoot: profile?.preferredFoot || "",
     positionIds: profile?.positions?.map((p) => p.id) || [],
+    primaryPositionId: profile?.primaryPositionId || "",
     categoryId: profile?.categoryId || "",
+    departmentId: profile?.departmentId || "",
+    cityId: profile?.cityId || "",
     goals: profile?.goals || 0,
     assists: profile?.assists || 0,
     matchesPlayed: profile?.matchesPlayed || 0,
@@ -53,13 +59,15 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
 
   useEffect(() => {
     const loadData = async () => {
-      const [posResult, catResult] = await Promise.all([
+      const [posResult, catResult, deptResult] = await Promise.all([
         getPositions(),
         getCategories(),
+        getDepartments(),
       ]);
 
       if (posResult.positions) setPositions(posResult.positions);
       if (catResult.categories) setCategories(catResult.categories);
+      if (deptResult.departments) setDepartments(deptResult.departments);
     };
 
     loadData();
@@ -77,10 +85,15 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     }));
   };
 
-  const handlePositionsChange = (positionIds: string[]) => {
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePositionsChange = (positionIds: string[], primaryPositionId: string) => {
     setFormData((prev) => ({
       ...prev,
       positionIds,
+      primaryPositionId,
     }));
   };
 
@@ -166,10 +179,13 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
           formData={formData}
           positions={positions}
           categories={categories}
+          departments={departments}
           validationErrors={validationErrors}
           onChange={handleInputChange}
+          onSelectChange={handleSelectChange}
           onPositionsChange={handlePositionsChange}
           currentAvatarUrl={profile?.user?.image}
+          playerName={profile?.user?.name}
           onAvatarChange={handleAvatarChange}
         />
 

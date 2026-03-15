@@ -79,9 +79,35 @@ model Position {
   name      String   @unique // e.g., "Delantero", "Mediocampista", "Defensa", "Portero"
   createdAt DateTime @default(now())
 
-  players PlayerProfile[] @relation("PlayerPositions")
+  players    PlayerProfile[] @relation("PlayerPositions")
+  primaryFor PlayerProfile[] @relation("PrimaryPosition")
 
   @@map("positions")
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  code      String   @unique
+  createdAt DateTime @default(now())
+
+  cities         City[]
+  playerProfiles PlayerProfile[]
+
+  @@map("departments")
+}
+
+model City {
+  id           String     @id @default(cuid())
+  name         String
+  departmentId String     @map("department_id")
+  department   Department @relation(fields: [departmentId], references: [id])
+  createdAt    DateTime   @default(now())
+
+  playerProfiles PlayerProfile[]
+
+  @@unique([name, departmentId])
+  @@map("cities")
 }
 
 model Category {
@@ -112,10 +138,18 @@ model PlayerProfile {
   preferredFoot String? // "RIGHT", "LEFT", "BOTH"
 
   // Position and Category - Many-to-Many for positions
-  positions Position[] @relation("PlayerPositions")
+  positions         Position[] @relation("PlayerPositions")
+  primaryPositionId String?    @map("primary_position_id")
+  primaryPosition   Position?  @relation("PrimaryPosition", fields: [primaryPositionId], references: [id])
 
   categoryId String?   @map("category_id")
   category   Category? @relation(fields: [categoryId], references: [id])
+
+  // Location
+  departmentId String?     @map("department_id")
+  department   Department? @relation(fields: [departmentId], references: [id])
+  cityId       String?     @map("city_id")
+  city         City?       @relation(fields: [cityId], references: [id])
 
   // Stats
   goals         Int @default(0)

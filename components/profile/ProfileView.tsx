@@ -84,11 +84,22 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               <div>
                 <div className="uppercase tracking-wide text-sm text-primary-500 font-semibold flex flex-wrap gap-2">
                   {profile?.positions && profile.positions.length > 0 ? (
-                    profile.positions.map((pos: { id: string; name: string }) => (
-                      <span key={pos.id} className="bg-primary-100 px-2 py-1 rounded">
-                        {pos.name}
-                      </span>
-                    ))
+                    profile.positions.map((pos: { id: string; name: string }) => {
+                      const isPrimary = profile.primaryPositionId === pos.id;
+                      return (
+                        <span
+                          key={pos.id}
+                          className={`flex items-center gap-1 px-2 py-1 rounded ${
+                            isPrimary
+                              ? "bg-amber-100 text-amber-700 border border-amber-300"
+                              : "bg-primary-100"
+                          }`}
+                        >
+                          {isPrimary && <span title="Posición principal">⭐</span>}
+                          {pos.name}
+                        </span>
+                      );
+                    })
                   ) : profile?.position?.name ? (
                     <span>{profile.position.name}</span>
                   ) : (
@@ -97,7 +108,16 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
                 </div>
                 <h1 className="mt-1 text-4xl font-bold text-gray-900">{user?.name || "Jugador"}</h1>
                 <p className="mt-2 text-gray-600">
-                  {profile?.team || "Sin equipo"} {profile?.zone && `• ${profile.zone}`}
+                  {profile?.team || "Sin equipo"}{" "}
+                  {(profile?.city?.name || profile?.department?.name) && (
+                    <>
+                      •{" "}
+                      {[profile?.city?.name, profile?.department?.name]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </>
+                  )}
+                  {!profile?.city && !profile?.department && profile?.zone && `• ${profile.zone}`}
                 </p>
                 {profile?.preferredFoot && (
                   <p className="mt-1 text-sm text-gray-500">

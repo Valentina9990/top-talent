@@ -60,9 +60,12 @@ export const PlayerProfileSchema = z.object({
     message: "Selecciona una opción válida"
   }).optional().or(z.literal("")),
   positionIds: z.array(z.string()).optional(),
+  primaryPositionId: z.string().optional().or(z.literal("")),
   categoryId: z.string().min(1, {
     message: "Selecciona una categoría"
   }).optional().or(z.literal("")),
+  departmentId: z.string().optional().or(z.literal("")),
+  cityId: z.string().optional().or(z.literal("")),
   goals: z.number().min(0, {
     message: "Los goles deben ser un número positivo"
   }).optional().or(z.literal(0)),

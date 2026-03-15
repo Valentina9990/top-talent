@@ -10,7 +10,10 @@ export interface PlayerProfileData {
   bio?: string;
   preferredFoot?: string;
   positionIds?: string[];
+  primaryPositionId?: string;
   categoryId?: string;
+  departmentId?: string;
+  cityId?: string;
   goals?: number;
   assists?: number;
   matchesPlayed?: number;
@@ -44,7 +47,10 @@ export async function getPlayerProfile(userId?: string) {
       where: { userId: targetUserId },
       include: {
         positions: true,
+        primaryPosition: true,
         category: true,
+        department: true,
+        city: true,
         videos: {
           orderBy: { createdAt: "desc" },
         },
@@ -94,6 +100,9 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
             bio: data.bio || null,
             preferredFoot: data.preferredFoot || null,
             categoryId: data.categoryId && data.categoryId !== "" ? data.categoryId : null,
+            primaryPositionId: data.primaryPositionId && data.primaryPositionId !== "" ? data.primaryPositionId : null,
+            departmentId: data.departmentId && data.departmentId !== "" ? data.departmentId : null,
+            cityId: data.cityId && data.cityId !== "" ? data.cityId : null,
             goals: data.goals,
             assists: data.assists,
             matchesPlayed: data.matchesPlayed,
@@ -135,6 +144,9 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
             bio: data.bio || null,
             preferredFoot: data.preferredFoot || null,
             categoryId: data.categoryId && data.categoryId !== "" ? data.categoryId : null,
+            primaryPositionId: data.primaryPositionId && data.primaryPositionId !== "" ? data.primaryPositionId : null,
+            departmentId: data.departmentId && data.departmentId !== "" ? data.departmentId : null,
+            cityId: data.cityId && data.cityId !== "" ? data.cityId : null,
             goals: data.goals || 0,
             assists: data.assists || 0,
             matchesPlayed: data.matchesPlayed || 0,
@@ -339,6 +351,33 @@ export async function getCategories() {
   } catch (error) {
     console.error("Error fetching categories:", error);
     return { error: "Error al obtener las categorías" };
+  }
+}
+
+export async function getDepartments() {
+  try {
+    const departments = await prisma.department.findMany({
+      orderBy: { name: "asc" },
+    });
+
+    return { success: true, departments };
+  } catch (error) {
+    console.error("Error fetching departments:", error);
+    return { error: "Error al obtener los departamentos" };
+  }
+}
+
+export async function getCitiesByDepartment(departmentId: string) {
+  try {
+    const cities = await prisma.city.findMany({
+      where: { departmentId },
+      orderBy: { name: "asc" },
+    });
+
+    return { success: true, cities };
+  } catch (error) {
+    console.error("Error fetching cities:", error);
+    return { error: "Error al obtener las ciudades" };
   }
 }
 
