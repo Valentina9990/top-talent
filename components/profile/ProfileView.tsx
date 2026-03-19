@@ -63,41 +63,72 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
     setShowDeleteAchievementModal(true);
   };
 
-  const avatarUrl = profile?.avatarUrl || user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || "Player")}`;
+  const avatarUrl = profile?.avatarUrl || user?.image;
+  const getInitials = (name?: string | null): string => {
+    if (!name) return "?";
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+    return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+  };
+  const initials = getInitials(user?.name);
 
   return (
     <>
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8">
         <div className="md:flex">
-          <div className="md:flex-shrink-0 relative h-48 md:h-auto md:w-64">
-            <Image
-              className="object-cover"
-              src={avatarUrl}
-              alt={user?.name || "Player"}
-              fill
-              sizes="(max-width: 768px) 100vw, 256px"
-              priority
-            />
+          <div className="md:flex-shrink-0 relative h-48 md:h-auto md:w-64 bg-primary-100 flex items-center justify-center">
+            {avatarUrl ? (
+              <Image
+                className="object-cover"
+                src={avatarUrl}
+                alt={user?.name || "Player"}
+                fill
+                sizes="(max-width: 768px) 100vw, 256px"
+                priority
+              />
+            ) : (
+              <span className="text-6xl font-bold text-primary-500 select-none">
+                {initials}
+              </span>
+            )}
           </div>
           <div className="p-8 flex-1">
             <div className="flex justify-between items-start">
               <div>
-                <div className="uppercase tracking-wide text-sm text-primary-500 font-semibold flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mb-2">
                   {profile?.positions && profile.positions.length > 0 ? (
-                    profile.positions.map((pos: { id: string; name: string }) => (
-                      <span key={pos.id} className="bg-primary-100 px-2 py-1 rounded">
-                        {pos.name}
-                      </span>
-                    ))
-                  ) : profile?.position?.name ? (
-                    <span>{profile.position.name}</span>
+                    profile.positions.map((pos: { id: string; name: string }) => {
+                      const isPrimary = profile.primaryPositionId === pos.id;
+                      return (
+                        <span
+                          key={pos.id}
+                          className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm transition-colors ${
+                            isPrimary
+                              ? "bg-primary-500 text-white font-semibold"
+                              : "bg-gray-100 text-gray-700"
+                          }`}
+                        >
+                          {isPrimary && <span className="text-base">★</span>}
+                          {pos.name}
+                        </span>
+                      );
+                    })
                   ) : (
-                    <span>Sin posición</span>
+                    <span className="text-sm text-gray-500">Sin posición</span>
                   )}
                 </div>
                 <h1 className="mt-1 text-4xl font-bold text-gray-900">{user?.name || "Jugador"}</h1>
                 <p className="mt-2 text-gray-600">
-                  {profile?.team || "Sin equipo"} {profile?.zone && `• ${profile.zone}`}
+                  {profile?.team || "Sin equipo"}{" "}
+                  {(profile?.city?.name || profile?.department?.name) && (
+                    <>
+                      •{" "}
+                      {[profile?.city?.name, profile?.department?.name]
+                        .filter(Boolean)
+                        .join(", ")}
+                    </>
+                  )}
+                  {!profile?.city && !profile?.department && profile?.zone && `• ${profile.zone}`}
                 </p>
                 {profile?.preferredFoot && (
                   <p className="mt-1 text-sm text-gray-500">

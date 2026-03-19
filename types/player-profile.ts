@@ -12,6 +12,18 @@ export interface Category {
   createdAt: Date;
 }
 
+export interface Department {
+  id: string;
+  name: string;
+  code: string;
+}
+
+export interface City {
+  id: string;
+  name: string;
+  departmentId: string;
+}
+
 export interface PlayerAchievement {
   id: string;
   playerId: string;
@@ -39,8 +51,14 @@ export interface PlayerProfile {
   bio: string | null;
   preferredFoot: string | null;
   positions: Position[];
+  primaryPositionId: string | null;
+  primaryPosition: Position | null;
   categoryId: string | null;
   category: Category | null;
+  departmentId: string | null;
+  department: Department | null;
+  cityId: string | null;
+  city: City | null;
   goals: number;
   assists: number;
   matchesPlayed: number;
@@ -62,7 +80,10 @@ export interface PlayerProfileFormData {
   bio?: string;
   preferredFoot?: string;
   positionIds?: string[];
+  primaryPositionId?: string;
   categoryId?: string;
+  departmentId?: string;
+  cityId?: string;
   goals?: number;
   assists?: number;
   matchesPlayed?: number;

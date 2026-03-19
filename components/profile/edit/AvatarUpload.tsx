@@ -3,16 +3,24 @@
 import React, { useState, useRef } from "react";
 import Image from "next/image";
 import { useFileUpload } from "@/hooks/use-file-upload";
-import { User, Upload, Trash2, Loader2 } from "lucide-react";
+import { Upload, Trash2, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface AvatarUploadProps {
   avatarUrl: string | null | undefined;
+  playerName?: string | null;
   onAvatarChange: (url: string) => void;
   className?: string;
 }
 
-export function AvatarUpload({ avatarUrl, onAvatarChange, className = "" }: AvatarUploadProps) {
+function getInitials(name?: string | null): string {
+  if (!name) return "?";
+  const parts = name.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+  return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+}
+
+export function AvatarUpload({ avatarUrl, playerName, onAvatarChange, className = "" }: AvatarUploadProps) {
   const [uploadError, setUploadError] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -30,14 +38,12 @@ export function AvatarUpload({ avatarUrl, onAvatarChange, className = "" }: Avat
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // Validar tamaño
     const fileSizeMB = file.size / (1024 * 1024);
     if (fileSizeMB > 10) {
       setUploadError("El archivo es demasiado grande. Máximo: 10MB");
       return;
     }
 
-    // Validar tipo
     if (!file.type.startsWith("image/")) {
       setUploadError("Solo se permiten imágenes");
       return;
@@ -59,6 +65,8 @@ export function AvatarUpload({ avatarUrl, onAvatarChange, className = "" }: Avat
     fileInputRef.current?.click();
   };
 
+  const initials = getInitials(playerName);
+
   return (
     <div className={className}>
       <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -67,7 +75,7 @@ export function AvatarUpload({ avatarUrl, onAvatarChange, className = "" }: Avat
 
       <div className="flex items-start gap-6">
         <div className="relative">
-          <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
+          <div className="w-32 h-32 rounded-full overflow-hidden bg-primary-100 border-2 border-gray-200 flex items-center justify-center">
             {avatarUrl ? (
               <Image
                 src={avatarUrl}
@@ -78,7 +86,9 @@ export function AvatarUpload({ avatarUrl, onAvatarChange, className = "" }: Avat
                 unoptimized
               />
             ) : (
-              <User className="w-16 h-16 text-gray-400" />
+              <span className="text-4xl font-bold text-primary-500 select-none">
+                {initials}
+              </span>
             )}
           </div>
 

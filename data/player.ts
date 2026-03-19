@@ -40,6 +40,9 @@ export async function getPlayers(filters?: PlayerFilters) {
           include: {
             positions: true,
             category: true,
+            primaryPosition: true,
+            department: true,
+            city: true,
             videos: {
               orderBy: {createdAt: "desc"},
             },
