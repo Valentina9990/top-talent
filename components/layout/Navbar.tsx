@@ -29,7 +29,6 @@ export const Navbar = () => {
 
   const playerMenuItems = [
     { label: "Escuelas", href: "/para-jugadores" },
-    { label: "Explorar convocatorias", href: "/mis-aplicaciones" },
     { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
