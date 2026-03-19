@@ -72,11 +72,11 @@ export const UserMenu = ({ user }: UserMenuProps) => {
           href: "/perfil",
           icon: User,
         },
-        {
-          label: "Configuración",
-          href: "/configuracion",
-          icon: Settings,
-        },
+        // {
+        //   label: "Configuración",
+        //   href: "/configuracion",
+        //   icon: Settings,
+        // },
       ];
     }
 
