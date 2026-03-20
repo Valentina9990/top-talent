@@ -11,15 +11,18 @@ import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { login } from "@/actions/login";
 import { useState, useTransition } from "react";
-import { useSearchParams } from "next/navigation";  
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLoginModal } from "@/providers/LoginModalProvider";
 import { Header } from "./header";
 import { Social } from "./social";
 import { BackButton } from "./back-button";
+import { useSession } from "next-auth/react";
 
 export const LoginFormModal = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { update } = useSession();
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Este correo ya está asociado con otra cuenta" : "";
   const { setIsOpen } = useLoginModal();
 
@@ -41,12 +44,15 @@ export const LoginFormModal = () => {
 
     startTransition(() => {
       login(values)
-        .then((data) => {
+        .then(async (data) => {
           setError(data?.error);
           setSuccess(data?.success);
 
           if (data?.success) {
+            await update();
             setIsOpen(false);
+            router.push(data.redirectTo || "/dashboard");
+            router.refresh();
           }
         })
     });

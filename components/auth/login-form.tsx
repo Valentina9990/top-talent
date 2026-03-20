@@ -15,10 +15,12 @@ import { useState, useTransition } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useLoginModal } from "@/providers/LoginModalProvider";
+import { useSession } from "next-auth/react";
 
 export const LoginForm = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { update } = useSession();
   const urlError = searchParams.get("error") === "OAuthAccountNotLinked" ? "Este correo ya está asociado con otra cuenta" : "";
   const { setIsOpen } = useLoginModal();
 
@@ -40,13 +42,14 @@ export const LoginForm = () => {
 
     startTransition(() => {
       login(values)
-        .then((data) => {
+        .then(async (data) => {
           if (data?.error) {
             setError(data.error);
           }
           
           if (data?.success) {
             setSuccess(data.success);
+            await update();
             setIsOpen(false);
             
             if (data.redirectTo) {

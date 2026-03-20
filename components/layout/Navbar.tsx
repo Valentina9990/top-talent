@@ -43,12 +43,13 @@ export const Navbar = () => {
   const getMenuItems = () => {
     if (isLoading) return [];
     if (!user) return publicMenuItems;
-    if (userRole === "PLAYER") return playerMenuItems;
     if (userRole === "SCHOOL") return schoolMenuItems;
-    return publicMenuItems;
+    if (userRole === "PLAYER" || !userRole) return playerMenuItems;
+    return playerMenuItems;
   };
 
   const menuItems = getMenuItems();
+  const homeHref = userRole === "PLAYER" ? "/para-jugadores" : "/";
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
@@ -61,7 +62,7 @@ export const Navbar = () => {
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
+            <Link href={homeHref} className="flex items-center space-x-2">
               <div className="flex h-20 w-20 items-center justify-center">
                 <Image
                   src="/pegasightLogo.png"
