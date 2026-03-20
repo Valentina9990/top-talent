@@ -195,15 +195,28 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             </div>
 
             {profile?.profileVideoUrl ? (
-              <div className="rounded-xl overflow-hidden shadow-lg bg-black">
-                <video
-                  controls
-                  src={profile.profileVideoUrl}
-                  className="w-full h-auto"
-                  poster={avatarUrl}
-                >
-                  Tu navegador no soporta el tag de video.
-                </video>
+              <div className="space-y-4">
+                <div className="rounded-xl overflow-hidden shadow-lg bg-black">
+                  <video
+                    controls
+                    src={profile.profileVideoUrl}
+                    className="w-full h-auto"
+                    poster={avatarUrl}
+                  >
+                    Tu navegador no soporta el tag de video.
+                  </video>
+                </div>
+
+                {profile?.fullVideoUrl && (
+                  <a
+                    href={profile.fullVideoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center rounded-lg bg-primary-500 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-700 transition-colors"
+                  >
+                    Ver video completo
+                  </a>
+                )}
               </div>
             ) : (
               <div

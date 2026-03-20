@@ -53,6 +53,7 @@ export default function ProfileEdit({ profile }: ProfileEditProps) {
     goals: profile?.goals || 0,
     assists: profile?.assists || 0,
     matchesPlayed: profile?.matchesPlayed || 0,
+    fullVideoUrl: profile?.fullVideoUrl || "",
   };
 
   const [formData, setFormData] = useState<PlayerProfileFormData>(initialFormData);

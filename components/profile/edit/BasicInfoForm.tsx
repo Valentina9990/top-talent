@@ -298,6 +298,28 @@ export function BasicInfoForm({
           <p className="mt-1 text-sm text-red-600">{validationErrors.bio}</p>
         )}
       </div>
+
+      <div className="mt-4">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          URL del video completo (YouTube u otra plataforma)
+        </label>
+        <input
+          type="url"
+          name="fullVideoUrl"
+          value={formData.fullVideoUrl || ""}
+          onChange={onChange}
+          className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent ${
+            validationErrors.fullVideoUrl ? "border-red-500" : "border-gray-300"
+          }`}
+          placeholder="https://www.youtube.com/watch?v=..."
+        />
+        <p className="mt-1 text-xs text-gray-500">
+          Este enlace es adicional al video corto que subes para tu perfil.
+        </p>
+        {validationErrors.fullVideoUrl && (
+          <p className="mt-1 text-sm text-red-600">{validationErrors.fullVideoUrl}</p>
+        )}
+      </div>
     </div>
   );
 }

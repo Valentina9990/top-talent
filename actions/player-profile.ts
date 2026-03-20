@@ -18,6 +18,7 @@ export interface PlayerProfileData {
   assists?: number;
   matchesPlayed?: number;
   profileVideoUrl?: string;
+  fullVideoUrl?: string;
 }
 
 async function getOrCreateProfile(userId: string) {
@@ -107,6 +108,7 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
             assists: data.assists,
             matchesPlayed: data.matchesPlayed,
             profileVideoUrl: data.profileVideoUrl || null,
+            fullVideoUrl: data.fullVideoUrl || null,
           },
         });
 
@@ -151,6 +153,7 @@ export async function updatePlayerProfile(data: PlayerProfileData) {
             assists: data.assists || 0,
             matchesPlayed: data.matchesPlayed || 0,
             profileVideoUrl: data.profileVideoUrl || null,
+            fullVideoUrl: data.fullVideoUrl || null,
           },
         });
 

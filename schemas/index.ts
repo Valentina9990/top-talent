@@ -78,6 +78,9 @@ export const PlayerProfileSchema = z.object({
   profileVideoUrl: z.string().url({
     message: "Debe ser una URL válida"
   }).optional().or(z.literal("")),
+  fullVideoUrl: z.string().url({
+    message: "Debe ser una URL válida"
+  }).optional().or(z.literal("")),
 });
 
 export const PlayerVideoSchema = z.object({
