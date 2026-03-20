@@ -63,6 +63,7 @@ export interface PlayerProfile {
   assists: number;
   matchesPlayed: number;
   profileVideoUrl: string | null;
+  fullVideoUrl: string | null;
   videos: PlayerVideo[];
   achievements: PlayerAchievement[];
   user?: {
@@ -88,6 +89,7 @@ export interface PlayerProfileFormData {
   assists?: number;
   matchesPlayed?: number;
   profileVideoUrl?: string;
+  fullVideoUrl?: string;
 }
 
 export interface VideoFormData {

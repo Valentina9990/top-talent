@@ -158,6 +158,7 @@ model PlayerProfile {
 
   // Media
   profileVideoUrl String?
+  fullVideoUrl    String?
   videos          PlayerVideo[]
 
   // Achievements
