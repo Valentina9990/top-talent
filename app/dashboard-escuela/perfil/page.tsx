@@ -92,30 +92,6 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
           )}
         </div>
       </div>
-
-      {isEditMode && (
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">💡 Consejos para tu perfil</h3>
-          <ul className="space-y-2 text-blue-800">
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Una descripción completa aumenta la confianza de los jugadores</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Agrega fotos de alta calidad de tus instalaciones</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Destaca tus logros más importantes y recientes</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Mantén tu información de contacto actualizada</span>
-            </li>
-          </ul>
-        </div>
-      )}
     </div>
   );
 }

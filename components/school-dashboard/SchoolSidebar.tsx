@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { 
   BarChart3, 
@@ -40,9 +40,12 @@ const menuItems = [
 
 export function SchoolSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
 
   const handleLogout = async () => {
     await logout();
+    router.push("/");
+    router.refresh();
   };
 
   return (
