@@ -128,12 +128,8 @@ export const SchoolProfileSchema = z.object({
   vision: z.string().max(500, {
     message: "La visión no puede exceder 500 caracteres"
   }).optional().or(z.literal("")),
-  department: z.string().max(100, {
-    message: "El departamento no puede exceder 100 caracteres"
-  }).optional().or(z.literal("")),
-  city: z.string().max(100, {
-    message: "La ciudad no puede exceder 100 caracteres"
-  }).optional().or(z.literal("")),
+  departmentId: z.string().optional().or(z.literal("")),
+  cityId: z.string().optional().or(z.literal("")),
   address: z.string().max(200, {
     message: "La dirección no puede exceder 200 caracteres"
   }).optional().or(z.literal("")),

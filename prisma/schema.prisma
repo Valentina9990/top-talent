@@ -94,6 +94,8 @@ model Department {
   cities         City[]
   playerProfiles PlayerProfile[]
 
+  schoolProfiles SchoolProfile[]
+
   @@map("departments")
 }
 
@@ -105,6 +107,8 @@ model City {
   createdAt    DateTime   @default(now())
 
   playerProfiles PlayerProfile[]
+
+  schoolProfiles SchoolProfile[]
 
   @@unique([name, departmentId])
   @@map("cities")
@@ -210,9 +214,11 @@ model SchoolProfile {
   vision       String? @db.Text
 
   // Location
-  department String? // Departamento
-  city       String? // Ciudad
-  address    String? // Dirección específica
+  departmentId String?     @map("department_id")
+  department   Department? @relation(fields: [departmentId], references: [id])
+  cityId       String?     @map("city_id")
+  city         City?       @relation(fields: [cityId], references: [id])
+  address      String? // Dirección específica
 
   // Contact
   phone        String?

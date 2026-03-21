@@ -96,6 +96,8 @@ export const getSchoolProfile = async (userId?: string) => {
                         name: true,
                     },
                 },
+                department: true,
+                city: true,
             },
         });
 

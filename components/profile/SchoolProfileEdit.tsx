@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { SchoolProfileSchema } from "@/schemas";
 import * as z from "zod";
 import { updateSchoolProfile, getCategories } from "@/actions/school-profile";
+import { getDepartments, getCitiesByDepartment } from "@/actions/player-profile";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { FormSection } from "./school/FormSection";
@@ -15,6 +16,14 @@ import { FormTextArea } from "./school/FormTextArea";
 import { CategoryMultiSelect } from "./school/CategoryMultiSelect";
 import { AvatarUpload } from "./edit/AvatarUpload";
 import { updateUserImage } from "@/actions/update-user-image";
+import { Department, City } from "@/types/player-profile";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 interface SchoolProfileEditProps {
     initialData: any;
@@ -31,6 +40,9 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage, returnPath }:
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
     const [categories, setCategories] = useState<Array<{ id: string; name: string }>>([]);
+    const [departments, setDepartments] = useState<Department[]>([]);
+    const [cities, setCities] = useState<City[]>([]);
+    const [loadingCities, setLoadingCities] = useState(false);
     const [isPending, setIsPending] = useState(false);
     const [avatarUrl, setAvatarUrl] = useState<string>(currentUserImage || "");
 
@@ -42,8 +54,8 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage, returnPath }:
             description: initialData?.description || "",
             mission: initialData?.mission || "",
             vision: initialData?.vision || "",
-            department: initialData?.department || "",
-            city: initialData?.city || "",
+            departmentId: initialData?.departmentId || "",
+            cityId: initialData?.cityId || "",
             address: initialData?.address || "",
             phone: initialData?.phone || "",
             contactEmail: initialData?.contactEmail || "",
@@ -56,14 +68,43 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage, returnPath }:
             achievements: initialData?.achievements || "",
         },
     });
-    // Fetch categories on mount
+    // Fetch categories and departments on mount
     useEffect(() => {
         const fetchCategories = async () => {
-            const cats = await getCategories();
+            const [cats, deptResult] = await Promise.all([
+                getCategories(),
+                getDepartments(),
+            ]);
+
             setCategories(cats);
+            if (deptResult.departments) {
+                setDepartments(deptResult.departments);
+            }
         };
         fetchCategories();
     }, []);
+
+    // Load cities when department changes
+    useEffect(() => {
+        const subscription = form.watch((value, { name }) => {
+            if (name === "departmentId") {
+                const departmentId = value.departmentId as string | undefined;
+
+                if (!departmentId) {
+                    setCities([]);
+                    return;
+                }
+
+                setLoadingCities(true);
+                getCitiesByDepartment(departmentId).then((res) => {
+                    if (res.cities) setCities(res.cities);
+                    setLoadingCities(false);
+                });
+            }
+        });
+
+        return () => subscription.unsubscribe();
+    }, [form]);
 
 
     const redirectPath = returnPath || "/perfil";
@@ -166,21 +207,60 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage, returnPath }:
             {/* Ubicación */}
             <FormSection title="Ubicación">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormInput
-                        id="department"
-                        label="Departamento"
-                        placeholder="Antioquia"
-                        disabled={isPending}
-                        register={form.register("department")}
-                    />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Departamento
+                        </label>
+                        <Select
+                            value={form.watch("departmentId") || ""}
+                            onValueChange={(value) => {
+                                form.setValue("departmentId", value);
+                                form.setValue("cityId", "");
+                            }}
+                            disabled={isPending}
+                        >
+                            <SelectTrigger className="w-full">
+                                <SelectValue placeholder="Seleccionar departamento" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {departments.map((dept) => (
+                                    <SelectItem key={dept.id} value={dept.id}>
+                                        {dept.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
 
-                    <FormInput
-                        id="city"
-                        label="Ciudad"
-                        placeholder="Medellín"
-                        disabled={isPending}
-                        register={form.register("city")}
-                    />
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Ciudad
+                        </label>
+                        <Select
+                            value={form.watch("cityId") || ""}
+                            onValueChange={(value) => form.setValue("cityId", value)}
+                            disabled={isPending || !form.watch("departmentId") || loadingCities}
+                        >
+                            <SelectTrigger className="w-full">
+                                <SelectValue
+                                    placeholder={
+                                        !form.watch("departmentId")
+                                            ? "Selecciona un departamento primero"
+                                            : loadingCities
+                                            ? "Cargando..."
+                                            : "Seleccionar ciudad"
+                                    }
+                                />
+                            </SelectTrigger>
+                            <SelectContent>
+                                {cities.map((city) => (
+                                    <SelectItem key={city.id} value={city.id}>
+                                        {city.name}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
                 </div>
 
                 <FormInput

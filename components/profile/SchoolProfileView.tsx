@@ -46,8 +46,8 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
         logoUrl={logoUrl || undefined}
         officialName={schoolName}
         nit={schoolProfile?.nit}
-        city={schoolProfile?.city}
-        department={schoolProfile?.department}
+        city={schoolProfile?.city?.name}
+        department={schoolProfile?.department?.name}
         description={schoolProfile?.description}
         statsCards={statsCards}
       />
@@ -134,13 +134,13 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
                 {schoolProfile?.department && (
                   <div>
                     <p className="text-sm font-medium text-gray-500">Departamento</p>
-                    <p className="text-gray-900">{schoolProfile.department}</p>
+                    <p className="text-gray-900">{schoolProfile.department.name}</p>
                   </div>
                 )}
                 {schoolProfile?.city && (
                   <div>
                     <p className="text-sm font-medium text-gray-500">Ciudad</p>
-                    <p className="text-gray-900">{schoolProfile.city}</p>
+                    <p className="text-gray-900">{schoolProfile.city.name}</p>
                   </div>
                 )}
                 {schoolProfile?.address && (
