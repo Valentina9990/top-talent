@@ -56,8 +56,7 @@ export function SchoolSidebar() {
             <School className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h2 className="font-bold text-lg text-white">Panel Escuela</h2>
-            <p className="text-xs text-white/70">Dashboard</p>
+            <h2 className="font-bold text-lg text-white">Panel Administrativo</h2>
           </div>
         </div>
       </div>
@@ -72,17 +71,16 @@ export function SchoolSidebar() {
               key={item.href}
               href={item.href}
               className={cn(
-                "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200",
-                "hover:bg-primary-100 group",
+                "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 group",
                 isActive
-                  ? "bg-primary-100 text-primary-700 hover:bg-primary-100"
-                  : "text-white/90 hover:text-primary-700"
+                  ? "bg-white/15 text-white"
+                  : "text-white/90 hover:bg-white/10 hover:text-white"
               )}
             >
               <Icon
                 className={cn(
                   "w-5 h-5 transition-transform group-hover:scale-110",
-                  isActive ? "text-primary-700" : "text-white/70 group-hover:text-primary-700"
+                  isActive ? "text-white" : "text-white/70 group-hover:text-white"
                 )}
               />
               <span className="font-medium">{item.title}</span>

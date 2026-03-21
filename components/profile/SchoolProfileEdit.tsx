@@ -19,9 +19,14 @@ import { updateUserImage } from "@/actions/update-user-image";
 interface SchoolProfileEditProps {
     initialData: any;
     currentUserImage?: string | null;
+    /**
+     * Ruta a la que se debe volver después de guardar o cancelar.
+     * Por defecto "/perfil" para mantener compatibilidad con la vista general.
+     */
+    returnPath?: string;
 }
 
-export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfileEditProps) => {
+export const SchoolProfileEdit = ({ initialData, currentUserImage, returnPath }: SchoolProfileEditProps) => {
     const router = useRouter();
     const [error, setError] = useState<string | undefined>("");
     const [success, setSuccess] = useState<string | undefined>("");
@@ -61,6 +66,8 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
     }, []);
 
 
+    const redirectPath = returnPath || "/perfil";
+
     const onSubmit = async (values: z.infer<typeof SchoolProfileSchema>) => {
         setError("");
         setSuccess("");
@@ -83,7 +90,7 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
             } else {
                 setSuccess(result.success);
                 setTimeout(() => {
-                    router.push("/perfil");
+                    router.push(redirectPath);
                     router.refresh();
                 }, 1000);
             }
@@ -95,7 +102,7 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
     };
 
     const handleCancel = () => {
-        router.push("/perfil");
+        router.push(redirectPath);
     };
 
     return (
@@ -104,6 +111,7 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
             <FormSection title="Información Básica">
                 <AvatarUpload
                     avatarUrl={avatarUrl}
+                    playerName={initialData?.officialName || initialData?.user?.name || "Escuela"}
                     onAvatarChange={setAvatarUrl}
                     className="mb-6"
                 />
@@ -278,14 +286,14 @@ export const SchoolProfileEdit = ({ initialData, currentUserImage }: SchoolProfi
                     type="button"
                     onClick={handleCancel}
                     disabled={isPending}
-                    className="flex-1 px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition duration-300"
+                    className="flex-1 px-6 py-3 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition duration-300 cursor-pointer disabled:cursor-not-allowed"
                 >
                     Cancelar
                 </button>
                 <button
                     type="submit"
                     disabled={isPending}
-                    className="flex-1 px-6 py-3 bg-primary-500 text-white font-bold rounded-lg hover:bg-primary-700 transition duration-300"
+                    className="flex-1 px-6 py-3 bg-primary-500 text-white font-bold rounded-lg hover:bg-primary-700 transition duration-300 cursor-pointer disabled:cursor-not-allowed"
                 >
                     {isPending ? "Guardando..." : "Guardar Cambios"}
                 </button>
