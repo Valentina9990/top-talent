@@ -6,8 +6,18 @@ import { MapPin, Users, Award } from "lucide-react";
 interface SchoolProfile {
   id: string;
   officialName: string | null;
-  department: string | null;
-  city: string | null;
+  department: {
+    id: string;
+    name: string;
+    code: string;
+    createdAt: Date;
+  } | null;
+  city: {
+    id: string;
+    name: string;
+    departmentId: string;
+    createdAt: Date;
+  } | null;
   description: string | null;
   categories: { id: string; name: string }[];
   _count: {
@@ -25,7 +35,7 @@ export default function SchoolCard({ school }: SchoolCardProps) {
   if (!profile) return null;
   const logoUrl = school.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(profile.officialName || school.name)}`;
   const schoolName = profile.officialName || school.name;
-  const location = [profile.city, profile.department].filter(Boolean).join(", ");
+  const location = [profile.city?.name, profile.department?.name].filter(Boolean).join(", ");
   const categories = profile.categories.map((c) => c.name).join(", ");
   return (
     <div className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden">
