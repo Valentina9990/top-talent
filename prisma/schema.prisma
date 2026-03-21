@@ -274,7 +274,7 @@ model ScoutProfile {
 
   // Basic Info
   fullName        String?
-  primaryPhone    String
+  primaryPhone    String?
   secondaryPhone  String?
 
   // Location (using Department and City tables)

@@ -23,7 +23,7 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: "El nombre es requerido"
   }),
-  role: z.enum(["PLAYER", "SCHOOL"], {
+  role: z.enum(["PLAYER", "SCHOOL", "SCOUT"], {
     message: "Selecciona un tipo de cuenta válido"
   }),
 }).refine((data) => data.password === data.confirmPassword, {
