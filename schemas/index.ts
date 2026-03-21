@@ -160,3 +160,17 @@ export const SchoolProfileSchema = z.object({
   }).optional().or(z.literal("")),
 });
 
+export const ScoutProfileSchema = z.object({
+  primaryPhone: z.string().max(20, {
+    message: "El teléfono principal no puede exceder 20 caracteres",
+  }).optional().or(z.literal("")),
+  secondaryPhone: z.string().max(20, {
+    message: "El teléfono secundario no puede exceder 20 caracteres",
+  }).optional().or(z.literal("")),
+  departmentId: z.string().optional().or(z.literal("")),
+  cityId: z.string().optional().or(z.literal("")),
+  yearsExperience: z.number().min(0, {
+    message: "Los años de experiencia deben ser un número positivo",
+  }).optional(),
+});
+

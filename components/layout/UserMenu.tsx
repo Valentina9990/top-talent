@@ -18,7 +18,7 @@ interface UserMenuProps {
     name?: string | null;
     email?: string | null;
     image?: string | null;
-    role?: "ADMIN" | "PLAYER" | "SCHOOL";
+    role?: "ADMIN" | "PLAYER" | "SCHOOL" | "SCOUT";
   };
 }
 
@@ -57,6 +57,13 @@ export const UserMenu = ({ user }: UserMenuProps) => {
     if (user.role === "SCHOOL") {
       return {
         label: "Escuela",
+        bg: "bg-primary-50",
+        text: "text-primary-700",
+      };
+    }
+    if (user.role === "SCOUT") {
+      return {
+        label: "Scout",
         bg: "bg-primary-50",
         text: "text-primary-700",
       };
