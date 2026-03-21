@@ -1,19 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import { cn } from "@/lib/utils";
-import { 
-  BarChart3, 
-  Users, 
-  User, 
+import {
+  BarChart3,
+  Users,
+  User,
   Settings,
   LogOut,
   School,
-  FileText
+  FileText,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { logout } from "@/actions/logout";
 
 const menuItems = [
   {
@@ -40,12 +40,9 @@ const menuItems = [
 
 export function SchoolSidebar() {
   const pathname = usePathname();
-  const router = useRouter();
 
   const handleLogout = async () => {
-    await logout();
-    router.push("/");
-    router.refresh();
+    await signOut({ callbackUrl: "/" });
   };
 
   return (
