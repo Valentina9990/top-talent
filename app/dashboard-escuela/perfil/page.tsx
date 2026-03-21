@@ -57,7 +57,7 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
           {!isEditMode ? (
             <a
               href="/dashboard-escuela/perfil?edit=true"
-              className="flex items-center gap-2 px-6 py-3 bg-white text-primary-500 rounded-lg hover:bg-white/90 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105"
+              className="flex items-center gap-2 px-6 py-3 bg-white text-primary-500 rounded-lg hover:bg-white/90 transition-all font-semibold shadow-lg hover:shadow-xl transform hover:scale-105 cursor-pointer"
             >
               <Edit3 className="w-5 h-5" />
               Editar Perfil
@@ -65,7 +65,7 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
           ) : (
             <a
               href="/dashboard-escuela/perfil"
-              className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-all font-semibold border border-white/30"
+              className="flex items-center gap-2 px-6 py-3 bg-white/10 backdrop-blur-sm text-white rounded-lg hover:bg-white/20 transition-all font-semibold border border-white/30 cursor-pointer"
             >
               <Eye className="w-5 h-5" />
               Vista Previa
@@ -74,47 +74,20 @@ export default async function PerfilEscuelaPage({ searchParams }: PageProps) {
         </div>
       </div>
 
-      <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-        <div className="p-8">
-          {isEditMode ? (
-            <div>
-              <div className="mb-6 pb-6 border-b border-gray-200">
-                <h2 className="text-xl font-semibold text-gray-900 mb-2">Edita tu Información</h2>
-                <p className="text-gray-600">Completa todos los campos para que tu escuela destaque</p>
-              </div>
-              <SchoolProfileEdit
-                initialData={schoolProfile}
-                currentUserImage={session.user.image}
-              />
-            </div>
-          ) : (
-            <SchoolProfileView schoolProfile={schoolProfile} />
-          )}
+      {isEditMode ? (
+        <div>
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold text-gray-900 mb-2">Edita tu Información</h2>
+            <p className="text-gray-600">Completa todos los campos para que tu escuela destaque</p>
+          </div>
+          <SchoolProfileEdit
+            initialData={schoolProfile}
+            currentUserImage={session.user.image}
+            returnPath="/dashboard-escuela/perfil"
+          />
         </div>
-      </div>
-
-      {isEditMode && (
-        <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
-          <h3 className="text-lg font-semibold text-blue-900 mb-3">💡 Consejos para tu perfil</h3>
-          <ul className="space-y-2 text-blue-800">
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Una descripción completa aumenta la confianza de los jugadores</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Agrega fotos de alta calidad de tus instalaciones</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Destaca tus logros más importantes y recientes</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-blue-500 mt-1">•</span>
-              <span>Mantén tu información de contacto actualizada</span>
-            </li>
-          </ul>
-        </div>
+      ) : (
+        <SchoolProfileView schoolProfile={schoolProfile} />
       )}
     </div>
   );

@@ -12,15 +12,16 @@ interface SchoolProfileViewProps {
 
 export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
   const categories = schoolProfile?.categories || [];
-  const logoUrl = schoolProfile?.user?.image || `https://ui-avatars.com/api/?name=${encodeURIComponent(schoolProfile?.officialName || schoolProfile?.user?.name || "Escuela")}`;
+  const schoolName = schoolProfile?.officialName || schoolProfile?.user?.name || "Escuela";
+  const logoUrl = schoolProfile?.user?.image || null;
 
   // Prepare stats cards
   const statsCards = (
     <>
-      {schoolProfile?.approximatePlayers && (
+      {typeof schoolProfile?.approximatePlayers === "number" && (
         <StatsCard
           value={schoolProfile.approximatePlayers}
-          label="Jugadores"
+          label="Jugadores registrados en la escuela"
         />
       )}
       {categories.length > 0 && (
@@ -42,11 +43,11 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
     <>
       {/* Profile Header */}
       <SchoolHeader
-        logoUrl={logoUrl}
-        officialName={schoolProfile?.officialName || schoolProfile?.user?.name || "Escuela"}
+        logoUrl={logoUrl || undefined}
+        officialName={schoolName}
         nit={schoolProfile?.nit}
-        city={schoolProfile?.city}
-        department={schoolProfile?.department}
+        city={schoolProfile?.city?.name}
+        department={schoolProfile?.department?.name}
         description={schoolProfile?.description}
         statsCards={statsCards}
       />
@@ -76,53 +77,55 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
         {/* Contact and Location - Two Column Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Contact Information */}
-          <SectionCard title="Información de Contacto">
-            <div className="space-y-4">
-              {schoolProfile?.phone && (
-                <ContactItem
-                  icon={<Phone className="w-5 h-5"/>}
-                  label="Teléfono"
-                  value={schoolProfile.phone}
-                  href={`tel:${schoolProfile.phone}`}
-                />
-              )}
-              {schoolProfile?.contactEmail && (
-                <ContactItem
-                  icon={<Mail className="w-5 h-5"/>}
-                  label="Email"
-                  value={schoolProfile.contactEmail}
-                  href={`mailto:${schoolProfile.contactEmail}`}
-                />
-              )}
-              {schoolProfile?.facebookUrl && (
-                <ContactItem
-                  icon={<Facebook className="w-5 h-5"/>}
-                  label="Facebook"
-                  value="Ver Perfil"
-                  href={schoolProfile.facebookUrl}
-                  isExternal
-                />
-              )}
-              {schoolProfile?.instagramUrl && (
-                <ContactItem
-                  icon={<Instagram className="w-5 h-5"/>}
-                  label="Instagram"
-                  value="Ver Perfil"
-                  href={schoolProfile.instagramUrl}
-                  isExternal
-                />
-              )}
-              {schoolProfile?.websiteUrl && (
-                <ContactItem
-                  icon={<Globe className="w-5 h-5"/>}
-                  label="Sitio Web"
-                  value="Visitar Sitio"
-                  href={schoolProfile.websiteUrl}
-                  isExternal
-                />
-              )}
-            </div>
-          </SectionCard>
+          {(schoolProfile?.phone || schoolProfile?.contactEmail || schoolProfile?.facebookUrl || schoolProfile?.instagramUrl || schoolProfile?.websiteUrl) && (
+            <SectionCard title="Información de Contacto">
+              <div className="space-y-4">
+                {schoolProfile?.phone && (
+                  <ContactItem
+                    icon={<Phone className="w-5 h-5"/>}
+                    label="Teléfono"
+                    value={schoolProfile.phone}
+                    href={`tel:${schoolProfile.phone}`}
+                  />
+                )}
+                {schoolProfile?.contactEmail && (
+                  <ContactItem
+                    icon={<Mail className="w-5 h-5"/>}
+                    label="Email"
+                    value={schoolProfile.contactEmail}
+                    href={`mailto:${schoolProfile.contactEmail}`}
+                  />
+                )}
+                {schoolProfile?.facebookUrl && (
+                  <ContactItem
+                    icon={<Facebook className="w-5 h-5"/>}
+                    label="Facebook"
+                    value="Ver perfil en Facebook"
+                    href={schoolProfile.facebookUrl}
+                    isExternal
+                  />
+                )}
+                {schoolProfile?.instagramUrl && (
+                  <ContactItem
+                    icon={<Instagram className="w-5 h-5"/>}
+                    label="Instagram"
+                    value="Ver perfil en Instagram"
+                    href={schoolProfile.instagramUrl}
+                    isExternal
+                  />
+                )}
+                {schoolProfile?.websiteUrl && (
+                  <ContactItem
+                    icon={<Globe className="w-5 h-5"/>}
+                    label="Sitio Web"
+                    value="Visitar sitio web"
+                    href={schoolProfile.websiteUrl}
+                    isExternal
+                  />
+                )}
+              </div>
+            </SectionCard>
+          )}
 
           {/* Location */}
           {(schoolProfile?.department || schoolProfile?.city || schoolProfile?.address) && (
@@ -131,13 +134,13 @@ export const SchoolProfileView = ({schoolProfile}: SchoolProfileViewProps) => {
                 {schoolProfile?.department && (
                   <div>
                     <p className="text-sm font-medium text-gray-500">Departamento</p>
-                    <p className="text-gray-900">{schoolProfile.department}</p>
+                    <p className="text-gray-900">{schoolProfile.department.name}</p>
                   </div>
                 )}
                 {schoolProfile?.city && (
                   <div>
                     <p className="text-sm font-medium text-gray-500">Ciudad</p>
-                    <p className="text-gray-900">{schoolProfile.city}</p>
+                    <p className="text-gray-900">{schoolProfile.city.name}</p>
                   </div>
                 )}
                 {schoolProfile?.address && (

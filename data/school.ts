@@ -9,29 +9,34 @@ export interface SchoolFilters {
 
 export async function getSchools(filters?: SchoolFilters) {
   try {
-    const schoolProfileWhere: any = {};
+    const whereClause: any = {
+      schoolProfile: {
+        isNot: null,
+      },
+      role: "SCHOOL",
+    };
 
     if (filters?.department) {
-      schoolProfileWhere.department = {
-        contains: filters.department,
-        mode: "insensitive",
+      whereClause.schoolProfile.department = {
+        is: {
+          name: {
+            contains: filters.department,
+            mode: "insensitive",
+          },
+        },
       };
     }
 
     if (filters?.city) {
-      schoolProfileWhere.city = {
-        contains: filters.city,
-        mode: "insensitive",
+      whereClause.schoolProfile.city = {
+        is: {
+          name: {
+            contains: filters.city,
+            mode: "insensitive",
+          },
+        },
       };
     }
-
-    const whereClause: any = {
-      schoolProfile: {
-        isNot: null,
-        ...(Object.keys(schoolProfileWhere).length > 0 && { is: schoolProfileWhere }),
-      },
-      role: "SCHOOL",
-    };
 
     if (filters?.name) {
       whereClause.name = {
@@ -46,6 +51,8 @@ export async function getSchools(filters?: SchoolFilters) {
         schoolProfile: {
           include: {
             categories: true,
+            department: true,
+            city: true,
             _count: {
               select: {
                 players: true,
@@ -77,23 +84,10 @@ export async function getSchools(filters?: SchoolFilters) {
 
 export async function getDepartments() {
   try {
-    const schools = await prisma.schoolProfile.findMany({
-      where: {
-        department: {
-          not: null,
-        },
-      },
-      select: {
-        department: true,
-      },
-      distinct: ["department"],
-      orderBy: {
-        department: "asc",
-      },
+    const departments = await prisma.department.findMany({
+      orderBy: { name: "asc" },
     });
-    return schools
-      .map((s) => s.department)
-      .filter((d): d is string => d !== null);
+    return departments.map((d) => d.name);
   } catch (error) {
     console.error("Error fetching departments:", error);
     return [];

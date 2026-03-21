@@ -8,8 +8,18 @@ import { searchSchools } from "@/actions/search-schools";
 interface SchoolProfile {
   id: string;
   officialName: string | null;
-  department: string | null;
-  city: string | null;
+  department: {
+    id: string;
+    name: string;
+    code: string;
+    createdAt: Date;
+  } | null;
+  city: {
+    id: string;
+    name: string;
+    departmentId: string;
+    createdAt: Date;
+  } | null;
   description: string | null;
   categories: { id: string; name: string }[];
   _count: {
