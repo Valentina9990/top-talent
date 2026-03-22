@@ -1,11 +1,5 @@
-import { getPlayers, getPositions } from "@/data/player";
-import FeedClient from "./FeedClient";
+import { redirect } from "next/navigation";
 
-export default async function ParaEscuelasPage() {
-  const [players, positions] = await Promise.all([
-    getPlayers(),
-    getPositions(),
-  ]);
-
-  return <FeedClient initialPlayers={players} positions={positions} />;
+export default function ParaEscuelasPage() {
+  redirect("/jugadores");
 }

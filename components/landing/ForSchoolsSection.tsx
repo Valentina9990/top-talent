@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const SCHOOL_FEATURES = [
   {
     title: "Mayor visibilidad",
-    description: "Dale difusión a tu escuela y atrae a los mejores talentos deportivos de tu región.",
+    description: "Da visibilidad profesional a tu escuela y a los jugadores que forman parte de ella.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -96,13 +96,12 @@ export function ForSchoolsSection() {
                 Para Escuelas
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
-                Encuentra el{" "}
-                <span className="text-primary-500">talento</span>{" "}
-                que buscas
+                Organiza tu escuela y da visibilidad a tu
+                <span className="text-primary-500"> talento</span>
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Promociona tu escuela deportiva, conecta con jugadores
-                talentosos, publica convocatorias y haz crecer tu institución.
+                Promociona tu escuela deportiva, organiza tus planteles, publica convocatorias y da visibilidad a tus
+                jugadores para que los scouts puedan descubrirlos.
               </p>
             </div>
 

@@ -41,8 +41,12 @@ export const login = async (values: z.infer<typeof LoginSchema>) => {
             redirect: false,
         });
 
-        const redirectTo = existingUser.role === "SCHOOL" 
-            ? "/dashboard-escuela" 
+        const redirectTo = existingUser.role === "SCHOOL"
+            ? "/dashboard-escuela"
+            : existingUser.role === "SCOUT"
+            ? "/jugadores"
+            : existingUser.role === "PLAYER"
+            ? "/para-jugadores"
             : DEFAULT_LOGIN_REDIRECT;
 
         return { success: "Inicio de sesión exitoso", redirectTo };

@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 const PLAYER_FEATURES = [
   {
     title: "Visibilidad garantizada",
-    description: "Tu perfil será visto por cazatalentos y escuelas profesionales de todo el país.",
+    description: "Tu perfil estará disponible para scouts, clubes y escuelas que usan nuestro buscador profesional.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -16,7 +16,7 @@ const PLAYER_FEATURES = [
   },
   {
     title: "Oportunidades reales",
-    description: "Recibe ofertas directas de instituciones deportivas interesadas en tu talento.",
+    description: "Recibe contactos directos de scouts e instituciones deportivas interesadas en tu talento.",
     icon: (
       <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
@@ -46,12 +46,12 @@ export function ForPlayersSection() {
               </span>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
                 ¡Muestra tu{" "}
-                <span className="text-primary-500">talento</span>{" "}
-                al mundo!
+                <span className="text-primary-500">talento</span>{""}
+                !
               </h2>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Conecta con escuelas deportivas de élite, muestra tus
-                habilidades y abre las puertas a nuevas oportunidades profesionales.
+                Construye un perfil profesional con tus datos reales, videos y estadísticas para que scouts, clubes y
+                escuelas puedan descubrirte y seguir tu evolución.
               </p>
             </div>
 
@@ -75,7 +75,7 @@ export function ForPlayersSection() {
                   size="lg"
                   className="bg-primary-500 hover:bg-primary-700 text-white px-8 py-6 text-lg font-semibold shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 transition-all duration-200"
                 >
-                  Explorar oportunidades
+                  Registrarme
                   <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
