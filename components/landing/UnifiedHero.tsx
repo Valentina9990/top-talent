@@ -35,8 +35,8 @@ export function UnifiedHero() {
           </h1>
 
           <p className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto">
-            Ya seas jugador buscando destacar o escuela buscando el próximo gran talento,
-            TopTalent es tu plataforma para alcanzar el éxito deportivo.
+            TopTalent conecta a jugadores que muestran su talento, escuelas que organizan y dan visibilidad a sus
+            planteles y scouts que buscan y analizan perfiles con datos reales.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -55,6 +55,15 @@ export function UnifiedHero() {
                 className="w-full sm:w-auto border-gray-500 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold transition-all duration-200"
               >
                 Soy Escuela
+              </Button>
+            </a>
+            <a href="#para-scouts">
+              <Button
+                size="lg"
+                variant="outline"
+                className="w-full sm:w-auto border-gray-500 text-white hover:bg-white/10 px-8 py-6 text-lg font-semibold transition-all duration-200"
+              >
+                Soy Scout
               </Button>
             </a>
           </div>

@@ -34,8 +34,15 @@ export const Navbar = () => {
   ];
 
   const schoolMenuItems = [
-    { label: "Explorar Jugadores", href: "/para-escuelas" },
+    { label: "Explorar Jugadores", href: "/jugadores" },
     { label: "Mis Ofertas", href: "/mis-ofertas" },
+    { label: "Suscripciones", href: "/suscripciones" },
+    { label: "Graba tu Partido", href: "/graba-tu-partido" },
+  ];
+
+  const scoutMenuItems = [
+    { label: "Jugadores", href: "/jugadores" },
+    { label: "Mi Panel", href: "/panel-scout" },
     { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
@@ -44,12 +51,18 @@ export const Navbar = () => {
     if (isLoading) return [];
     if (!user) return publicMenuItems;
     if (userRole === "SCHOOL") return schoolMenuItems;
+    if (userRole === "SCOUT") return scoutMenuItems;
     if (userRole === "PLAYER" || !userRole) return playerMenuItems;
     return playerMenuItems;
   };
 
   const menuItems = getMenuItems();
-  const homeHref = userRole === "PLAYER" ? "/para-jugadores" : "/";
+  const homeHref =
+    userRole === "PLAYER"
+      ? "/para-jugadores"
+      : userRole === "SCOUT"
+      ? "/jugadores"
+      : "/";
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);

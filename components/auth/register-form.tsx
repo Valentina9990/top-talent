@@ -73,7 +73,7 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel className="text-gray-700">Tipo de cuenta</FormLabel>
                   <FormControl>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       <button
                         type="button"
                         disabled={isPending}
@@ -102,6 +102,21 @@ export const RegisterForm = () => {
                         <div className="font-semibold">Escuela</div>
                         <div className="text-xs text-gray-600 mt-1">
                           Perfil institucional
+                        </div>
+                      </button>
+                      <button
+                        type="button"
+                        disabled={isPending}
+                        onClick={() => field.onChange("SCOUT")}
+                        className={`p-4 border-2 rounded-lg text-center transition-all ${
+                          field.value === "SCOUT"
+                            ? "border-primary-500 bg-primary-50 text-primary-700"
+                            : "border-gray-300 hover:border-gray-400"
+                        }`}
+                      >
+                        <div className="font-semibold">Scout</div>
+                        <div className="text-xs text-gray-600 mt-1">
+                          Búsqueda y evaluación de talento
                         </div>
                       </button>
                     </div>

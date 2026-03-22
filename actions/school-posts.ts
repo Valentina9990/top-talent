@@ -41,7 +41,7 @@ export async function createSchoolPost(data: CreatePostData) {
     });
 
     revalidatePath("/dashboard-escuela");
-    revalidatePath("/para-escuelas");
+    revalidatePath("/jugadores");
 
     return { success: true, post };
   } catch (error) {
@@ -105,7 +105,7 @@ export async function deleteSchoolPost(postId: string) {
     });
 
     revalidatePath("/dashboard-escuela");
-    revalidatePath("/para-escuelas");
+    revalidatePath("/jugadores");
 
     return { success: true };
   } catch (error) {

@@ -26,12 +26,16 @@ model User {
 
   // School profile
   schoolProfile SchoolProfile?
+
+  // Scout profile
+  scoutProfile ScoutProfile?
 }
 
 enum UserRole {
   ADMIN
   PLAYER
   SCHOOL
+  SCOUT
 }
 
 model Account {
@@ -96,6 +100,8 @@ model Department {
 
   schoolProfiles SchoolProfile[]
 
+  scoutProfiles  ScoutProfile[]
+
   @@map("departments")
 }
 
@@ -109,6 +115,8 @@ model City {
   playerProfiles PlayerProfile[]
 
   schoolProfiles SchoolProfile[]
+
+  scoutProfiles  ScoutProfile[]
 
   @@unique([name, departmentId])
   @@map("cities")
@@ -167,6 +175,10 @@ model PlayerProfile {
 
   // Achievements
   achievements PlayerAchievement[]
+
+  // Scout relations
+  contactedByScouts ScoutContactedPlayer[]
+  favoritedByScouts ScoutFavoritePlayer[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -258,3 +270,59 @@ model SchoolPost {
   @@index([schoolId])
   @@index([createdAt])
 }
+
+model ScoutProfile {
+  id     String @id @default(cuid())
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Basic Info
+  fullName        String?
+  primaryPhone    String?
+  secondaryPhone  String?
+
+  // Location (using Department and City tables)
+  departmentId String?     @map("department_id")
+  department   Department? @relation(fields: [departmentId], references: [id])
+  cityId       String?     @map("city_id")
+  city         City?       @relation(fields: [cityId], references: [id])
+
+  // Experience
+  yearsExperience Int?
+
+  // Player relations
+  contactedPlayers ScoutContactedPlayer[]
+  favoritePlayers  ScoutFavoritePlayer[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("scout_profiles")
+}
+
+model ScoutContactedPlayer {
+  id       String        @id @default(cuid())
+  scoutId  String        @map("scout_id")
+  scout    ScoutProfile  @relation(fields: [scoutId], references: [id], onDelete: Cascade)
+  playerId String        @map("player_id")
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([scoutId, playerId])
+  @@map("scout_contacted_players")
+}
+
+model ScoutFavoritePlayer {
+  id       String        @id @default(cuid())
+  scoutId  String        @map("scout_id")
+  scout    ScoutProfile  @relation(fields: [scoutId], references: [id], onDelete: Cascade)
+  playerId String        @map("player_id")
+  player   PlayerProfile @relation(fields: [playerId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@unique([scoutId, playerId])
+  @@map("scout_favorite_players")
+}
+

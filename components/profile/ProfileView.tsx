@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Pencil, Trash2, CheckCircle2 } from "lucide-react";
+import { Plus, Pencil, Trash2, CheckCircle2, Heart } from "lucide-react";
 import { deletePlayerAchievement } from "@/actions/player-profile";
 import { updatePlayerProfile } from "@/actions/player-profile";
 import { useRouter } from "next/navigation";
@@ -11,14 +11,25 @@ import { AchievementModal } from "../modals/AchievementModal";
 import { PlayerStats } from "./PlayerStats";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import { VideoUploadModal } from "../modals/VideoUploadModal";
+import { ContactPlayerModal } from "../modals/ContactPlayerModal";
+import { toggleFavoritePlayer } from "@/actions/scout-players";
 
 interface ProfileViewProps {
   profile: any;
   user: any;
   isOwner: boolean;
+  playerId: string;
+  viewerRole?: string | null;
+  scoutContact?: {
+    name?: string | null;
+    email?: string | null;
+    primaryPhone?: string | null;
+    secondaryPhone?: string | null;
+  };
+  initialIsFavorite?: boolean;
 }
 
-export default function ProfileView({ profile, user, isOwner }: ProfileViewProps) {
+export default function ProfileView({ profile, user, isOwner, playerId, viewerRole, scoutContact, initialIsFavorite }: ProfileViewProps) {
   const router = useRouter();
   const [deletingAchievement, setDeletingAchievement] = useState<string | null>(null);
   const [showVideoModal, setShowVideoModal] = useState(false);
@@ -28,6 +39,28 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
   const [showDeleteAchievementModal, setShowDeleteAchievementModal] = useState(false);
   const [achievementToDelete, setAchievementToDelete] = useState<string | null>(null);
   const [isDeletingVideo, setIsDeletingVideo] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const [isFavorite, setIsFavorite] = useState<boolean>(!!initialIsFavorite);
+  const [isTogglingFavorite, setIsTogglingFavorite] = useState(false);
+
+  const handleToggleFavorite = async () => {
+    if (!playerId || isTogglingFavorite) return;
+
+    setIsTogglingFavorite(true);
+    try {
+      const result = await toggleFavoritePlayer(playerId);
+      if (result.error) {
+        alert(result.error);
+      } else if (typeof result.isFavorite === "boolean") {
+        setIsFavorite(result.isFavorite);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Ocurrió un error al actualizar favoritos");
+    } finally {
+      setIsTogglingFavorite(false);
+    }
+  };
 
   const handleDeleteVideo = async () => {
     setIsDeletingVideo(true);
@@ -159,11 +192,25 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               assists={profile?.assists || 0}
               matchesPlayed={profile?.matchesPlayed || 0}
             />
-            
-            {!isOwner && (
-              <button className="mt-8 bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300">
-                Contactar Jugador
-              </button>
+
+            {!isOwner && viewerRole === "SCOUT" && (
+              <div className="mt-8 flex flex-wrap gap-3">
+                <button
+                  className="bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300 cursor-pointer"
+                  onClick={() => setShowContactModal(true)}
+                >
+                  Contactar Jugador
+                </button>
+                <button
+                  type="button"
+                  onClick={handleToggleFavorite}
+                  disabled={isTogglingFavorite}
+                  className="inline-flex items-center gap-2 border border-primary-500 text-primary-500 font-bold py-3 px-4 rounded-lg bg-white hover:bg-primary-50 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  <Heart className={`w-4 h-4 ${isFavorite ? "fill-primary-500" : ""}`} />
+                  {isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -346,6 +393,19 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             isLoading={!!deletingAchievement}
           />
         </>
+      )}
+
+      {!isOwner && viewerRole === "SCOUT" && (
+        <ContactPlayerModal
+          isOpen={showContactModal}
+          onClose={() => setShowContactModal(false)}
+          playerId={playerId}
+          playerName={user?.name}
+          scoutName={scoutContact?.name}
+          scoutEmail={scoutContact?.email}
+          primaryPhone={scoutContact?.primaryPhone}
+          secondaryPhone={scoutContact?.secondaryPhone}
+        />
       )}
     </>
   );

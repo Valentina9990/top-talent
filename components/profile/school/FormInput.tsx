@@ -7,6 +7,7 @@ interface FormInputProps {
     label: string;
     type?: string;
     placeholder?: string;
+    min?: number;
     disabled?: boolean;
     register: any;
     error?: string;
@@ -18,6 +19,7 @@ export const FormInput: React.FC<FormInputProps> = ({
     label,
     type = "text",
     placeholder,
+    min,
     disabled,
     register,
     error,
@@ -33,6 +35,7 @@ export const FormInput: React.FC<FormInputProps> = ({
                 type={type}
                 {...register}
                 placeholder={placeholder}
+                min={min}
                 disabled={disabled}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
             />

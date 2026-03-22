@@ -23,7 +23,7 @@ export const RegisterSchema = z.object({
   name: z.string().min(1, {
     message: "El nombre es requerido"
   }),
-  role: z.enum(["PLAYER", "SCHOOL"], {
+  role: z.enum(["PLAYER", "SCHOOL", "SCOUT"], {
     message: "Selecciona un tipo de cuenta válido"
   }),
 }).refine((data) => data.password === data.confirmPassword, {
@@ -158,5 +158,33 @@ export const SchoolProfileSchema = z.object({
   achievements: z.string().max(1000, {
     message: "Los logros no pueden exceder 1000 caracteres"
   }).optional().or(z.literal("")),
+});
+
+export const ScoutProfileSchema = z.object({
+  primaryPhone: z.string().max(20, {
+    message: "El teléfono principal no puede exceder 20 caracteres",
+  }).optional().or(z.literal("")),
+  secondaryPhone: z.string().max(20, {
+    message: "El teléfono secundario no puede exceder 20 caracteres",
+  }).optional().or(z.literal("")),
+  departmentId: z.string().optional().or(z.literal("")),
+  cityId: z.string().optional().or(z.literal("")),
+  yearsExperience: z.number().min(0, {
+    message: "Los años de experiencia deben ser un número positivo",
+  }).optional(),
+});
+
+export const ContactPlayerSchema = z.object({
+  playerId: z.string().min(1, {
+    message: "El jugador es requerido",
+  }),
+  message: z.string().min(1, {
+    message: "El mensaje es requerido",
+  }).max(1000, {
+    message: "El mensaje no puede exceder 1000 caracteres",
+  }),
+  contactMethod: z.enum(["EMAIL", "PRIMARY_PHONE", "SECONDARY_PHONE"], {
+    message: "Selecciona un método de contacto válido",
+  }),
 });
 
