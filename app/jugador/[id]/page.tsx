@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { getPlayerProfile } from "@/actions/player-profile";
+import { getScoutProfile } from "@/actions/scout-profile";
 import ProfileView from "@/components/profile/ProfileView";
 
 interface PageProps {
@@ -21,6 +22,26 @@ export default async function PlayerProfilePage({ params }: PageProps) {
   }
 
   const isOwner = session?.user?.id === playerId;
+
+  let scoutContact: {
+    name?: string | null;
+    email?: string | null;
+    primaryPhone?: string | null;
+    secondaryPhone?: string | null;
+  } | null = null;
+
+  if (session?.user?.role === "SCOUT") {
+    const scoutProfile = await getScoutProfile(session.user.id);
+
+    if (scoutProfile) {
+      scoutContact = {
+        name: scoutProfile.fullName || scoutProfile.user?.name,
+        email: scoutProfile.user?.email,
+        primaryPhone: scoutProfile.primaryPhone,
+        secondaryPhone: scoutProfile.secondaryPhone,
+      };
+    }
+  }
 
   return (
     <div className="bg-gray-100 min-h-screen">
@@ -49,6 +70,9 @@ export default async function PlayerProfilePage({ params }: PageProps) {
           profile={result.profile}
           user={result.profile.user}
           isOwner={isOwner}
+          playerId={playerId}
+          viewerRole={session?.user?.role ?? null}
+          scoutContact={scoutContact ?? undefined}
         />
       </div>
     </div>

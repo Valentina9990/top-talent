@@ -174,3 +174,17 @@ export const ScoutProfileSchema = z.object({
   }).optional(),
 });
 
+export const ContactPlayerSchema = z.object({
+  playerId: z.string().min(1, {
+    message: "El jugador es requerido",
+  }),
+  message: z.string().min(10, {
+    message: "El mensaje debe tener al menos 10 caracteres",
+  }).max(1000, {
+    message: "El mensaje no puede exceder 1000 caracteres",
+  }),
+  contactMethod: z.enum(["EMAIL", "PRIMARY_PHONE", "SECONDARY_PHONE"], {
+    message: "Selecciona un método de contacto válido",
+  }),
+});
+

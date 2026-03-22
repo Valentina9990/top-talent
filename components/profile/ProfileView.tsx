@@ -11,14 +11,23 @@ import { AchievementModal } from "../modals/AchievementModal";
 import { PlayerStats } from "./PlayerStats";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import { VideoUploadModal } from "../modals/VideoUploadModal";
+import { ContactPlayerModal } from "../modals/ContactPlayerModal";
 
 interface ProfileViewProps {
   profile: any;
   user: any;
   isOwner: boolean;
+  playerId: string;
+  viewerRole?: string | null;
+  scoutContact?: {
+    name?: string | null;
+    email?: string | null;
+    primaryPhone?: string | null;
+    secondaryPhone?: string | null;
+  };
 }
 
-export default function ProfileView({ profile, user, isOwner }: ProfileViewProps) {
+export default function ProfileView({ profile, user, isOwner, playerId, viewerRole, scoutContact }: ProfileViewProps) {
   const router = useRouter();
   const [deletingAchievement, setDeletingAchievement] = useState<string | null>(null);
   const [showVideoModal, setShowVideoModal] = useState(false);
@@ -28,6 +37,7 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
   const [showDeleteAchievementModal, setShowDeleteAchievementModal] = useState(false);
   const [achievementToDelete, setAchievementToDelete] = useState<string | null>(null);
   const [isDeletingVideo, setIsDeletingVideo] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const handleDeleteVideo = async () => {
     setIsDeletingVideo(true);
@@ -160,8 +170,11 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
               matchesPlayed={profile?.matchesPlayed || 0}
             />
             
-            {!isOwner && (
-              <button className="mt-8 bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300">
+            {!isOwner && viewerRole === "SCOUT" && (
+              <button
+                className="mt-8 bg-primary-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-primary-700 transition duration-300"
+                onClick={() => setShowContactModal(true)}
+              >
                 Contactar Jugador
               </button>
             )}
@@ -346,6 +359,19 @@ export default function ProfileView({ profile, user, isOwner }: ProfileViewProps
             isLoading={!!deletingAchievement}
           />
         </>
+      )}
+
+      {!isOwner && viewerRole === "SCOUT" && (
+        <ContactPlayerModal
+          isOpen={showContactModal}
+          onClose={() => setShowContactModal(false)}
+          playerId={playerId}
+          playerName={user?.name}
+          scoutName={scoutContact?.name}
+          scoutEmail={scoutContact?.email}
+          primaryPhone={scoutContact?.primaryPhone}
+          secondaryPhone={scoutContact?.secondaryPhone}
+        />
       )}
     </>
   );
