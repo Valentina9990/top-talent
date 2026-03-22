@@ -3,6 +3,7 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import { getPlayerProfile } from "@/actions/player-profile";
 import { getScoutProfile } from "@/actions/scout-profile";
+import { isFavoritePlayer } from "@/actions/scout-players";
 import ProfileView from "@/components/profile/ProfileView";
 
 interface PageProps {
@@ -43,6 +44,15 @@ export default async function PlayerProfilePage({ params }: PageProps) {
     }
   }
 
+  let initialIsFavorite = false;
+
+  if (session?.user?.role === "SCOUT") {
+    const favoriteResult = await isFavoritePlayer(playerId);
+    if (favoriteResult.success) {
+      initialIsFavorite = !!favoriteResult.isFavorite;
+    }
+  }
+
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -73,6 +83,7 @@ export default async function PlayerProfilePage({ params }: PageProps) {
           playerId={playerId}
           viewerRole={session?.user?.role ?? null}
           scoutContact={scoutContact ?? undefined}
+          initialIsFavorite={initialIsFavorite}
         />
       </div>
     </div>

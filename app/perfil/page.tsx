@@ -81,6 +81,8 @@ export default async function ProfilePage({ searchParams }: PageProps) {
               profile={result.profile}
               user={session.user}
               isOwner={true}
+              playerId={session.user.id}
+              viewerRole={session.user.role}
             />
           )}
         </div>

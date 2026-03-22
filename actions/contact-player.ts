@@ -40,6 +40,7 @@ export const contactPlayer = async (values: {
       prisma.scoutProfile.findUnique({
         where: { userId: session.user.id },
         select: {
+          id: true,
           fullName: true,
           primaryPhone: true,
           secondaryPhone: true,
@@ -90,6 +91,16 @@ export const contactPlayer = async (values: {
     const scoutName = scoutProfile.fullName || session.user.name || "Scout";
     const playerName = playerUser.name || "Jugador";
 
+    // Ensure we have the player's profile to register the contact
+    const playerProfile = await prisma.playerProfile.findUnique({
+      where: { userId: playerUser.id },
+      select: { id: true },
+    });
+
+    if (!playerProfile) {
+      return { error: "Perfil de jugador no encontrado" };
+    }
+
     await sendContactPlayerEmails({
       playerEmail: playerUser.email,
       playerName,
@@ -99,6 +110,28 @@ export const contactPlayer = async (values: {
       contactValue,
       message,
     });
+
+    // Register that this scout has contacted this player
+    try {
+      const existingContact = await prisma.scoutContactedPlayer.findFirst({
+        where: {
+          scoutId: scoutProfile.id,
+          playerId: playerProfile.id,
+        },
+      });
+
+      if (!existingContact) {
+        await prisma.scoutContactedPlayer.create({
+          data: {
+            scoutId: scoutProfile.id,
+            playerId: playerProfile.id,
+          },
+        });
+      }
+    } catch (logError) {
+      console.error("Error registrando jugador contactado:", logError);
+      // No interrumpir el flujo principal si solo falla el log
+    }
 
     return { success: "Mensaje enviado correctamente al jugador" };
   } catch (error) {
