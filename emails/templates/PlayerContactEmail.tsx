@@ -1,4 +1,4 @@
-import { Heading, Text, Hr } from '@react-email/components';
+import { Heading, Text, Hr, Link } from '@react-email/components';
 import * as React from 'react';
 import { EmailLayout } from '../components/EmailLayout';
 import { baseStyles } from '../styles/shared';
@@ -9,6 +9,7 @@ interface PlayerContactEmailProps {
   message: string;
   contactMethodLabel: string;
   contactValue: string;
+  scoutProfileUrl: string;
 }
 
 export const PlayerContactEmail = ({
@@ -17,6 +18,7 @@ export const PlayerContactEmail = ({
   message,
   contactMethodLabel,
   contactValue,
+  scoutProfileUrl,
 }: PlayerContactEmailProps) => {
   return (
     <EmailLayout preview="Has recibido un mensaje de un scout">
@@ -51,6 +53,17 @@ export const PlayerContactEmail = ({
       <Text style={baseStyles.paragraph}>
         Te recomendamos responder directamente al scout utilizando el método de
         contacto indicado.
+      </Text>
+
+      <Hr style={baseStyles.divider} />
+
+      <Text style={baseStyles.paragraph}>
+        También puedes conocer más sobre el scout visitando su perfil en TopTalent:
+      </Text>
+      <Text style={baseStyles.paragraph}>
+        <Link href={scoutProfileUrl} style={baseStyles.link}>
+          Ver perfil del scout
+        </Link>
       </Text>
     </EmailLayout>
   );

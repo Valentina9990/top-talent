@@ -62,6 +62,9 @@ export const sendContactPlayerEmails = async (params: ContactPlayerEmailParams) 
         message,
     } = params;
 
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+    const scoutProfileUrl = `${baseUrl}/scout/${encodeURIComponent(scoutEmail)}`;
+
     const playerHtml = await render(
         PlayerContactEmail({
             playerName,
@@ -69,6 +72,7 @@ export const sendContactPlayerEmails = async (params: ContactPlayerEmailParams) 
             message,
             contactMethodLabel,
             contactValue,
+            scoutProfileUrl,
         })
     );
 
@@ -79,6 +83,7 @@ export const sendContactPlayerEmails = async (params: ContactPlayerEmailParams) 
             message,
             contactMethodLabel,
             contactValue,
+            scoutProfileUrl,
         })
     );
 

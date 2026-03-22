@@ -1,4 +1,4 @@
-import { Heading, Text, Hr } from '@react-email/components';
+import { Heading, Text, Hr, Link } from '@react-email/components';
 import * as React from 'react';
 import { EmailLayout } from '../components/EmailLayout';
 import { baseStyles } from '../styles/shared';
@@ -9,6 +9,7 @@ interface ScoutContactConfirmationEmailProps {
   message: string;
   contactMethodLabel: string;
   contactValue: string;
+  scoutProfileUrl: string;
 }
 
 export const ScoutContactConfirmationEmail = ({
@@ -17,6 +18,7 @@ export const ScoutContactConfirmationEmail = ({
   message,
   contactMethodLabel,
   contactValue,
+  scoutProfileUrl,
 }: ScoutContactConfirmationEmailProps) => {
   return (
     <EmailLayout preview="Tu mensaje ha sido enviado al jugador">
@@ -51,6 +53,17 @@ export const ScoutContactConfirmationEmail = ({
       <Text style={baseStyles.paragraph}>
         El jugador ahora tiene tu información de contacto y podrá
         comunicarse contigo directamente si está interesado.
+      </Text>
+
+      <Hr style={baseStyles.divider} />
+
+      <Text style={baseStyles.paragraph}>
+        Este es el enlace público a tu perfil de scout en TopTalent:
+      </Text>
+      <Text style={baseStyles.paragraph}>
+        <Link href={scoutProfileUrl} style={baseStyles.link}>
+          Ver mi perfil de scout
+        </Link>
       </Text>
     </EmailLayout>
   );
