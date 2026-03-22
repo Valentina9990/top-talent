@@ -21,12 +21,14 @@ export default async function ProfilePage({ searchParams }: PageProps) {
     redirect("/auth/login");
   }
 
+  const userId = session.user.id!;
+
   const params = await searchParams;
   const isEditMode = params.edit === "true";
 
   // Handle SCHOOL profile
   if (session.user.role === "SCHOOL") {
-    const schoolProfile = await getSchoolProfile(session.user.id);
+    const schoolProfile = await getSchoolProfile(userId);
 
     if (!schoolProfile) {
       return <div>Error: No se pudo cargar el perfil de la escuela</div>;
@@ -65,7 +67,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
 
   // Handle PLAYER profile
   if (session.user.role === "PLAYER") {
-    const result = await getPlayerProfile(session.user.id);
+    const result = await getPlayerProfile(userId);
 
     if (!result.profile) {
       return <div>Error: No se pudo cargar el perfil</div>;
@@ -81,7 +83,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
               profile={result.profile}
               user={session.user}
               isOwner={true}
-              playerId={session.user.id}
+              playerId={userId}
               viewerRole={session.user.role}
             />
           )}
@@ -92,7 +94,7 @@ export default async function ProfilePage({ searchParams }: PageProps) {
 
   // Handle SCOUT profile (read-only for now)
   if (session.user.role === "SCOUT") {
-    const scoutProfile = await getScoutProfile(session.user.id);
+    const scoutProfile = await getScoutProfile(userId);
 
     if (!scoutProfile) {
       return <div>Error: No se pudo cargar el perfil de scout</div>;
