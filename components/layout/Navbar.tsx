@@ -42,6 +42,7 @@ export const Navbar = () => {
 
   const scoutMenuItems = [
     { label: "Jugadores", href: "/jugadores" },
+    { label: "Mi Panel", href: "/panel-scout" },
     { label: "Suscripciones", href: "/suscripciones" },
     { label: "Graba tu Partido", href: "/graba-tu-partido" },
   ];
